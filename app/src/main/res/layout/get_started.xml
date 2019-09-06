@@ -9,39 +9,36 @@
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="8">
+        android:layout_height="65dp">
 
         <ImageView
             android:id="@+id/logo"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:src="@drawable/logo"
-            android:textAlignment="center"/>
+            android:textAlignment="center" />
     </LinearLayout>
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="40">
+        android:layout_height="414dp">
 
         <androidx.viewpager.widget.ViewPager
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:id="@+id/startPager"/>
+            android:id="@+id/startedPager"/>
 
     </LinearLayout>
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="20"
+        android:layout_height="166dp"
         android:orientation="vertical">
 
         <Button
             android:id="@+id/login"
             android:layout_width="300dp"
-            android:layout_height="70dp"
+            android:layout_height="71dp"
             android:layout_gravity="center"
             android:text="Login to HandyMan"
             android:textColor="@android:color/white"
@@ -50,42 +47,33 @@
             android:layout_marginBottom="10dp"
             android:stateListAnimator="@null"
             android:background="@drawable/loginbutton"
-            android:textSize="20sp" />
+            android:textSize="20sp"></Button>
 
         <Button
             android:id="@+id/createnew"
             android:layout_width="300dp"
-            android:layout_height="70dp"
+            android:layout_height="71dp"
             android:layout_gravity="center"
             android:text="Create a New Account"
             android:textColor="@android:color/holo_orange_light"
             android:textAllCaps="false"
             android:stateListAnimator="@null"
             android:background="@drawable/createnew"
-            android:textSize="20sp">
-
-        </Button>
+            android:textSize="20sp"></Button>
 
     </LinearLayout>
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="1"
+        android:layout_height="7dp"
         android:background="#FFEB3B"
-        android:orientation="vertical">
-
-    </LinearLayout>
+        android:orientation="vertical"></LinearLayout>
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="1"
+        android:layout_height="match_parent"
         android:background="#FF9800"
-        android:orientation="vertical">
-
-    </LinearLayout>
-
+        android:orientation="vertical"></LinearLayout>
 
 </LinearLayout>
 
