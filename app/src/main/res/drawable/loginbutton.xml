@@ -4,5 +4,6 @@
     <gradient android:startColor="@android:color/holo_orange_light"
         android:endColor="@android:color/holo_orange_light"
         android:angle="270" />
+    <corners android:radius="3dp" />
     <stroke android:width="5px" android:color="@android:color/holo_orange_light" />
 </shape>
