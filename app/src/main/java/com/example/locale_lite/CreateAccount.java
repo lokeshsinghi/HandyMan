@@ -2,6 +2,7 @@ package com.example.locale_lite;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
@@ -12,7 +13,7 @@ import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.Spinner;
 
-public abstract class CreateAccount<findView> extends AppCompatActivity implements AdapterView.OnItemSelectedListener {
+public class CreateAccount<findView> extends AppCompatActivity implements AdapterView.OnItemSelectedListener {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -33,6 +34,14 @@ public abstract class CreateAccount<findView> extends AppCompatActivity implemen
     cityList = (Spinner) findViewById(R.id.citylist);
     gender = (RadioGroup) findViewById(R.id.gender);
 
+    next = (Button)findViewById(R.id.btNext);
+    next.setOnClickListener(new View.OnClickListener() {
+        @Override
+        public void onClick(View view) {
+            Intent intent = new Intent(CreateAccount.this, ProfileServiceProvider.class);
+            startActivity(intent);
+        }
+    });
 
 
 
