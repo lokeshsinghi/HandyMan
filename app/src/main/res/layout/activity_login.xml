@@ -1,0 +1,155 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/container"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+
+    android:paddingTop="20dp"
+
+    android:orientation="vertical">
+
+    <ImageView
+        android:layout_marginTop="50dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/ic_launcher_foreground"
+        />
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_marginTop="20dp">
+
+        <TextView
+            android:id="@+id/textView"
+            android:layout_width="200dp"
+            android:layout_height="54dp"
+            android:editable="false"
+            android:text="Enter Registered Mobile Number"
+            android:textColor="#000000"
+            android:textSize="18sp"
+            android:textStyle="normal"
+            android:visibility="visible"
+            android:layout_marginLeft="20dp"
+            tools:layout_editor_absoluteX="20dp"
+            tools:layout_editor_absoluteY="246dp" />
+
+        <TextView
+            android:id="@+id/textView6"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="30dp"
+            android:layout_marginTop="0dp"
+            android:layout_marginEnd="0dp"
+            android:clickable="true"
+            android:text="Use Email ID"
+            android:textColor="#FF9800"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="1.0"
+            app:layout_constraintStart_toEndOf="@+id/textView"
+            app:layout_constraintTop_toTopOf="parent" />
+
+
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="338dp"
+        android:layout_height="46dp"
+        android:layout_marginBottom="336dp"
+        android:orientation="horizontal"
+
+        app:layout_constraintBottom_toBottomOf="parent"
+        tools:layout_editor_absoluteX="4dp">
+
+        <TextView
+            android:id="@+id/logmob"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginVertical="10dp"
+            android:layout_marginLeft="30dp"
+
+            android:layout_marginTop="7dp"
+            android:text="+91"
+            android:textSize="18sp"
+            tools:layout_editor_absoluteX="4dp"
+            tools:layout_editor_absoluteY="349dp" />
+
+        <EditText
+            android:id="@+id/editText"
+
+            android:layout_width="260dp"
+            android:layout_gravity="center"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:layout_marginLeft="10dp"
+
+            android:ems="10"
+            android:inputType="phone" />
+
+    </LinearLayout>
+
+
+
+
+    <ProgressBar
+        android:id="@+id/loading"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginTop="64dp"
+        android:layout_marginBottom="64dp"
+        android:visibility="gone"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.454"
+        tools:layout_editor_absoluteX="194dp" />
+
+    <Button
+        android:id="@+id/login"
+        android:layout_width="300dp"
+        android:layout_height="70dp"
+        android:layout_gravity="center"
+        android:layout_marginTop="-300dp"
+        android:layout_marginBottom="10dp"
+        android:background="@drawable/loginbutton"
+        android:stateListAnimator="@null"
+        android:text="Proceed to login"
+        android:textAllCaps="false"
+        android:textColor="@android:color/white"
+        android:textSize="20sp" />
+
+    <LinearLayout
+        android:layout_width="287dp"
+        android:layout_height="31dp"
+        android:orientation="horizontal"
+        android:layout_gravity="center"
+        >
+
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="20dp"
+            android:layout_marginVertical="10dp"
+            android:layout_marginLeft="50dp"
+            android:layout_marginTop="0dp"
+            android:text="Don't have a account?"
+            android:textAlignment="center"
+
+
+
+            />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="20dp"
+            android:layout_marginLeft="5dp"
+            android:layout_marginTop="10dp"
+            android:text="Sign up"
+            android:textAlignment="center"
+            android:textColor="#216EF3"
+            android:clickable="true"/>
+    </LinearLayout>
+
+</LinearLayout>
