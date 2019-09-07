@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="fill_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:padding="10dp"
+    android:fillViewport="false">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="fill_parent"
+        android:orientation="vertical"
+        android:padding="30dp"
+        android:weightSum="16"
+        tools:context=".ProfileSP">
+
+        <ImageView
+            android:id="@+id/logo2"
+            android:layout_width="120dp"
+            android:layout_height="40dp"
+            android:layout_weight="2"
+            app:srcCompat="@drawable/logo" />
+
+        <TextView
+            android:id="@+id/Create"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/roboto_medium"
+            android:maxLines="1"
+            android:layout_weight="2"
+            android:text="Complete your Handyman Profile"
+            android:textAlignment="gravity"
+            android:textColor="#000000"
+            android:autoSizeTextType="uniform"
+            android:textSize="24dp"
+            />
+        <Spinner
+            android:id="@+id/categories"
+            style="@style/Widget.AppCompat.Spinner.DropDown"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:layout_marginTop="20dp"
+            android:ems="10"
+            android:scrollbarStyle="outsideInset"
+            android:layout_marginBottom="20dp"
+            android:textSize="16sp" />
+        <EditText
+            android:id="@+id/Qualifications"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Qualifications"
+            android:textSize="16sp" />
+
+        <EditText
+            android:id="@+id/experience"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="20dp"
+            android:hint="Years of Experience"
+            android:inputType="numberDecimal"
+            android:textSize="16sp" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:weightSum="3"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Upload your Profile Photo"
+                android:layout_weight="2"
+                android:layout_marginBottom="20dp"
+                android:textColor="#000000"
+                android:textSize="18sp" />
+            />
+            <Button
+                android:layout_width="75dp"
+                android:layout_height="30dp"
+                android:text="Upload"
+                android:layout_marginBottom="20dp"
+                android:layout_marginLeft="1dp"
+                android:background="@drawable/loginbutton"/>
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:weightSum="3"
+            android:orientation="horizontal">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Upload your Identity Proof"
+                android:layout_weight="2"
+                android:layout_marginBottom="80dp"
+                android:textColor="#000000"
+                android:textSize="18sp" />
+
+            <Button
+                android:layout_width="75dp"
+                android:layout_height="30dp"
+                android:layout_marginBottom="80dp"
+                android:layout_margin="0dp"
+                android:background="@drawable/loginbutton"
+                android:text="Upload" />
+        </LinearLayout>
+        <Button
+            android:layout_width="80dp"
+            android:layout_height="40dp"
+            android:layout_gravity="center"
+            android:layout_margin="0dp"
+            android:background="@drawable/loginbutton"
+            android:text="Submit" />
+    </LinearLayout>
+</ScrollView>
