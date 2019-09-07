@@ -2,6 +2,7 @@ package com.example.locale_lite;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
@@ -11,18 +12,19 @@ import android.widget.EditText;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.Spinner;
+import android.widget.TextView;
 
-public abstract class CreateAccount<findView> extends AppCompatActivity implements AdapterView.OnItemSelectedListener {
+public class CreateAccount<findView> extends AppCompatActivity implements AdapterView.OnItemSelectedListener{
 
+    EditText firstName, lastName, emailId, phoneNum, password, cpassword;
+    TextView signIn;
+    Button next;
+    Spinner cityList;
+    RadioGroup gender, accType;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_create_account);
-
-    EditText firstName, lastName, emailId, phoneNum, password, cpassword;
-    Button next;
-    Spinner cityList;
-    RadioGroup gender, accType;
 
     firstName = (EditText)findViewById(R.id.firstname);
     lastName = (EditText) findViewById(R.id.lastname);
@@ -33,6 +35,23 @@ public abstract class CreateAccount<findView> extends AppCompatActivity implemen
     cityList = (Spinner) findViewById(R.id.citylist);
     gender = (RadioGroup) findViewById(R.id.gender);
 
+    signIn = (TextView) findViewById(R.id.signin);
+    signIn.setOnClickListener(new View.OnClickListener() {
+        @Override
+        public void onClick(View view)  {
+            Intent intent = new Intent(CreateAccount.this, Login.class);
+            startActivity(intent);
+        }
+    });
+
+    next = (Button)findViewById(R.id.btNext);
+    next.setOnClickListener(new View.OnClickListener() {
+        @Override
+        public void onClick(View view) {
+            Intent intent = new Intent(CreateAccount.this, ProfileServiceProvider.class);
+            startActivity(intent);
+        }
+    });
 
 
 
