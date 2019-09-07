@@ -18,6 +18,8 @@
             </intent-filter>
         </activity>
         <activity android:name=".CreateAccount"></activity>
+        <activity android:name=".Login"></activity>
+        <activity android:name=".ProfileServiceProvider"></activity>
+        <activity android:name=".OTP"></activity>
     </application>
-
 </manifest>
