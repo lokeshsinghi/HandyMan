@@ -1,6 +1,7 @@
 package com.example.locale_lite;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.viewpager.widget.ViewPager;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -13,15 +14,24 @@ import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.Spinner;
 
-public class MainActivity <findView> extends AppCompatActivity{
+import com.google.android.gms.maps.CameraUpdateFactory;
+import com.google.android.gms.maps.GoogleMap;
+import com.google.android.gms.maps.SupportMapFragment;
+import com.google.android.gms.maps.model.LatLng;
+import com.google.android.gms.maps.model.MarkerOptions;
 
-    Button createNew, logIn;
+public class MainActivity extends AppCompatActivity{
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        createNew = (Button) findViewById(R.id.createnew);
+        ViewPager viewPager = (ViewPager) findViewById(R.id.startPager);
+        ImageAdapter adapter = new ImageAdapter(this);
+        viewPager.setAdapter(adapter);
+
+        Button createNew = (Button) findViewById(R.id.createnew);
         createNew.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -29,7 +39,7 @@ public class MainActivity <findView> extends AppCompatActivity{
                 startActivity(intent);
             }
         });
-        logIn = (Button) findViewById(R.id.login);
+        Button logIn = (Button) findViewById(R.id.login);
         logIn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
