@@ -18,6 +18,11 @@ public class getStarted extends AppCompatActivity {
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.get_started);
+
+        ViewPager viewPager = (ViewPager) findViewById(R.id.startPager);
+        ImageAdapter adapter = new ImageAdapter(this);
+        viewPager.setAdapter(adapter);
+
         createNew = (Button) findViewById(R.id.createnew);
         createNew.setOnClickListener(new View.OnClickListener() {
             @Override
