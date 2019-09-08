@@ -7,248 +7,274 @@
     android:orientation="vertical"
     android:padding="10dp"
     android:fillViewport="false">
-<LinearLayout
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:orientation="vertical"
-    android:padding="30dp"
-    android:weightSum="16"
-    tools:context=".CreateAccount">
-
-    <ImageView
-        android:id="@+id/logo"
-        android:layout_width="120dp"
-        android:layout_height="40dp"
-        android:layout_weight="2"
-        app:srcCompat="@drawable/logo" />
-
-    <TextView
-        android:id="@+id/Create"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:fontFamily="@font/roboto_medium"
-        android:maxLines="1"
-        android:layout_weight="2"
-        android:text="Create your Handyman Account"
-        android:textAlignment="gravity"
-        android:textColor="#000000"
-        android:autoSizeTextType="uniform"
-        android:textSize="24dp"
-        />
-
-    <ImageView
-        android:id="@+id/google"
-        android:layout_width="44dp"
-        android:layout_marginTop="20dp"
-        android:layout_gravity="center"
-        android:layout_marginBottom="20dp"
-        android:layout_height="40dp"
-        android:layout_weight="2"
-        app:srcCompat="@drawable/google" />
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:layout_weight="1"
-        android:text="____OR____"
-        android:textSize="20dp"/>
-
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:weightSum="2"
-        android:layout_weight="1"
-        android:orientation="horizontal">
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:padding="30dp"
+        android:weightSum="16"
+        tools:context=".CreateAccount">
 
-        <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/firstname"
-            android:layout_width="165dp"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="15dp"
-            android:layout_marginRight="25dp"
-            android:layout_weight="1"
-            android:hint="First Name"
-            android:singleLine="true"
-            android:textAlignment="viewStart"
-            android:textSize="16sp" />
+        <ImageView
+            android:id="@+id/logo"
+            android:layout_width="120dp"
+            android:layout_height="40dp"
+            android:layout_weight="2"
+            app:srcCompat="@drawable/logo" />
 
-        <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/lastname"
-            android:layout_width="165dp"
+        <TextView
+            android:id="@+id/Create"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="15dp"
-            android:layout_weight="1"
-            android:hint="Last Name"
-            android:textSize="16sp" />
-    </LinearLayout>
-    <EditText
-        android:id="@+id/email"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:ems="10"
-        android:layout_weight="1"
-        android:hint="Email Address"
-        android:layout_marginTop="15dp"
-        android:inputType="textEmailAddress"
-        android:textSize="16sp" />
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_weight="1"
-        android:orientation="horizontal">
+            android:fontFamily="@font/roboto_medium"
+            android:maxLines="1"
+            android:layout_weight="2"
+            android:text="Create your Handyman Account"
+            android:textAlignment="gravity"
+            android:textColor="#000000"
+            android:autoSizeTextType="uniform"
+            android:textSize="24dp"
+            />
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="15dp"
-            android:textSize="16sp"
-            android:layout_marginRight="10dp"
-            android:text="+91" />
+            android:layout_gravity="center"
+            android:layout_marginTop="5dp"
+            android:layout_marginBottom="10dp"
+            android:layout_weight="1"
+            android:text="Sign up with Google"
+            android:textSize="20dp"/>
 
-        <EditText
-            android:id="@+id/phone"
+        <ImageView
+            android:id="@+id/google"
+            android:layout_width="44dp"
+
+            android:layout_gravity="center"
+            android:layout_marginBottom="20dp"
+            android:layout_height="40dp"
+            android:layout_weight="2"
+            app:srcCompat="@drawable/google" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+           android:layout_marginTop="-10dp"
+            android:layout_weight="1"
+            android:text="OR"
+            android:textSize="15dp"/>
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:weightSum="2"
+            android:layout_weight="1"
+            android:orientation="horizontal">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/firstname"
+                android:layout_width="165dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="15dp"
+                android:layout_marginRight="25dp"
+                android:layout_weight="1"
+                android:hint="First Name"
+                android:singleLine="true"
+                android:textAlignment="viewStart"
+                android:textSize="16sp" />
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/lastname"
+                android:layout_width="165dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="15dp"
+                android:layout_weight="1"
+                android:hint="Last Name"
+                android:textSize="16sp" />
+        </LinearLayout>
+        <EditText
+            android:id="@+id/email"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:layout_weight="1"
+            android:hint="Email Address"
+            android:layout_marginTop="15dp"
+            android:inputType="textEmailAddress"
+            android:textSize="16sp" />
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="15dp"
+                android:textSize="16sp"
+                android:layout_marginRight="10dp"
+                android:text="+91" />
+
+            <EditText
+                android:id="@+id/phone"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="15dp"
+                android:ems="10"
+                android:layout_marginBottom="15dp"
+                android:hint="Phone Number"
+                android:inputType="phone"
+                android:textSize="16sp"
+                android:maxLength="10"/>
+        </LinearLayout>
+
+        <RadioGroup
+            android:id="@+id/gender"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_weight="1"
+            android:orientation="horizontal"
+            android:weightSum="3">
+
+            <RadioButton
+                android:id="@+id/checkMale"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="10dp"
+                android:layout_weight="1"
+                android:text="Male" />
+
+            <RadioButton
+                android:id="@+id/checkFemale"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="10dp"
+                android:layout_weight="1"
+                android:text="Female" />
+
+            <RadioButton
+                android:id="@+id/checkOthers"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="Others" />
+        </RadioGroup>
+        <Spinner
+            android:id="@+id/citylist"
+            style="@style/Widget.AppCompat.Spinner.DropDown"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
             android:layout_marginTop="15dp"
             android:ems="10"
+
+            android:scrollbarStyle="outsideInset"
             android:layout_marginBottom="15dp"
-            android:hint="Phone Number"
-            android:inputType="phone"
+            android:text="Select City"
             android:textSize="16sp" />
-    </LinearLayout>
-
-    <RadioGroup
-        android:id="@+id/gender"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:layout_weight="1"
-        android:orientation="horizontal"
-        android:weightSum="3">
-
-        <RadioButton
-            android:id="@+id/checkMale"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginRight="10dp"
-            android:layout_weight="1"
-            android:text="Male" />
-
-        <RadioButton
-            android:id="@+id/checkFemale"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginRight="10dp"
-            android:layout_weight="1"
-            android:text="Female" />
-
-        <RadioButton
-            android:id="@+id/checkOthers"
+        <RadioGroup
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="Others" />
-    </RadioGroup>
-    <Spinner
-        android:id="@+id/citylist"
-        style="@style/Widget.AppCompat.Spinner.DropDown"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_weight="1"
-        android:layout_marginTop="15dp"
-        android:ems="10"
-        android:scrollbarStyle="outsideInset"
-        android:layout_marginBottom="15dp"
-        android:text="Select City"
-        android:textSize="16sp" />
-    <RadioGroup
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_weight="1"
-        android:weightSum="2"
-        android:layout_gravity="center"
-        android:orientation="horizontal">
+            android:weightSum="2"
+            android:layout_gravity="center"
+            android:orientation="horizontal">
 
-        <RadioButton
-            android:id="@+id/checkCustomer"
+            <RadioButton
+                android:id="@+id/checkCustomer"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:layout_marginRight="10dp"
+
+                android:text="Customer" />
+
+            <RadioButton
+                android:id="@+id/checkServiceProvider"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="Service Provider" />
+        </RadioGroup>
+
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:layout_marginRight="10dp"
+            android:weightSum="2"
+            android:orientation="horizontal">
 
-            android:text="Customer" />
+            <EditText
+                android:id="@+id/pwd"
+                android:layout_width="150dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="15dp"
+                android:layout_marginRight="25dp"
+                android:ems="10"
+                android:layout_weight="1"
+                android:hint="Password"
+                android:inputType="textPassword"
+                android:textSize="16sp" />
 
-        <RadioButton
-            android:id="@+id/checkServiceProvider"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:text="Service Provider" />
-    </RadioGroup>
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_weight="1"
-        android:weightSum="2"
-        android:orientation="horizontal">
-
-        <EditText
-            android:id="@+id/pwd"
-            android:layout_width="150dp"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="15dp"
-            android:layout_marginRight="25dp"
-            android:ems="10"
-            android:layout_weight="1"
-            android:hint="Password"
-            android:inputType="textPassword"
-            android:textSize="16sp" />
-
-        <EditText
-            android:id="@+id/confirmpwd"
-            android:layout_width="150dp"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="15dp"
-            android:layout_weight="1"
-            android:ems="10"
-            android:hint="Confirm Password"
-            android:inputType="textPassword"
-            android:textSize="16sp" />
-    </LinearLayout>
-
-    <Button
-        android:id="@+id/btNext"
-        android:layout_width="98dp"
-        android:layout_height="wrap_content"
-        android:layout_gravity="end"
-        android:layout_weight="2"
-        android:layout_marginTop="10dp"
-        android:background="@drawable/loginbutton"
-        android:text="Next" />
-    <LinearLayout
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_weight="1"
-        android:layout_gravity="bottom"
-        android:orientation="horizontal">
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="40dp"
-            android:text="Already have an Account?"
-            android:textSize="14sp" />
+            <EditText
+                android:id="@+id/confirmpwd"
+                android:layout_width="150dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="15dp"
+                android:layout_weight="1"
+                android:ems="10"
+                android:hint="Confirm Password"
+                android:inputType="textPassword"
+                android:textSize="16sp" />
+        </LinearLayout>
 
         <TextView
-            android:id="@+id/signin"
-            android:layout_width="159dp"
+            android:id="@+id/warn"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="40dp"
+            android:layout_gravity="left"
             android:layout_marginLeft="10dp"
-            android:text="Sign in"
-            android:textColor="#216EF3" />
+            android:layout_marginTop="-5dp"
+            android:text="Password doesn't match!"
+            android:textColor="#ff0000"
+            android:visibility="invisible" />
 
+        <Button
+            android:id="@+id/btNext"
+            android:layout_width="98dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="end"
+            android:layout_marginTop="10dp"
+            android:layout_weight="2"
+            android:background="@drawable/loginbutton"
+android:clickable="false"
+
+            android:text="Next" />
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:layout_gravity="bottom"
+            android:orientation="horizontal">
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="40dp"
+                android:text="Already have an Account?"
+                android:textSize="14sp" />
+
+            <TextView
+                android:id="@+id/signin"
+                android:layout_width="159dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="40dp"
+                android:layout_marginLeft="10dp"
+                android:text="Sign in"
+                android:textColor="#216EF3" />
+
+        </LinearLayout>
     </LinearLayout>
-</LinearLayout>
 </ScrollView>
 
