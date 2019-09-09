@@ -202,13 +202,14 @@
         <item>General Maintenance</item>
         <item>Gutter Maintenance</item>
         <item>Interior Designing</item>
-        <item>Maid service</item>
+        <item>Maid Service</item>
         <item>Painter</item>
         <item>Plumber</item>
-        <item>Pest control</item>
-        <item>Remodeling</item>
-        <item>Tiling</item>
-        <item>Water purification</item>
-        <item>Window installation</item>
+        <item>Pest Control</item>
+        <item>Water Purification</item>
+
     </string-array>
+    <string name="title_activity_main2">Main2Activity</string>
+    <string name="title_home">Home</string>
+    <string name="title_settings">Settings</string>
 </resources>
