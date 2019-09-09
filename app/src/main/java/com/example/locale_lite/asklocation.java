@@ -80,6 +80,12 @@ public class asklocation extends FragmentActivity implements OnMapReadyCallback,
         mMap.setOnCameraMoveListener(new GoogleMap.OnCameraMoveListener() {
             public void onCameraMove() {
                 markerCenter.setPosition(mMap.getCameraPosition().target);
+                LatLng position = markerCenter.getPosition();
+                //Remove Toast and store position as final Location
+                Toast.makeText(
+                        asklocation.this,
+                        position+"",
+                        Toast.LENGTH_LONG).show();
             }
         });
 

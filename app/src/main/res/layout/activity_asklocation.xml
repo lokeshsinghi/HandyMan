@@ -4,8 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
     android:background="@android:color/white"
+    android:orientation="vertical"
     tools:context=".asklocation">
 
     <LinearLayout
@@ -62,9 +62,9 @@
                 android:layout_marginBottom="10dp">
 
                 <EditText
+                    android:id="@+id/compadd"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:id="@+id/compadd"
                     android:hint="Complete Address"
                     android:textCursorDrawable="@drawable/theme_color" />
 
@@ -73,62 +73,62 @@
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:layout_marginBottom="10dp"
                 android:layout_marginLeft="17dp"
                 android:layout_marginRight="12dp"
-                android:text="NickName for Address"/>
+                android:layout_marginBottom="10dp"
+                android:text="NickName for Address" />
 
             <RadioGroup
+                android:id="@+id/nickname"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
-                android:orientation="horizontal"
-                android:layout_marginBottom="10dp"
                 android:layout_marginLeft="12dp"
                 android:layout_marginRight="12dp"
-                android:weightSum="3"
-                android:id="@+id/nickname">
+                android:layout_marginBottom="10dp"
+                android:orientation="horizontal"
+                android:weightSum="3">
 
                 <androidx.appcompat.widget.AppCompatRadioButton
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="Home"
-                    android:layout_weight="1"
                     android:id="@+id/home"
-                    app:buttonTint="@android:color/holo_orange_light"/>
-
-                <androidx.appcompat.widget.AppCompatRadioButton
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="Work"
                     android:layout_weight="1"
+                    android:text="Home"
+                    app:buttonTint="@android:color/holo_orange_light" />
+
+                <androidx.appcompat.widget.AppCompatRadioButton
                     android:id="@+id/work"
-                    app:buttonTint="@android:color/holo_orange_light"/>
-
-                <androidx.appcompat.widget.AppCompatRadioButton
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="Other"
                     android:layout_weight="1"
+                    android:text="Work"
+                    app:buttonTint="@android:color/holo_orange_light" />
+
+                <androidx.appcompat.widget.AppCompatRadioButton
                     android:id="@+id/other"
-                    app:buttonTint="@android:color/holo_orange_light"/>
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="Other"
+                    app:buttonTint="@android:color/holo_orange_light" />
             </RadioGroup>
 
             <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/nickname_other_textinputlayout"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:id="@+id/nickname_other_textinputlayout"
                 android:layout_marginLeft="12dp"
                 android:layout_marginRight="12dp"
                 android:layout_marginBottom="10dp"
                 android:visibility="gone">
 
                 <EditText
+                    android:id="@+id/nickname_other_edittext"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:id="@+id/nickname_other_edittext"
-                    android:textCursorDrawable="@drawable/theme_color"
-                    android:hint="Enter a nickname (e.g. bae's home)"/>
+                    android:hint="Enter a nickname (e.g. bae's home)"
+                    android:textCursorDrawable="@drawable/theme_color" />
 
             </com.google.android.material.textfield.TextInputLayout>
 
@@ -137,13 +137,13 @@
                 android:layout_width="200dp"
                 android:layout_height="50dp"
                 android:layout_gravity="center"
-                android:text="Save"
-                android:textColor="@android:color/white"
-                android:textAllCaps="false"
                 android:layout_marginTop="10dp"
                 android:layout_marginBottom="10dp"
-                android:stateListAnimator="@null"
                 android:background="@drawable/loginbutton"
+                android:stateListAnimator="@null"
+                android:text="Save"
+                android:textAllCaps="false"
+                android:textColor="@android:color/white"
                 android:textSize="20sp" />
 
         </LinearLayout>
