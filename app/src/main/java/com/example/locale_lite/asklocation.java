@@ -10,6 +10,10 @@ import android.Manifest;
 import android.content.pm.PackageManager;
 import android.location.Location;
 import android.os.Bundle;
+import android.view.View;
+import android.widget.EditText;
+import android.widget.RadioButton;
+import android.widget.RadioGroup;
 import android.widget.Toast;
 
 import com.google.android.gms.location.FusedLocationProviderClient;
@@ -30,6 +34,9 @@ public class asklocation extends FragmentActivity implements OnMapReadyCallback,
         GoogleMap.OnMyLocationButtonClickListener {
 
     Location currentLocation;
+    RadioGroup addresscategory;
+    RadioButton home, work, others;
+    EditText nickaddress;
     FusedLocationProviderClient fusedLocationProviderClient;
     private static final int REQUEST_CODE = 101;
     private GoogleMap mMap;
@@ -39,10 +46,16 @@ public class asklocation extends FragmentActivity implements OnMapReadyCallback,
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_asklocation);
+        addresscategory = (RadioGroup) findViewById(R.id.nickname);
+        home = (RadioButton) findViewById(R.id.checkhome);
+        work = (RadioButton)findViewById(R.id.checkwork);
+        others = (RadioButton) findViewById(R.id.checkother);
+        nickaddress = (EditText)findViewById(R.id.nickname_other);
         fusedLocationProviderClient = LocationServices.getFusedLocationProviderClient(this);
         fetchLastLocation();
 
     }
+
 
     private void fetchLastLocation(){
         if (ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION)
@@ -98,6 +111,26 @@ public class asklocation extends FragmentActivity implements OnMapReadyCallback,
                 if(grantResults.length>0 && grantResults[0] == PackageManager.PERMISSION_GRANTED){
                     fetchLastLocation();
                 }
+                break;
+        }
+    }
+
+    public void onRadioButtonClicked(View view) {
+        // Is the button now checked?
+        boolean checked = ((RadioButton) view).isChecked();
+
+        switch(view.getId()) {
+            case R.id.checkhome:
+                if (checked)
+                    nickaddress.setVisibility(View.INVISIBLE);
+                break;
+            case R.id.checkwork:
+                if (checked)
+                    nickaddress.setVisibility(View.INVISIBLE);
+                break;
+            case R.id.checkother:
+                if(checked)
+                    nickaddress.setVisibility(View.VISIBLE);
                 break;
         }
     }

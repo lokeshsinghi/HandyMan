@@ -4,8 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@android:color/white"
     android:orientation="vertical"
+    android:background="@android:color/white"
     tools:context=".asklocation">
 
     <LinearLayout
@@ -90,48 +90,40 @@
                 android:weightSum="3">
 
                 <androidx.appcompat.widget.AppCompatRadioButton
-                    android:id="@+id/home"
+                    android:id="@+id/checkhome"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:text="Home"
-                    app:buttonTint="@android:color/holo_orange_light" />
+                    app:buttonTint="@android:color/holo_orange_light"
+                    android:onClick="onRadioButtonClicked"/>
 
                 <androidx.appcompat.widget.AppCompatRadioButton
-                    android:id="@+id/work"
+                    android:id="@+id/checkwork"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:text="Work"
-                    app:buttonTint="@android:color/holo_orange_light" />
+                    app:buttonTint="@android:color/holo_orange_light"
+                    android:onClick="onRadioButtonClicked"/>
 
                 <androidx.appcompat.widget.AppCompatRadioButton
-                    android:id="@+id/other"
+                    android:id="@+id/checkother"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:text="Other"
-                    app:buttonTint="@android:color/holo_orange_light" />
+                    app:buttonTint="@android:color/holo_orange_light"
+                    android:onClick="onRadioButtonClicked"/>
             </RadioGroup>
 
-            <com.google.android.material.textfield.TextInputLayout
-                android:id="@+id/nickname_other_textinputlayout"
+            <EditText
+                android:id="@+id/nickname_other"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="12dp"
-                android:layout_marginRight="12dp"
-                android:layout_marginBottom="10dp"
-                android:visibility="gone">
-
-                <EditText
-                    android:id="@+id/nickname_other_edittext"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:hint="Enter a nickname (e.g. bae's home)"
-                    android:textCursorDrawable="@drawable/theme_color" />
-
-            </com.google.android.material.textfield.TextInputLayout>
-
+                android:textCursorDrawable="@drawable/theme_color"
+                android:hint="Enter a nickname (e.g. bae's home)"
+                android:visibility="invisible"/>
             <Button
                 android:id="@+id/finalbutton"
                 android:layout_width="200dp"
