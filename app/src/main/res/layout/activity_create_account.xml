@@ -36,31 +36,21 @@
             android:textSize="24dp"
             />
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:layout_marginTop="5dp"
-            android:layout_marginBottom="10dp"
-            android:layout_weight="1"
-            android:text="Sign up with Google"
-            android:textSize="20dp"/>
-
         <ImageView
             android:id="@+id/google"
-            android:layout_width="44dp"
-
+            android:layout_width="180dp"
             android:layout_gravity="center"
-            android:layout_marginBottom="20dp"
-            android:layout_height="40dp"
+            android:layout_height="45dp"
+            android:layout_marginTop="20dp"
+            android:layout_marginBottom="30dp"
             android:layout_weight="2"
-            app:srcCompat="@drawable/google" />
+            app:srcCompat="@drawable/gsignup" />
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-           android:layout_marginTop="-10dp"
+            android:layout_marginTop="-10dp"
             android:layout_weight="1"
             android:text="OR"
             android:textSize="15dp"/>
@@ -77,6 +67,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="15dp"
                 android:layout_marginRight="25dp"
+                android:inputType="textCapWords"
                 android:layout_weight="1"
                 android:hint="First Name"
                 android:singleLine="true"
@@ -88,10 +79,12 @@
                 android:layout_width="165dp"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="15dp"
+                android:inputType="textCapWords"
                 android:layout_weight="1"
                 android:hint="Last Name"
                 android:textSize="16sp" />
         </LinearLayout>
+
         <EditText
             android:id="@+id/email"
             android:layout_width="match_parent"
@@ -127,7 +120,10 @@
                 android:inputType="phone"
                 android:textSize="16sp"
                 android:maxLength="10"/>
+
+
         </LinearLayout>
+
 
         <RadioGroup
             android:id="@+id/gender"
@@ -161,6 +157,7 @@
                 android:layout_weight="1"
                 android:text="Others" />
         </RadioGroup>
+
         <Spinner
             android:id="@+id/citylist"
             style="@style/Widget.AppCompat.Spinner.DropDown"
@@ -169,16 +166,18 @@
             android:layout_weight="1"
             android:layout_marginTop="15dp"
             android:ems="10"
-
             android:scrollbarStyle="outsideInset"
             android:layout_marginBottom="15dp"
             android:text="Select City"
             android:textSize="16sp" />
+
         <RadioGroup
+            android:id="@+id/acctype"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:weightSum="2"
+            android:checkedButton="@+id/checkCustomer"
             android:layout_gravity="center"
             android:orientation="horizontal">
 
@@ -188,15 +187,18 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:layout_marginRight="10dp"
-
-                android:text="Customer" />
+                android:text="Customer"
+                android:onClick="onRadioButtonClicked"/>
+                />
 
             <RadioButton
                 android:id="@+id/checkServiceProvider"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:text="Service Provider" />
+                android:text="Service Provider"
+                android:onClick="onRadioButtonClicked"/>
+                 />
         </RadioGroup>
 
         <LinearLayout
@@ -230,17 +232,39 @@
                 android:textSize="16sp" />
         </LinearLayout>
 
-        <TextView
-            android:id="@+id/warn"
-            android:layout_width="wrap_content"
+        <Spinner
+            android:id="@+id/categories"
+            style="@style/Widget.AppCompat.Spinner.DropDown"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_gravity="left"
-            android:layout_marginLeft="10dp"
-            android:layout_marginTop="-5dp"
-            android:text="Password doesn't match!"
-            android:textColor="#ff0000"
-            android:visibility="invisible" />
+            android:layout_weight="1"
+            android:layout_marginTop="20dp"
+            android:ems="10"
+            android:visibility="invisible"
+            android:scrollbarStyle="outsideInset"
+            android:layout_marginBottom="15dp"
+            android:text="Select City"
+            android:textSize="16sp" />
 
+            <ProgressBar
+                android:id="@+id/pBar"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:minWidth="50dp"
+                android:minHeight="50dp"
+                android:visibility="invisible"></ProgressBar>
+
+            <Button
+            android:id="@+id/btSubmit"
+            android:layout_width="98dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="end"
+            android:layout_marginTop="10dp"
+            android:layout_weight="2"
+            android:background="@drawable/loginbutton"
+            android:clickable="false"
+            android:text="Submit" />
         <Button
             android:id="@+id/btNext"
             android:layout_width="98dp"
@@ -249,9 +273,10 @@
             android:layout_marginTop="10dp"
             android:layout_weight="2"
             android:background="@drawable/loginbutton"
-android:clickable="false"
+            android:clickable="false"
+            android:text="Next"
+            android:visibility="invisible"/>
 
-            android:text="Next" />
         <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -274,7 +299,8 @@ android:clickable="false"
                 android:text="Sign in"
                 android:textColor="#216EF3" />
 
+
+
         </LinearLayout>
     </LinearLayout>
 </ScrollView>
-
