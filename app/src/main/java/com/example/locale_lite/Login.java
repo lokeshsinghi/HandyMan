@@ -21,6 +21,7 @@ import com.google.firebase.database.ValueEventListener;
 public class Login extends AppCompatActivity  {
 
     TextView signUp;
+    int p=0,q=0;
     EditText pNum;
     TextView useEmail;
     ProgressBar pbar;
@@ -35,6 +36,7 @@ public class Login extends AppCompatActivity  {
         logIn =(Button) findViewById(R.id.login);
         pbar = findViewById(R.id.loading);
         databaseUsers = FirebaseDatabase.getInstance().getReference("customers");
+
         logIn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -44,7 +46,6 @@ public class Login extends AppCompatActivity  {
                 else {
                     pbar.setVisibility(View.VISIBLE);
                     FirebaseDatabase.getInstance().getReference().child("Customers")
-
                             .addListenerForSingleValueEvent(new ValueEventListener() {
                                 @Override
                                 public void onDataChange(DataSnapshot dataSnapshot) {
@@ -53,24 +54,62 @@ public class Login extends AppCompatActivity  {
                                         Customers c = snapshot.getValue(Customers.class);
 
                                         if(c.getPhonenum().toString().equals(phone)) {
+                                            p=1;
+                                            Toast.makeText(Login.this, " fctfgh", Toast.LENGTH_SHORT).show();
                                             Intent intent = new Intent(Login.this, OTP.class);
-                                            intent.putExtra("phonenumber","+91"+phone);
-                                             startActivity(intent);
+                                            intent.putExtra("phonenumber", "+91" + phone);
+                                            startActivity(intent);
                                             break;
                                         }
-                                        pbar.setVisibility(View.GONE);
-                                    Toast.makeText(Login.this, "Mobile Number not Registered. Sign up", Toast.LENGTH_SHORT).show();
+                                        else
+                                            p=0;
                                     }
                                 }
                                 @Override
                                 public void onCancelled(DatabaseError databaseError) {
                                 }
                             });
-                        }
 
-                        }
 
-                });
+
+
+                    FirebaseDatabase.getInstance().getReference().child("ServiceProviders")
+                            .addListenerForSingleValueEvent(new ValueEventListener() {
+                                @Override
+                                public void onDataChange(DataSnapshot dataSnapshot) {
+                                    for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
+                                        pbar.setVisibility(View.GONE);
+                                        ServiceProviders c = snapshot.getValue(ServiceProviders.class);
+
+                                        if(c.getPhonenum().toString().equals(phone)) {
+                                            q=1;
+                                            Intent intent = new Intent(Login.this, OTP.class);
+                                            intent.putExtra("phonenumber","+91"+phone);
+                                            Toast.makeText(Login.this, " ", Toast.LENGTH_SHORT).show();
+                                            startActivity(intent);
+                                            break;
+                                        }
+                                        else
+                                            q=0;
+
+                                    }
+                                    if(p==0&&q==0){
+                                        Toast.makeText(Login.this, "Mobile Number not Registered. Sign up", Toast.LENGTH_SHORT).show();
+                                    }
+                                }
+                                @Override
+                                public void onCancelled(DatabaseError databaseError) {
+                                }
+                            });
+                }
+//                if(p==0)
+//                {
+//                    pbar.setVisibility(View.GONE);
+//                    Toast.makeText(Login.this, "Mobile Number not Registered. Sign up", Toast.LENGTH_SHORT).show();
+//                }
+            }
+
+        });
 
         useEmail = (TextView) findViewById(R.id.email);
         useEmail.setOnClickListener(new View.OnClickListener() {
@@ -91,5 +130,5 @@ public class Login extends AppCompatActivity  {
                 startActivity(intent);
             }
         });
-            }
-        }
+    }
+}
