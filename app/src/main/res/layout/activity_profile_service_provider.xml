@@ -4,13 +4,15 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="fill_parent"
     android:layout_height="wrap_content"
+    android:background="#ffffff"
+    android:fillViewport="false"
     android:orientation="vertical"
-    android:padding="10dp"
-    android:fillViewport="false">
+    android:padding="10dp">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="fill_parent"
+        android:layout_marginBottom="10dp"
         android:orientation="vertical"
         android:padding="30dp"
         android:weightSum="16"
@@ -20,159 +22,186 @@
             android:id="@+id/logo2"
             android:layout_width="120dp"
             android:layout_height="40dp"
+            android:layout_marginBottom="10dp"
             android:layout_weight="2"
-            app:srcCompat="@drawable/logo"
-            />
+            app:srcCompat="@drawable/logo" />
 
         <TextView
             android:id="@+id/Create"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_weight="2"
+            android:autoSizeTextType="uniform"
             android:fontFamily="@font/roboto_medium"
             android:maxLines="1"
-            android:layout_weight="2"
             android:text="Complete your Handyman Profile"
             android:textAlignment="gravity"
             android:textColor="#000000"
-            android:autoSizeTextType="uniform"
-            android:textSize="24dp"
-            />
+            android:textSize="24dp" />
 
-        <EditText
-            android:id="@+id/Qualifications"
+        <com.google.android.material.textfield.TextInputLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"
-            android:hint="Qualifications"
-            android:textSize="16sp" />
+            android:layout_marginLeft="12dp"
+            android:layout_marginRight="12dp"
+            android:layout_marginBottom="10dp">
 
-        <EditText
-            android:id="@+id/experience"
+            <EditText
+                android:id="@+id/Qualifications"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:hint="Qualifications"
+                android:textCursorDrawable="@drawable/theme_color"
+                android:textSize="16sp" />
+
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="20dp"
-            android:hint="Years of Experience"
-            android:inputType="numberDecimal"
-            android:textSize="16sp" />
-<LinearLayout
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
-    android:orientation="horizontal">
-       <LinearLayout
-           android:layout_width="wrap_content"
-           android:layout_height="wrap_content"
-           android:orientation="vertical">
+            android:layout_marginLeft="12dp"
+            android:layout_marginRight="12dp">
+
+            <EditText
+                android:id="@+id/experience"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="20dp"
+                android:hint="Years of Experience"
+                android:inputType="numberDecimal"
+                android:textCursorDrawable="@drawable/theme_color"
+                android:textSize="16sp" />
+        </com.google.android.material.textfield.TextInputLayout>
+
         <LinearLayout
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:weightSum="3"
-            android:orientation="vertical">
-
-            <TextView
-                android:layout_width="150dp"
-                android:layout_height="wrap_content"
-                android:text="Upload your Profile Photo"
-                android:layout_marginTop="10dp"
-                android:layout_gravity="center"
-                android:textAlignment="center"
-                android:layout_marginBottom="10dp"
-                android:textColor="#000000"
-                android:textSize="18sp" />
-            />
-            <LinearLayout
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                >
-            <Button
-                android:id="@+id/chooser1"
-                android:layout_width="75dp"
-                android:layout_height="30dp"
-                android:text="CHOOSE"
-                android:layout_gravity="center"
-                android:background="@drawable/createnew"/>
-            <Button
-                android:id="@+id/uploader1"
-                android:layout_width="75dp"
-                android:layout_height="30dp"
-                android:layout_marginLeft="10dp"
-                android:text="Upload"
-                android:layout_gravity="center"
-                android:background="@drawable/createnew"/>
-
-            </LinearLayout>
-            </LinearLayout>
-
-
-
-            android:layout_marginTop="10dp"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_height="239dp"
             android:orientation="horizontal">
+
             <LinearLayout
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:weightSum="3"
+                android:layout_height="match_parent"
+                android:layout_marginRight="10dp"
                 android:orientation="vertical">
 
-                <TextView
-                    android:layout_width="150dp"
-                    android:layout_height="wrap_content"
-                    android:text="Upload your Identity Proof"
-                    android:layout_marginTop="10dp"
-                    android:layout_gravity="center"
-                    android:textAlignment="center"
-                    android:layout_marginBottom="10dp"
-                    android:textColor="#000000"
-                    android:textSize="18sp" />
-                />
                 <LinearLayout
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:orientation="horizontal"
-                    >
-                    <Button
-                        android:id="@+id/chooser2"
-                        android:layout_width="75dp"
-                        android:layout_height="30dp"
-                        android:text="CHOOSE"
+                    android:orientation="vertical"
+                    android:weightSum="3">
+
+                    <TextView
+                        android:layout_width="150dp"
+                        android:layout_height="wrap_content"
                         android:layout_gravity="center"
-                        android:background="@drawable/createnew"/>
-                    <Button
-                        android:id="@+id/uploader2"
-                        android:layout_width="75dp"
-                        android:layout_height="30dp"
-                        android:layout_marginLeft="10dp"
-                        android:text="Upload"
-                        android:layout_gravity="center"
-                        android:background="@drawable/createnew"/>
+                        android:layout_marginTop="10dp"
+                        android:layout_marginBottom="10dp"
+                        android:text="Upload your Profile Photo"
+                        android:textAlignment="center"
+                        android:textColor="#000000"
+                        android:textSize="18sp" />
+                    />
+
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal">
+
+                        <Button
+                            android:id="@+id/chooser1"
+                            android:layout_width="75dp"
+                            android:layout_height="30dp"
+                            android:layout_gravity="center"
+                            android:background="@drawable/createnew"
+                            android:text="CHOOSE" />
+
+                        <Button
+                            android:id="@+id/uploader1"
+                            android:layout_width="75dp"
+                            android:layout_height="30dp"
+                            android:layout_gravity="center"
+                            android:layout_marginLeft="10dp"
+                            android:background="@drawable/createnew"
+                            android:text="Upload" />
+
+                    </LinearLayout>
+
 
                 </LinearLayout>
+
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:weightSum="3">
+
+                    <TextView
+                        android:layout_width="150dp"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:layout_marginTop="10dp"
+                        android:layout_marginBottom="10dp"
+                        android:text="Upload your Identity Proof"
+                        android:textAlignment="center"
+                        android:textColor="#000000"
+                        android:textSize="18sp" />
+                    />
+
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal">
+
+                        <Button
+                            android:id="@+id/chooser2"
+                            android:layout_width="75dp"
+                            android:layout_height="30dp"
+                            android:layout_gravity="center"
+                            android:background="@drawable/createnew"
+                            android:text="CHOOSE" />
+
+                        <Button
+                            android:id="@+id/uploader2"
+                            android:layout_width="75dp"
+                            android:layout_height="30dp"
+                            android:layout_gravity="center"
+                            android:layout_marginLeft="10dp"
+                            android:background="@drawable/createnew"
+                            android:text="Upload" />
+
+                    </LinearLayout>
+                </LinearLayout>
             </LinearLayout>
-</LinearLayout>
-  <LinearLayout
-      android:layout_width="wrap_content"
-      android:layout_height="wrap_content"
-    android:orientation="vertical">
-      <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Your Chosen Image is shown"
-        android:gravity="center"
-        android:textSize="12dp"/>
-        <ImageView
-            android:layout_marginLeft="10dp"
-            android:layout_width="150dp"
-            android:layout_height="180dp"
-            android:id="@+id/imageView1"
-            ></ImageView>
-  </LinearLayout>
-</LinearLayout>
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:text="Your Chosen Image is shown"
+                    android:textSize="12dp" />
+
+                <ImageView
+                    android:id="@+id/imageView1"
+                    android:layout_width="150dp"
+                    android:layout_height="180dp"
+                    android:layout_marginLeft="10dp"></ImageView>
+            </LinearLayout>
+        </LinearLayout>
+
+
         <Button
             android:layout_width="80dp"
             android:layout_height="40dp"
             android:layout_gravity="center"
             android:layout_marginTop="30dp"
+            android:id="@+id/profilenext_button"
             android:background="@drawable/loginbutton"
             android:text="Next" />
     </LinearLayout>

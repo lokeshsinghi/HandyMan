@@ -7,10 +7,12 @@ import androidx.core.content.ContextCompat;
 import androidx.fragment.app.FragmentActivity;
 
 import android.Manifest;
+import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.location.Location;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
@@ -29,6 +31,8 @@ import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 
 public class asklocation extends FragmentActivity implements OnMapReadyCallback, GoogleMap.OnMyLocationClickListener,
         GoogleMap.OnMyLocationButtonClickListener {
@@ -41,33 +45,41 @@ public class asklocation extends FragmentActivity implements OnMapReadyCallback,
     private static final int REQUEST_CODE = 101;
     private GoogleMap mMap;
     private Marker markerCenter;
+    Button savebutton;
+    private DatabaseReference databaseReference;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_asklocation);
+
+        databaseReference = FirebaseDatabase.getInstance().getReference("Location");
+
         addresscategory = (RadioGroup) findViewById(R.id.nickname);
         home = (RadioButton) findViewById(R.id.checkhome);
-        work = (RadioButton)findViewById(R.id.checkwork);
+        work = (RadioButton) findViewById(R.id.checkwork);
         others = (RadioButton) findViewById(R.id.checkother);
-        nickaddress = (EditText)findViewById(R.id.nickname_other);
+        nickaddress = (EditText) findViewById(R.id.nickname_other);
+        savebutton = findViewById(R.id.save_button);
         fusedLocationProviderClient = LocationServices.getFusedLocationProviderClient(this);
         fetchLastLocation();
+
 
     }
 
 
-    private void fetchLastLocation(){
+
+    private void fetchLastLocation() {
         if (ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION)
                 != PackageManager.PERMISSION_GRANTED) {
-            ActivityCompat.requestPermissions(this,new String[]{Manifest.permission.ACCESS_FINE_LOCATION},REQUEST_CODE);
+            ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.ACCESS_FINE_LOCATION}, REQUEST_CODE);
             return;
         }
         Task<Location> task = fusedLocationProviderClient.getLastLocation();
         task.addOnSuccessListener(new OnSuccessListener<Location>() {
             @Override
             public void onSuccess(Location location) {
-                if(location != null){
+                if (location != null) {
                     currentLocation = location;
                     SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
                             .findFragmentById(R.id.map);
@@ -81,7 +93,7 @@ public class asklocation extends FragmentActivity implements OnMapReadyCallback,
     public void onMapReady(GoogleMap googleMap) {
 
         mMap = googleMap;
-        LatLng latLng = new LatLng(currentLocation.getLatitude(),currentLocation.getLongitude());
+        LatLng latLng = new LatLng(currentLocation.getLatitude(), currentLocation.getLongitude());
         MarkerOptions markerOptions = new MarkerOptions().position(mMap.getCameraPosition().target);
         googleMap.animateCamera(CameraUpdateFactory.newLatLng(latLng));
         googleMap.animateCamera(CameraUpdateFactory.newLatLngZoom(latLng, 15));
@@ -93,12 +105,20 @@ public class asklocation extends FragmentActivity implements OnMapReadyCallback,
         mMap.setOnCameraMoveListener(new GoogleMap.OnCameraMoveListener() {
             public void onCameraMove() {
                 markerCenter.setPosition(mMap.getCameraPosition().target);
-                LatLng position = markerCenter.getPosition();
-                //Remove Toast and store position as final Location
-                Toast.makeText(
-                        asklocation.this,
-                        position+"",
-                        Toast.LENGTH_LONG).show();
+                final LatLng position = markerCenter.getPosition();
+
+
+                savebutton.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+
+                        DatabaseReference newpost = databaseReference.push();
+                        newpost.setValue(position);
+
+                        Intent intent = new Intent(asklocation.this, Main2Activity.class);
+                        startActivity(intent);
+                    }
+                });
             }
         });
 
@@ -106,9 +126,9 @@ public class asklocation extends FragmentActivity implements OnMapReadyCallback,
 
     @Override
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
-        switch (requestCode){
+        switch (requestCode) {
             case REQUEST_CODE:
-                if(grantResults.length>0 && grantResults[0] == PackageManager.PERMISSION_GRANTED){
+                if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
                     fetchLastLocation();
                 }
                 break;
@@ -119,7 +139,7 @@ public class asklocation extends FragmentActivity implements OnMapReadyCallback,
         // Is the button now checked?
         boolean checked = ((RadioButton) view).isChecked();
 
-        switch(view.getId()) {
+        switch (view.getId()) {
             case R.id.checkhome:
                 if (checked)
                     nickaddress.setVisibility(View.INVISIBLE);
@@ -129,7 +149,7 @@ public class asklocation extends FragmentActivity implements OnMapReadyCallback,
                     nickaddress.setVisibility(View.INVISIBLE);
                 break;
             case R.id.checkother:
-                if(checked)
+                if (checked)
                     nickaddress.setVisibility(View.VISIBLE);
                 break;
         }
