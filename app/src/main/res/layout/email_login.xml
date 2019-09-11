@@ -39,7 +39,7 @@
             tools:layout_editor_absoluteY="246dp" />
 
         <TextView
-            android:id="@+id/textView6"
+            android:id="@+id/usemobile"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="15dp"
@@ -68,19 +68,21 @@
 
 
         <EditText
-            android:id="@+id/editText6"
+            android:id="@+id/editEmail"
             android:layout_width="300dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:ems="10"
+            android:hint="Registered Email ID"
             android:inputType="textEmailAddress" />
 
         <EditText
-            android:id="@+id/editText7"
+            android:id="@+id/editPassword"
             android:layout_width="300dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:ems="10"
+            android:hint="Password"
             android:inputType="textPassword" />
 
         <LinearLayout
@@ -88,19 +90,26 @@
             android:layout_height="wrap_content"
             android:orientation="horizontal">
 
-            <CheckBox
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content" />
+<!--            <CheckBox-->
+<!--                android:layout_width="wrap_content"-->
+<!--                android:layout_height="wrap_content" />-->
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="-5dp"
-                android:hint="Show Password" />
+<!--            <TextView-->
+<!--                android:layout_width="wrap_content"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:layout_marginLeft="-5dp"-->
+<!--                android:hint="Show Password" />-->
         </LinearLayout>
     </LinearLayout>
 
-
+    <ProgressBar
+        android:id="@+id/pBar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:minWidth="50dp"
+        android:minHeight="50dp"
+        android:visibility="invisible"></ProgressBar>
     <Button
         android:id="@+id/login"
         android:layout_width="195dp"
@@ -135,6 +144,7 @@
             />
 
         <TextView
+            android:id="@+id/signup"
             android:layout_width="wrap_content"
             android:layout_height="20dp"
             android:layout_marginLeft="5dp"

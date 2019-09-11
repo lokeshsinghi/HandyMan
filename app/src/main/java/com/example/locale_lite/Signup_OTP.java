@@ -26,7 +26,7 @@ import com.google.firebase.auth.PhoneAuthProvider;
 
 import java.util.concurrent.TimeUnit;
 
-public class OTP extends AppCompatActivity {
+public class Signup_OTP extends AppCompatActivity {
 
     private String otp;
     private FirebaseAuth mAuth;
@@ -51,7 +51,7 @@ public class OTP extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 sendOTP(phonenumber);
-                Toast.makeText(OTP.this, "OTP sent again", Toast.LENGTH_SHORT).show();
+                Toast.makeText(Signup_OTP.this, "OTP sent again", Toast.LENGTH_SHORT).show();
             }
         });
 
@@ -82,15 +82,16 @@ public class OTP extends AppCompatActivity {
                     @Override
                     public void onComplete(@NonNull Task<AuthResult> task) {
                         if (task.isSuccessful()) {
-                            Intent intent = new Intent(OTP.this, Main2Activity.class);
+                            Intent intent = new Intent(Signup_OTP.this, asklocation.class);
                             intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
                             startActivity(intent);
                             finish();
 
                         }else{
-                            Intent intent = new Intent(OTP.this, OTP.class);
-                              Toast.makeText(OTP.this,"Wrong OTP!"
-                                , Toast.LENGTH_LONG).show();
+                            Intent intent = new Intent(Signup_OTP.this, Signup_OTP.class);
+                            Toast.makeText(Signup_OTP.this,"Wrong OTP!"
+                                    , Toast.LENGTH_LONG).show();
+                            startActivity(intent);
                         }
                     }
                 });
@@ -129,7 +130,7 @@ public class OTP extends AppCompatActivity {
 
         @Override
         public void onVerificationFailed(@NonNull FirebaseException e) {
-            Toast.makeText(OTP.this,"Verification Failed! ",Toast.LENGTH_LONG).show();
+            Toast.makeText(Signup_OTP.this,"Verification Failed! ",Toast.LENGTH_LONG).show();
         }
     };
 }
