@@ -14,12 +14,6 @@ public class ProfileServiceProvider extends AppCompatActivity implements Adapter
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_profile_service_provider);
-        Spinner categories = (Spinner) findViewById(R.id.categories);
-        ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this,
-                R.array.Categories, android.R.layout.simple_spinner_item);
-        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        categories.setAdapter(adapter);
-        categories.setOnItemSelectedListener(this);
     }
 
     @Override

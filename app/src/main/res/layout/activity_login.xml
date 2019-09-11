@@ -5,48 +5,46 @@
     android:id="@+id/container"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:baselineAligned="false"
-    android:orientation="vertical"
-    android:paddingLeft="16dp"
+
     android:paddingTop="20dp"
-    android:paddingRight="16dp"
-    android:paddingBottom="16dp">
+
+    android:orientation="vertical">
 
     <ImageView
+        android:layout_marginTop="50dp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="50dp"
-        android:src="@drawable/ic_launcher_foreground" />
-
+        android:src="@drawable/ic_launcher_foreground"
+        />
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
-        android:orientation="horizontal">
+        android:orientation="horizontal"
+        android:layout_marginTop="20dp">
 
         <TextView
             android:id="@+id/textView"
             android:layout_width="200dp"
             android:layout_height="54dp"
-            android:layout_marginLeft="20dp"
             android:editable="false"
-            android:text="Enter Registered Email Address"
+            android:text="Enter Registered Mobile Number"
             android:textColor="#000000"
             android:textSize="18sp"
             android:textStyle="normal"
             android:visibility="visible"
+            android:layout_marginLeft="20dp"
             tools:layout_editor_absoluteX="20dp"
             tools:layout_editor_absoluteY="246dp" />
 
         <TextView
-            android:id="@+id/usemobile"
+            android:id="@+id/email"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="15dp"
+            android:layout_marginStart="30dp"
             android:layout_marginTop="0dp"
             android:layout_marginEnd="0dp"
             android:clickable="true"
-            android:text="Use Mobile No."
+            android:text="Use Email ID"
             android:textColor="#FF9800"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="1.0"
@@ -55,71 +53,68 @@
 
 
     </LinearLayout>
-
     <LinearLayout
-        android:layout_width="wrap_content"
-        android:layout_height="125dp"
-        android:layout_gravity="left
-"
-        android:layout_marginLeft="20dp"
-        android:layout_marginTop="05dp"
+        android:layout_width="338dp"
+        android:layout_height="46dp"
         android:layout_marginBottom="336dp"
-        android:orientation="vertical">
+        android:orientation="horizontal"
 
+        app:layout_constraintBottom_toBottomOf="parent"
+        tools:layout_editor_absoluteX="4dp">
 
-        <EditText
-            android:id="@+id/editEmail"
-            android:layout_width="300dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:ems="10"
-            android:hint="Registered Email ID"
-            android:inputType="textEmailAddress" />
-
-        <EditText
-            android:id="@+id/editPassword"
-            android:layout_width="300dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:ems="10"
-            android:hint="Password"
-            android:inputType="textPassword" />
-
-        <LinearLayout
+        <TextView
+            android:id="@+id/logmob"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:orientation="horizontal">
+            android:layout_gravity="center"
+            android:layout_marginVertical="10dp"
+            android:layout_marginLeft="30dp"
 
-<!--            <CheckBox-->
-<!--                android:layout_width="wrap_content"-->
-<!--                android:layout_height="wrap_content" />-->
+            android:layout_marginTop="7dp"
+            android:text="+91"
+            android:textSize="18sp"
+            tools:layout_editor_absoluteX="4dp"
+            tools:layout_editor_absoluteY="349dp" />
 
-<!--            <TextView-->
-<!--                android:layout_width="wrap_content"-->
-<!--                android:layout_height="wrap_content"-->
-<!--                android:layout_marginLeft="-5dp"-->
-<!--                android:hint="Show Password" />-->
-        </LinearLayout>
+        <EditText
+            android:id="@+id/phonenum"
+            android:layout_width="260dp"
+            android:layout_gravity="center"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:layout_marginLeft="10dp"
+            android:ems="10"
+            android:maxLength="10"
+            android:inputType="phone" />
+
     </LinearLayout>
 
+
+
+
     <ProgressBar
-        android:id="@+id/pBar"
-        android:layout_width="wrap_content"
+        android:id="@+id/loading"
         android:layout_height="wrap_content"
+        android:layout_width="wrap_content"
         android:layout_gravity="center"
+        android:layout_marginTop="64dp"
+        android:layout_marginBottom="64dp"
         android:minWidth="50dp"
         android:minHeight="50dp"
-        android:visibility="invisible"></ProgressBar>
+        android:visibility="invisible">
+
+    </ProgressBar>
+
     <Button
         android:id="@+id/login"
-        android:layout_width="195dp"
-        android:layout_height="wrap_content"
+        android:layout_width="300dp"
+        android:layout_height="70dp"
         android:layout_gravity="center"
-        android:layout_marginTop="-320dp"
+        android:layout_marginTop="-300dp"
         android:layout_marginBottom="10dp"
-        android:background="#FF9800"
+        android:background="@drawable/loginbutton"
         android:stateListAnimator="@null"
-        android:text="Login"
+        android:text="Proceed to login"
         android:textAllCaps="false"
         android:textColor="@android:color/white"
         android:textSize="20sp" />
@@ -127,8 +122,9 @@
     <LinearLayout
         android:layout_width="287dp"
         android:layout_height="31dp"
+        android:orientation="horizontal"
         android:layout_gravity="center"
-        android:orientation="horizontal">
+        >
 
 
         <TextView
@@ -137,8 +133,9 @@
             android:layout_marginVertical="10dp"
             android:layout_marginLeft="50dp"
             android:layout_marginTop="0dp"
-            android:text="Don't have a account?"
+            android:text="Don't have an account?"
             android:textAlignment="center"
+
 
 
             />
@@ -149,10 +146,10 @@
             android:layout_height="20dp"
             android:layout_marginLeft="5dp"
             android:layout_marginTop="10dp"
-            android:clickable="true"
             android:text="Sign up"
             android:textAlignment="center"
-            android:textColor="#216EF3" />
+            android:textColor="#216EF3"
+            android:clickable="true"/>
     </LinearLayout>
 
 </LinearLayout>
