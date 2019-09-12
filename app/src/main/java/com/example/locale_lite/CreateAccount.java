@@ -157,28 +157,45 @@ public class CreateAccount<findView> extends AppCompatActivity implements Adapte
                 mAuth.createUserWithEmailAndPassword(emailid,pword)
                         .addOnCompleteListener(new OnCompleteListener<AuthResult>() {
                             @Override
-                            public void onComplete(@NonNull Task<AuthResult> task) {
+                            public void onComplete(@NonNull final Task<AuthResult> task) {
                                 progressBar.setVisibility(View.GONE);
-                                if (task.isSuccessful()) {
-                                    ServiceProviders sp = new ServiceProviders(firstname, lastname, emailid, phonenum, city, category);
-                                    FirebaseDatabase.getInstance().getReference("ServiceProvider")
-                                            .child(FirebaseAuth.getInstance().getCurrentUser().getUid())
-                                            .setValue(sp).addOnCompleteListener(new OnCompleteListener<Void>() {
-                                        @Override
-                                        public void onComplete(@NonNull Task<Void> task) {
-                                            progressBar.setVisibility(View.GONE);
-                                            if(task.isSuccessful()) {
-                                                Toast.makeText(CreateAccount.this, "Registered Successfully", Toast.LENGTH_LONG).show();
-                                                Intent intent = new Intent(CreateAccount.this, ProfileServiceProvider.class);
-                                                intent.putExtras(bundle);
-                                                startActivity(intent);
+
+
+                                final String phone = phoneNum.getText().toString();
+                                FirebaseDatabase.getInstance().getReference().child("ServiceProviders")
+                                        .addListenerForSingleValueEvent(new ValueEventListener() {
+                                            @Override
+                                            public void onDataChange(DataSnapshot dataSnapshot) {
+                                                for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
+                                                    ServiceProviders s = snapshot.getValue(ServiceProviders.class);
+
+                                                    if(s.getPhonenum().toString().equals(phone)) {
+                                                        p=1;
+                                                    }
+                                                    else
+                                                        p=0;
+                                                }
+                                                if(p==1)
+                                                {
+                                                    Toast.makeText(CreateAccount.this, "This Phone Number is already registered", Toast.LENGTH_SHORT).show();
+                                                }
+                                                else if (p==0 && task.isSuccessful()) {
+                                                    String phoneNumber = "+91" + phonenum;
+                                                    Intent intent = new Intent(CreateAccount.this, ProfileServiceProvider.class);
+//                                                    intent.putExtras(bundle);
+                                                    startActivity(intent);
+                                                }
+                                                else{
+                                                    Toast.makeText(CreateAccount.this, "This Email Id is already registered",Toast.LENGTH_LONG).show();
+                                                }
                                             }
-                                        }
-                                    });
-                                }
-                                else{
-                                    Toast.makeText(CreateAccount.this, task.getException().getMessage(),Toast.LENGTH_LONG).show();
-                                }
+                                            @Override
+                                            public void onCancelled(DatabaseError databaseError) {
+                                            }
+                                        });
+
+
+
                             }
                         });
         }}

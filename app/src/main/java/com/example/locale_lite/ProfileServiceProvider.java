@@ -53,13 +53,13 @@ public class ProfileServiceProvider extends AppCompatActivity implements View.On
 
 
 
-    Bundle bundle = getIntent().getExtras();
-    String firstname = bundle.getString("firstname");
-    String lastname = bundle.getString("lastname");
-    String emailid = bundle.getString("emailid");
-    String phonenum = bundle.getString("phonenum");
-    String city = bundle.getString("city");
-    String category = bundle.getString("category");
+//    Bundle bundle = getIntent().getExtras();
+//    String firstname = bundle.getString("firstname");
+//    String lastname = bundle.getString("lastname");
+//    String emailid = bundle.getString("emailid");
+//    String phonenum = bundle.getString("phonenum");
+//    String city = bundle.getString("city");
+//    String category = bundle.getString("category");
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
