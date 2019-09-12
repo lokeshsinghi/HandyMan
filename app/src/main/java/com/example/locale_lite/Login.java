@@ -55,7 +55,6 @@ public class Login extends AppCompatActivity  {
 
                                         if(c.getPhonenum().toString().equals(phone)) {
                                             p=1;
-                                            Toast.makeText(Login.this, " fctfgh", Toast.LENGTH_SHORT).show();
                                             Intent intent = new Intent(Login.this, OTP.class);
                                             intent.putExtra("phonenumber", "+91" + phone);
                                             startActivity(intent);
@@ -93,7 +92,8 @@ public class Login extends AppCompatActivity  {
                                             q=0;
 
                                     }
-                                    if(p==0&&q==0){
+                                    if(p==0 && q==0){
+                                        pbar.setVisibility(View.GONE);
                                         Toast.makeText(Login.this, "Mobile Number not Registered. Sign up", Toast.LENGTH_SHORT).show();
                                     }
                                 }
@@ -102,11 +102,6 @@ public class Login extends AppCompatActivity  {
                                 }
                             });
                 }
-//                if(p==0)
-//                {
-//                    pbar.setVisibility(View.GONE);
-//                    Toast.makeText(Login.this, "Mobile Number not Registered. Sign up", Toast.LENGTH_SHORT).show();
-//                }
             }
 
         });

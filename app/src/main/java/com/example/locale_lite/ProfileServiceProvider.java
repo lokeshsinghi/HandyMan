@@ -49,6 +49,18 @@ public class ProfileServiceProvider extends AppCompatActivity implements View.On
     private Uri filePath1;
     static int count=0;
 
+
+
+
+
+    Bundle bundle = getIntent().getExtras();
+    String firstname = bundle.getString("firstname");
+    String lastname = bundle.getString("lastname");
+    String emailid = bundle.getString("emailid");
+    String phonenum = bundle.getString("phonenum");
+    String city = bundle.getString("city");
+    String category = bundle.getString("category");
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
