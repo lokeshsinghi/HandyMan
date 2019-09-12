@@ -1,8 +1,6 @@
 package com.example.locale_lite;
-
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
-
 import android.content.Intent;
 import android.media.Image;
 import android.os.Bundle;
@@ -20,7 +18,6 @@ import android.widget.RadioGroup;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
-
 import com.google.android.gms.auth.api.signin.GoogleSignIn;
 import com.google.android.gms.auth.api.signin.GoogleSignInClient;
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
@@ -29,8 +26,11 @@ import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseAuthSettings;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 import org.w3c.dom.Text;
 
@@ -46,6 +46,7 @@ public class CreateAccount<findView> extends AppCompatActivity implements Adapte
     ProgressBar progressBar;
     private FirebaseAuth mAuth;
     private GoogleSignInClient googleSignInClient;
+    int p=0,q=0;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -142,13 +143,24 @@ public class CreateAccount<findView> extends AppCompatActivity implements Adapte
             }
             else    {
                 progressBar.setVisibility(View.VISIBLE);
+
+
+                final Bundle bundle = new Bundle();
+                bundle.putString("firstname",firstname);
+                bundle.putString("lastname",lastname);
+                bundle.putString("emailid",emailid);
+                bundle.putString("phonenum",phonenum);
+                bundle.putString("city",city);
+                bundle.putString("category",category);
+
+
                 mAuth.createUserWithEmailAndPassword(emailid,pword)
                         .addOnCompleteListener(new OnCompleteListener<AuthResult>() {
                             @Override
                             public void onComplete(@NonNull Task<AuthResult> task) {
                                 progressBar.setVisibility(View.GONE);
                                 if (task.isSuccessful()) {
-                                    ServiceProviders sp = new ServiceProviders(firstname, lastname, emailid, phonenum, city, pword, cpword, category);
+                                    ServiceProviders sp = new ServiceProviders(firstname, lastname, emailid, phonenum, city, category);
                                     FirebaseDatabase.getInstance().getReference("ServiceProvider")
                                             .child(FirebaseAuth.getInstance().getCurrentUser().getUid())
                                             .setValue(sp).addOnCompleteListener(new OnCompleteListener<Void>() {
@@ -157,8 +169,9 @@ public class CreateAccount<findView> extends AppCompatActivity implements Adapte
                                             progressBar.setVisibility(View.GONE);
                                             if(task.isSuccessful()) {
                                                 Toast.makeText(CreateAccount.this, "Registered Successfully", Toast.LENGTH_LONG).show();
-//                                                Intent intent = new Intent(CreateAccount.this, ProfileServiceProvider.class);
-//                                                startActivity(intent);
+                                                Intent intent = new Intent(CreateAccount.this, ProfileServiceProvider.class);
+                                                intent.putExtras(bundle);
+                                                startActivity(intent);
                                             }
                                         }
                                     });
@@ -215,32 +228,64 @@ public class CreateAccount<findView> extends AppCompatActivity implements Adapte
                     password.setError("Passwords do not match. Try again!");
                 else    {
                     progressBar.setVisibility(View.VISIBLE);
+
+
+
+
+                    final Bundle bundle = new Bundle();
+                    bundle.putString("firstname",firstname);
+                    bundle.putString("lastname",lastname);
+                    bundle.putString("emailid",emailid);
+                    bundle.putString("phonenum",phonenum);
+                    bundle.putString("city",city);
+
+
+
+
+
                     mAuth.createUserWithEmailAndPassword(emailid,pword)
                             .addOnCompleteListener(new OnCompleteListener<AuthResult>() {
                                 @Override
-                                public void onComplete(@NonNull Task<AuthResult> task) {
+                                public void onComplete(@NonNull final Task<AuthResult> task) {
                                     progressBar.setVisibility(View.GONE);
-                                    if (task.isSuccessful()) {
-                                        Customers customer = new Customers(firstname, lastname, emailid, phonenum, city);
-                                        FirebaseDatabase.getInstance().getReference("Customers")
-                                                .child(FirebaseAuth.getInstance().getCurrentUser().getUid())
-                                                .setValue(customer).addOnCompleteListener(new OnCompleteListener<Void>() {
-                                            @Override
-                                            public void onComplete(@NonNull Task<Void> task) {
-                                                progressBar.setVisibility(View.GONE);
-                                                if(task.isSuccessful()) {
-                                                    Toast.makeText(CreateAccount.this, "Registered Successfully", Toast.LENGTH_LONG).show();
-                                                    String phoneNumber = "+91" + phonenum;
-                                                    Intent intent = new Intent(CreateAccount.this, Signup_OTP.class);
-                                                    intent.putExtra("phonenumber", phoneNumber);
-                                                    startActivity(intent);
+
+
+                                    final String phone = phoneNum.getText().toString();
+                                    FirebaseDatabase.getInstance().getReference().child("Customers")
+                                            .addListenerForSingleValueEvent(new ValueEventListener() {
+                                                @Override
+                                                public void onDataChange(DataSnapshot dataSnapshot) {
+                                                    for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
+                                                        Customers c = snapshot.getValue(Customers.class);
+
+                                                        if(c.getPhonenum().toString().equals(phone)) {
+                                                            p=1;
+                                                        }
+                                                        else
+                                                            p=0;
+                                                    }
+                                                    if(p==1)
+                                                    {
+                                                        Toast.makeText(CreateAccount.this, "This Phone Number is already registered", Toast.LENGTH_SHORT).show();
+                                                    }
+                                                    else if (p==0 && task.isSuccessful()) {
+                                                        String phoneNumber = "+91" + phonenum;
+                                                        Intent intent = new Intent(CreateAccount.this, Signup_OTP.class);
+                                                        intent.putExtra("phonenumber", phoneNumber);
+                                                        intent.putExtras(bundle);
+                                                        startActivity(intent);
+                                                    }
+                                                    else{
+                                                        Toast.makeText(CreateAccount.this, "This Email Id is already registered",Toast.LENGTH_LONG).show();
+                                                    }
                                                 }
-                                            }
-                                        });
-                                    }
-                                    else{
-                                        Toast.makeText(CreateAccount.this, task.getException().getMessage(),Toast.LENGTH_LONG).show();
-                                    }
+                                                @Override
+                                                public void onCancelled(DatabaseError databaseError) {
+                                                }
+                                            });
+
+
+
                                 }
                             });
                 }}
