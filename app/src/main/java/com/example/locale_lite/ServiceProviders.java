@@ -1,12 +1,35 @@
 package com.example.locale_lite;
 
+import android.net.Uri;
+
 public class ServiceProviders {
-    String firstname;
+    private String firstname;
     String lastname;
     String emailid;
     String phonenum;
     String city;
     String category;
+
+    public String getProfilePicUrl() {
+        return profilePicUrl;
+    }
+
+    public void setProfilePicUrl(String profilePicUrl) {
+        this.profilePicUrl = profilePicUrl;
+    }
+
+    public String getIdProofUrl() {
+        return idProofUrl;
+    }
+
+    public void setIdProofUrl(String idProofUrl) {
+        this.idProofUrl = idProofUrl;
+    }
+
+    String profilePicUrl;
+    String idProofUrl;
+
+
 
     ServiceProviders()  {
 

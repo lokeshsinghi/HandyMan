@@ -182,7 +182,7 @@ public class CreateAccount<findView> extends AppCompatActivity implements Adapte
                                                 else if (p==0 && task.isSuccessful()) {
                                                     String phoneNumber = "+91" + phonenum;
                                                     Intent intent = new Intent(CreateAccount.this, ProfileServiceProvider.class);
-//                                                    intent.putExtras(bundle);
+                                                    intent.putExtras(bundle);
                                                     startActivity(intent);
                                                 }
                                                 else{
