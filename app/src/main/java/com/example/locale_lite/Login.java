@@ -26,7 +26,6 @@ public class Login extends AppCompatActivity  {
     TextView useEmail;
     ProgressBar pbar;
     Button logIn;
-    DatabaseReference databaseUsers;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -35,7 +34,6 @@ public class Login extends AppCompatActivity  {
         pNum = findViewById(R.id.phonenum);
         logIn =(Button) findViewById(R.id.login);
         pbar = findViewById(R.id.loading);
-        databaseUsers = FirebaseDatabase.getInstance().getReference("customers");
 
         logIn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -52,10 +50,9 @@ public class Login extends AppCompatActivity  {
                                     for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
                                         pbar.setVisibility(View.GONE);
                                         Customers c = snapshot.getValue(Customers.class);
-
-                                        if(c.getPhonenum().toString().equals(phone)) {
+                                        if(c.getPhonenum().equals(phone)) {
                                             p=1;
-                                            Intent intent = new Intent(Login.this, OTP.class);
+                                            Intent intent = new Intent(Login.this, Main2Activity.class);
                                             intent.putExtra("phonenumber", "+91" + phone);
                                             startActivity(intent);
                                             break;
@@ -77,14 +74,13 @@ public class Login extends AppCompatActivity  {
                                 @Override
                                 public void onDataChange(DataSnapshot dataSnapshot) {
                                     for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
-                                        pbar.setVisibility(View.GONE);
                                         ServiceProviders c = snapshot.getValue(ServiceProviders.class);
 
                                         if(c.getPhonenum().toString().equals(phone)) {
                                             q=1;
+                                            pbar.setVisibility(View.GONE);
                                             Intent intent = new Intent(Login.this, OTP.class);
                                             intent.putExtra("phonenumber","+91"+phone);
-                                            Toast.makeText(Login.this, " ", Toast.LENGTH_SHORT).show();
                                             startActivity(intent);
                                             break;
                                         }
@@ -94,7 +90,7 @@ public class Login extends AppCompatActivity  {
                                     }
                                     if(p==0 && q==0){
                                         pbar.setVisibility(View.GONE);
-                                        Toast.makeText(Login.this, "Mobile Number not Registered. Sign up", Toast.LENGTH_SHORT).show();
+                                        Toast.makeText(Login.this, "Mobile Number not registered. Sign up", Toast.LENGTH_SHORT).show();
                                     }
                                 }
                                 @Override

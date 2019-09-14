@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.media.Image;
 import android.os.Bundle;
 import android.text.TextUtils;
+import android.util.Log;
 import android.util.Patterns;
 import android.view.View;
 import android.widget.AdapterView;
@@ -34,6 +35,9 @@ import com.google.firebase.database.ValueEventListener;
 
 import org.w3c.dom.Text;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class CreateAccount<findView> extends AppCompatActivity implements AdapterView.OnItemSelectedListener{
 
     EditText firstName, lastName, emailId, phoneNum, password, cpassword;
@@ -41,6 +45,7 @@ public class CreateAccount<findView> extends AppCompatActivity implements Adapte
     ImageView googleSignup;
     Button next, submit;
     Spinner cityList, categories;
+    Bundle bundle;
     RadioGroup gender, accType;
     RadioButton male, female, others, typecus, typeser;
     ProgressBar progressBar;
@@ -94,7 +99,7 @@ public class CreateAccount<findView> extends AppCompatActivity implements Adapte
             startActivity(intent);
         }
     });
-
+        final ArrayList<ServiceProviders> serviceprovidersArrayList = new ArrayList<>();
     next = (Button)findViewById(R.id.btNext);
     next.setOnClickListener(new View.OnClickListener() {
         @Override
@@ -163,14 +168,15 @@ public class CreateAccount<findView> extends AppCompatActivity implements Adapte
 
                                 final String phone = phoneNum.getText().toString();
                                 FirebaseDatabase.getInstance().getReference().child("ServiceProviders")
-                                        .addListenerForSingleValueEvent(new ValueEventListener() {
+                                        .addValueEventListener(new ValueEventListener() {
                                             @Override
                                             public void onDataChange(DataSnapshot dataSnapshot) {
                                                 for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
                                                     ServiceProviders s = snapshot.getValue(ServiceProviders.class);
-
+                                                    serviceprovidersArrayList.add(s);
                                                     if(s.getPhonenum().toString().equals(phone)) {
                                                         p=1;
+                                                        break;
                                                     }
                                                     else
                                                         p=0;
@@ -182,6 +188,7 @@ public class CreateAccount<findView> extends AppCompatActivity implements Adapte
                                                 else if (p==0 && task.isSuccessful()) {
                                                     String phoneNumber = "+91" + phonenum;
                                                     Intent intent = new Intent(CreateAccount.this, ProfileServiceProvider.class);
+                                                    intent.putExtra("phonenumber",phoneNumber);
                                                     intent.putExtras(bundle);
                                                     startActivity(intent);
                                                 }
@@ -201,7 +208,7 @@ public class CreateAccount<findView> extends AppCompatActivity implements Adapte
         }}
 
     });
-
+         final ArrayList<Customers> customersArrayList = new ArrayList<>();
 
     submit = (Button)findViewById(R.id.btSubmit);
         submit.setOnClickListener(new View.OnClickListener() {
@@ -257,24 +264,19 @@ public class CreateAccount<findView> extends AppCompatActivity implements Adapte
                     bundle.putString("city",city);
 
 
-
-
-
                     mAuth.createUserWithEmailAndPassword(emailid,pword)
                             .addOnCompleteListener(new OnCompleteListener<AuthResult>() {
                                 @Override
                                 public void onComplete(@NonNull final Task<AuthResult> task) {
                                     progressBar.setVisibility(View.GONE);
-
-
                                     final String phone = phoneNum.getText().toString();
                                     FirebaseDatabase.getInstance().getReference().child("Customers")
-                                            .addListenerForSingleValueEvent(new ValueEventListener() {
+                                            .addValueEventListener(new ValueEventListener() {
                                                 @Override
                                                 public void onDataChange(DataSnapshot dataSnapshot) {
                                                     for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
                                                         Customers c = snapshot.getValue(Customers.class);
-
+                                                        customersArrayList.add(c);
                                                         if(c.getPhonenum().toString().equals(phone)) {
                                                             p=1;
                                                         }
@@ -298,6 +300,7 @@ public class CreateAccount<findView> extends AppCompatActivity implements Adapte
                                                 }
                                                 @Override
                                                 public void onCancelled(DatabaseError databaseError) {
+                                                    Log.e("error",databaseError.getDetails());
                                                 }
                                             });
 
@@ -308,7 +311,7 @@ public class CreateAccount<findView> extends AppCompatActivity implements Adapte
                 }}
 
         });
-
+        int x = customersArrayList.size();
         Spinner cityspinner = (Spinner) findViewById(R.id.citylist);
         ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this,
                 R.array.Cities, android.R.layout.simple_spinner_item);
@@ -353,7 +356,6 @@ public class CreateAccount<findView> extends AppCompatActivity implements Adapte
                     break;
         }
     }
-
     @Override
     public void onItemSelected(AdapterView<?> parent, View view, int i, long l) {
 

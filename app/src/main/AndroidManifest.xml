@@ -16,10 +16,10 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
+        <activity android:name=".asklocationSP"></activity>
         <activity
             android:name=".Main2Activity"
-            android:label="@string/title_activity_main2">
-        </activity>
+            android:label="@string/title_activity_main2" />
         <activity android:name=".asklocation" />
 
         <meta-data
@@ -36,10 +36,12 @@
         </activity>
         <activity android:name=".CreateAccount" />
         <activity android:name=".Login" />
-        <activity android:name=".EmailLogin"></activity>
-        <activity android:name=".Signup_OTP"></activity>
+        <activity android:name=".EmailLogin" />
+        <activity android:name=".Signup_OTP" />
         <activity android:name=".ProfileServiceProvider" />
+        <activity android:name=".SignupSP_OTP" />
         <activity android:name=".OTP" />
+
     </application>
 
 </manifest>

@@ -36,12 +36,10 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
-public class asklocation extends FragmentActivity implements OnMapReadyCallback, GoogleMap.OnMyLocationClickListener,
+public class asklocationSP extends FragmentActivity implements OnMapReadyCallback, GoogleMap.OnMyLocationClickListener,
         GoogleMap.OnMyLocationButtonClickListener {
 
     Location currentLocation;
-    RadioGroup addresscategory;
-    RadioButton home, work, others;
     EditText nickaddress;
     FusedLocationProviderClient fusedLocationProviderClient;
     private static final int REQUEST_CODE = 101;
@@ -53,11 +51,7 @@ public class asklocation extends FragmentActivity implements OnMapReadyCallback,
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_asklocation);
-        addresscategory = (RadioGroup) findViewById(R.id.nickname);
-        home = (RadioButton) findViewById(R.id.checkhome);
-        work = (RadioButton) findViewById(R.id.checkwork);
-        others = (RadioButton) findViewById(R.id.checkother);
+        setContentView(R.layout.activity_asklocation_sp);
         nickaddress = (EditText) findViewById(R.id.nickname_other);
         savebutton = findViewById(R.id.save_button);
         fusedLocationProviderClient = LocationServices.getFusedLocationProviderClient(this);
@@ -82,7 +76,7 @@ public class asklocation extends FragmentActivity implements OnMapReadyCallback,
                     currentLocation = location;
                     SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
                             .findFragmentById(R.id.map);
-                    mapFragment.getMapAsync(asklocation.this);
+                    mapFragment.getMapAsync(asklocationSP.this);
                 }
             }
         });
@@ -117,26 +111,31 @@ public class asklocation extends FragmentActivity implements OnMapReadyCallback,
                         String emailid = bundle.getString("emailid");
                         String phonenum = bundle.getString("phonenum");
                         String city = bundle.getString("city");
+                        String category = bundle.getString("category");
+                        String downloadUrlID = bundle.getString("downloadUrlID");
+                        String downloadUrlPP = bundle.getString("downloadUrlPP");
+                        String qualifications = bundle.getString("qualifications");
+                        Float experience = bundle.getFloat("yearsOfExperience");
 
 
-                        Customers customer = new Customers(firstname, lastname, emailid, phonenum, city);
-                        customer.setLatitude(position.latitude);
-                        customer.setLongitude(position.longitude);
-                        FirebaseDatabase.getInstance().getReference("Customers")
-                                .child(FirebaseAuth.getInstance().getCurrentUser().getUid())
-                                .setValue(customer).addOnCompleteListener(new OnCompleteListener<Void>() {
-                            @Override
-                            public void onComplete(@NonNull Task<Void> task) {
-                                if(task.isSuccessful()) {
-                                    Toast.makeText(asklocation.this, "Registered Successfully", Toast.LENGTH_LONG).show();
-                                }
-                                Intent intent = new Intent(asklocation.this, Main2Activity.class);
-                                startActivity(intent);
-                            }
-                        });
-
-
-                        Intent intent = new Intent(asklocation.this, Main2Activity.class);
+                ServiceProviders sp = new ServiceProviders(firstname, lastname, emailid, phonenum, city, category);
+                sp.setIdProofUrl(downloadUrlID);
+                sp.setProfilePicUrl(downloadUrlPP);
+                sp.setQualifications(qualifications);
+                sp.setYearsOfExperience(experience);
+                sp.setLatitude(position.latitude);
+                sp.setLongitude(position.longitude);
+                FirebaseDatabase.getInstance().getReference("ServiceProviders")
+                        .child(FirebaseAuth.getInstance().getCurrentUser().getUid())
+                        .setValue(sp).addOnCompleteListener(new OnCompleteListener<Void>() {
+                    @Override
+                    public void onComplete(@NonNull Task<Void> task) {
+                        if (task.isSuccessful()) {
+                            Toast.makeText(asklocationSP.this, "Registered Successfully", Toast.LENGTH_LONG).show();
+                        }
+                    }
+                });
+                        Intent intent = new Intent(asklocationSP.this, Main2Activity.class);
                         startActivity(intent);
                     }
                 });
@@ -156,25 +155,7 @@ public class asklocation extends FragmentActivity implements OnMapReadyCallback,
         }
     }
 
-    public void onRadioButtonClicked(View view) {
-        // Is the button now checked?
-        boolean checked = ((RadioButton) view).isChecked();
 
-        switch (view.getId()) {
-            case R.id.checkhome:
-                if (checked)
-                    nickaddress.setVisibility(View.INVISIBLE);
-                break;
-            case R.id.checkwork:
-                if (checked)
-                    nickaddress.setVisibility(View.INVISIBLE);
-                break;
-            case R.id.checkother:
-                if (checked)
-                    nickaddress.setVisibility(View.VISIBLE);
-                break;
-        }
-    }
 
     @Override
     public void onMyLocationClick(@NonNull Location location) {

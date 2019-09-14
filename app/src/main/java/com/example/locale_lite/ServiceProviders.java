@@ -2,6 +2,8 @@ package com.example.locale_lite;
 
 import android.net.Uri;
 
+import com.google.android.gms.maps.model.LatLng;
+
 public class ServiceProviders {
     private String firstname;
     String lastname;
@@ -9,6 +11,46 @@ public class ServiceProviders {
     String phonenum;
     String city;
     String category;
+    Float yearsOfExperience;
+    String qualifications;
+
+    public Double getLatitude() {
+        return latitude;
+    }
+
+    public void setLatitude(Double latitude) {
+        this.latitude = latitude;
+    }
+
+    public Double getLongitude() {
+        return longitude;
+    }
+
+    public void setLongitude(Double longitude) {
+        this.longitude = longitude;
+    }
+
+    Double latitude;
+    Double longitude;
+    String profilePicUrl;
+    String idProofUrl;
+    public float getYearsOfExperience() {
+        return yearsOfExperience;
+    }
+
+    public void setYearsOfExperience(float yearsOfExperience) {
+        this.yearsOfExperience = yearsOfExperience;
+    }
+
+    public String getQualifications() {
+        return qualifications;
+    }
+
+    public void setQualifications(String qualifications) {
+        this.qualifications = qualifications;
+    }
+
+
 
     public String getProfilePicUrl() {
         return profilePicUrl;
@@ -26,8 +68,7 @@ public class ServiceProviders {
         this.idProofUrl = idProofUrl;
     }
 
-    String profilePicUrl;
-    String idProofUrl;
+
 
 
 
