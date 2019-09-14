@@ -29,8 +29,10 @@ import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
+import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
@@ -52,9 +54,6 @@ public class asklocation extends FragmentActivity implements OnMapReadyCallback,
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_asklocation);
-
-        databaseReference = FirebaseDatabase.getInstance().getReference("Location");
-
         addresscategory = (RadioGroup) findViewById(R.id.nickname);
         home = (RadioButton) findViewById(R.id.checkhome);
         work = (RadioButton) findViewById(R.id.checkwork);
@@ -112,8 +111,30 @@ public class asklocation extends FragmentActivity implements OnMapReadyCallback,
                     @Override
                     public void onClick(View view) {
 
-                        DatabaseReference newpost = databaseReference.push();
-                        newpost.setValue(position);
+                        Bundle bundle = getIntent().getExtras();
+                        String firstname = bundle.getString("firstname");
+                        String lastname = bundle.getString("lastname");
+                        String emailid = bundle.getString("emailid");
+                        String phonenum = bundle.getString("phonenum");
+                        String city = bundle.getString("city");
+
+
+                        Customers customer = new Customers(firstname, lastname, emailid, phonenum, city);
+                        customer.setLatitude(position.latitude);
+                        customer.setLongitude(position.longitude);
+                        FirebaseDatabase.getInstance().getReference("Customers")
+                                .child(FirebaseAuth.getInstance().getCurrentUser().getUid())
+                                .setValue(customer).addOnCompleteListener(new OnCompleteListener<Void>() {
+                            @Override
+                            public void onComplete(@NonNull Task<Void> task) {
+                                if(task.isSuccessful()) {
+                                    Toast.makeText(asklocation.this, "Registered Successfully", Toast.LENGTH_LONG).show();
+                                }
+                                Intent intent = new Intent(asklocation.this, Main2Activity.class);
+                                startActivity(intent);
+                            }
+                        });
+
 
                         Intent intent = new Intent(asklocation.this, Main2Activity.class);
                         startActivity(intent);

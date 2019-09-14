@@ -16,12 +16,16 @@ import android.view.View;
 
 import android.webkit.MimeTypeMap;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Spinner;
 import android.widget.Toast;
 
+import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.storage.FirebaseStorage;
@@ -42,12 +46,21 @@ public class ProfileServiceProvider extends AppCompatActivity implements View.On
     private Button next;
     private ImageView imageView1,imageView2;
     private String fname;
+    EditText Qualifications, Experience;
     private String uploadId;
+    Uri downloadUrlPP, downloadUrlID;
+    String qualifications;
+    float experience;
     private StorageReference storageReference;
     private DatabaseReference databaseReference;
     //a Uri object to store file path
     private Uri filePath1;
     static int count=0;
+
+
+
+
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -55,14 +68,14 @@ public class ProfileServiceProvider extends AppCompatActivity implements View.On
         setContentView(R.layout.activity_profile_service_provider);
 
         storageReference= FirebaseStorage.getInstance().getReference("uploads");
-        databaseReference = FirebaseDatabase.getInstance().getReference("Images");
         //getting buttons from layout
         buttonChoose1 =  findViewById(R.id.chooser1);
         buttonUpload1 =  findViewById(R.id.uploader1);
         buttonChoose2 =  findViewById(R.id.chooser2);
         buttonUpload2 =  findViewById(R.id.uploader2);
         next = findViewById(R.id.profilenext_button);
-
+        Qualifications = findViewById(R.id.Qualifications);
+        Experience = findViewById(R.id.experience);
         imageView1 = findViewById(R.id.imageView1);
 
         //attaching listener
@@ -71,13 +84,10 @@ public class ProfileServiceProvider extends AppCompatActivity implements View.On
         buttonChoose2.setOnClickListener(this);
         buttonUpload2.setOnClickListener(this);
 
-        next.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(ProfileServiceProvider.this, asklocation.class);
-                startActivity(intent);
-            }
-        });
+        next.setOnClickListener(this);
+
+
+
     }
 
     //method to show file chooser
@@ -110,7 +120,7 @@ public class ProfileServiceProvider extends AppCompatActivity implements View.On
     }
 
 
-    private void uploadFile() {
+    private void uploadFile1() {
         //if there is a file to upload
         if (filePath1 != null) {
             //displaying a progress dialog while upload is going on
@@ -123,36 +133,86 @@ public class ProfileServiceProvider extends AppCompatActivity implements View.On
                     .addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
                         @Override
                         public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
-                            //if the upload is successfull
+                            //if the upload is successful
                             //hiding the progress dialog
 
                             progressDialog.dismiss();
 
-                            count++;
-                            if(count==1)
-                            {
-                                buttonUpload1.setBackgroundColor(Color.GRAY);
-                                buttonChoose1.setClickable(false);
-                                buttonUpload1.setClickable(false);
-                                imageView1.setImageBitmap(null);
-                                fname = "ProfilePic";
-                            }
-                            else if(count==2)
-                            {
-                                buttonUpload2.setBackgroundColor(Color.GRAY);
-                                buttonChoose2.setClickable(false);
-                                buttonUpload2.setClickable(false);
-                                imageView1.setImageBitmap(null);
-                                fname = "IDProof";
-                            }
                             //and displaying a success toast
-                            Toast.makeText(getApplicationContext(), "File Uploaded ", Toast.LENGTH_LONG).show();
-                            UploadImage uploadImage = new UploadImage(fname, profileRef.getDownloadUrl().toString());
-                            uploadId = databaseReference.push().getKey();
-                            databaseReference.child(uploadId).setValue(uploadImage);
+                            profileRef.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
+                                @Override
+                                public void onSuccess(Uri uri) {
+                                    downloadUrlPP = uri;
+                                    count++;
+                                }
+
+                       });
+
+                    }})
+                    .addOnFailureListener(new OnFailureListener() {
+                        @Override
+                        public void onFailure(@NonNull Exception exception) {
+                            //if the upload is not successfull
+                            //hiding the progress dialog
+                            progressDialog.dismiss();
+
+                            //and displaying error message
+                            Toast.makeText(getApplicationContext(), exception.getMessage(), Toast.LENGTH_LONG).show();
+                        }
+                    })
+                    .addOnProgressListener(new OnProgressListener<UploadTask.TaskSnapshot>() {
+                        @Override
+                        public void onProgress(UploadTask.TaskSnapshot taskSnapshot) {
+                            //calculating progress percentage
+                            double progress = 100.0 * (taskSnapshot.getBytesTransferred()/ taskSnapshot.getTotalByteCount());
+
+                            //displaying percentage in progress dialog
+                            progressDialog.setMessage("Uploaded " + ((int) progress) + "%...");
+
                         }
 
-                    })
+                    });
+        }
+        //if there is not any file
+        else {
+            //you can display an error toast
+            Toast.makeText(getApplicationContext(), "No file selected", Toast.LENGTH_SHORT).show();
+        }
+    }
+
+
+
+
+    private void uploadFile2() {
+        //if there is a file to upload
+        if (filePath1 != null) {
+            //displaying a progress dialog while upload is going on
+            final ProgressDialog progressDialog = new ProgressDialog(this);
+            progressDialog.setTitle("Uploading");
+            progressDialog.show();
+
+            final StorageReference profileRef = storageReference.child(System.currentTimeMillis()+"."+getFileExtension(filePath1));
+            profileRef.putFile(filePath1)
+                    .addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
+                        @Override
+                        public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
+                            //if the upload is successful
+                            //hiding the progress dialog
+
+                            progressDialog.dismiss();
+
+                            //and displaying a success toast
+                            profileRef.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
+                                @Override
+                                public void onSuccess(Uri uri) {
+                                    downloadUrlID = uri;
+                                    //Do what you want with the url
+                                    count++;
+                                }
+
+                            });
+
+                        }})
                     .addOnFailureListener(new OnFailureListener() {
                         @Override
                         public void onFailure(@NonNull Exception exception) {
@@ -185,20 +245,43 @@ public class ProfileServiceProvider extends AppCompatActivity implements View.On
     }
     @Override
     public void onClick(View view) {
+        if(view == next)
+        {
+
+            if(count<2)
+                Toast.makeText(ProfileServiceProvider.this, "Upload all required files",Toast.LENGTH_SHORT).show();
+            else if (Qualifications.getText().toString().trim().equalsIgnoreCase(""))
+                Qualifications.setError("Qualifications required");
+
+            else if (Experience.getText().toString().trim().equalsIgnoreCase(""))
+                Experience.setError("Years of Experience Required");
+            else {
+                Bundle bundle = getIntent().getExtras();
+                bundle.putString("downloadUrlID",downloadUrlID.toString());
+                bundle.putString("downloadUrlPP",downloadUrlPP.toString());
+                bundle.putString("qualifications",Qualifications.getText().toString());
+                bundle.putString("yearsOfExperience",Experience.getText().toString());
+                final String phonenumber = getIntent().getStringExtra("phonenumber");
+                Intent intent = new Intent(ProfileServiceProvider.this, SignupSP_OTP.class);
+                intent.putExtra("phonenumber", phonenumber);
+                intent.putExtras(bundle);
+                startActivity(intent);
+            }
+        }
         //if the clicked button is choose
         if (view == buttonChoose1) {
             showFileChooser();
         }
         //if the clicked button is upload
         else if (view == buttonUpload1) {
-            uploadFile();
+            uploadFile1();
         }
         if (view == buttonChoose2) {
             showFileChooser();
         }
         //if the clicked button is upload
         else if (view == buttonUpload2) {
-            uploadFile();
+            uploadFile2();
         }
 
     }
