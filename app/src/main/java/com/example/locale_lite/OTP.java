@@ -23,6 +23,7 @@ import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.PhoneAuthCredential;
 import com.google.firebase.auth.PhoneAuthProvider;
+import com.google.firebase.database.FirebaseDatabase;
 
 import java.util.concurrent.TimeUnit;
 
@@ -46,6 +47,11 @@ public class OTP extends AppCompatActivity {
         resendotp = findViewById(R.id.resend);
         final String phonenumber = getIntent().getStringExtra("phonenumber");
         sendOTP(phonenumber);
+
+
+
+
+
 
         findViewById(R.id.resend).setOnClickListener(new View.OnClickListener() {
             @Override
@@ -82,15 +88,23 @@ public class OTP extends AppCompatActivity {
                     @Override
                     public void onComplete(@NonNull Task<AuthResult> task) {
                         if (task.isSuccessful()) {
-                            Intent intent = new Intent(OTP.this, Main2Activity.class);
+
+
+                            Bundle bundle = getIntent().getExtras();
+
+
+
+                            Intent intent = new Intent(OTP.this, asklocation.class);
                             intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                            intent.putExtras(bundle);
                             startActivity(intent);
                             finish();
 
                         }else{
                             Intent intent = new Intent(OTP.this, OTP.class);
-                              Toast.makeText(OTP.this,"Wrong OTP!"
-                                , Toast.LENGTH_LONG).show();
+                            Toast.makeText(OTP.this,"Wrong OTP!"
+                                    , Toast.LENGTH_LONG).show();
+                            startActivity(intent);
                         }
                     }
                 });
