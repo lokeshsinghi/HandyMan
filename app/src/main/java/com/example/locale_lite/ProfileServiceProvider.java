@@ -16,6 +16,7 @@ import android.view.View;
 
 import android.webkit.MimeTypeMap;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Spinner;
 import android.widget.Toast;
@@ -45,8 +46,11 @@ public class ProfileServiceProvider extends AppCompatActivity implements View.On
     private Button next;
     private ImageView imageView1,imageView2;
     private String fname;
+    EditText Qualifications, Experience;
     private String uploadId;
     Uri downloadUrlPP, downloadUrlID;
+    String qualifications;
+    float experience;
     private StorageReference storageReference;
     private DatabaseReference databaseReference;
     //a Uri object to store file path
@@ -64,14 +68,14 @@ public class ProfileServiceProvider extends AppCompatActivity implements View.On
         setContentView(R.layout.activity_profile_service_provider);
 
         storageReference= FirebaseStorage.getInstance().getReference("uploads");
-        databaseReference = FirebaseDatabase.getInstance().getReference("Images");
         //getting buttons from layout
         buttonChoose1 =  findViewById(R.id.chooser1);
         buttonUpload1 =  findViewById(R.id.uploader1);
         buttonChoose2 =  findViewById(R.id.chooser2);
         buttonUpload2 =  findViewById(R.id.uploader2);
         next = findViewById(R.id.profilenext_button);
-
+        Qualifications = findViewById(R.id.Qualifications);
+        Experience = findViewById(R.id.experience);
         imageView1 = findViewById(R.id.imageView1);
 
         //attaching listener
@@ -140,8 +144,6 @@ public class ProfileServiceProvider extends AppCompatActivity implements View.On
                                 public void onSuccess(Uri uri) {
                                     downloadUrlPP = uri;
                                     count++;
-                                    //Do what you want with the url
-                                    Toast.makeText(ProfileServiceProvider.this,downloadUrlPP.toString() , Toast.LENGTH_LONG).show();
                                 }
 
                        });
@@ -206,7 +208,6 @@ public class ProfileServiceProvider extends AppCompatActivity implements View.On
                                     downloadUrlID = uri;
                                     //Do what you want with the url
                                     count++;
-                                    Toast.makeText(ProfileServiceProvider.this,downloadUrlID.toString() , Toast.LENGTH_LONG).show();
                                 }
 
                             });
@@ -246,32 +247,26 @@ public class ProfileServiceProvider extends AppCompatActivity implements View.On
     public void onClick(View view) {
         if(view == next)
         {
-            Bundle bundle = getIntent().getExtras();
-            String firstname = bundle.getString("firstname");
-            String lastname = bundle.getString("lastname");
-            String emailid = bundle.getString("emailid");
-            String phonenum = bundle.getString("phonenum");
-            String city = bundle.getString("city");
-            String category = bundle.getString("category");
 
+            if(count<2)
+                Toast.makeText(ProfileServiceProvider.this, "Upload all required files",Toast.LENGTH_SHORT).show();
+            else if (Qualifications.getText().toString().trim().equalsIgnoreCase(""))
+                Qualifications.setError("Qualifications required");
 
-            ServiceProviders sp = new ServiceProviders(firstname, lastname, emailid, phonenum, city, category);
-            sp.setIdProofUrl(downloadUrlID.toString());
-            sp.setProfilePicUrl(downloadUrlPP.toString());
-            FirebaseDatabase.getInstance().getReference("Service Providers")
-                    .child(FirebaseAuth.getInstance().getCurrentUser().getUid())
-                    .setValue(sp).addOnCompleteListener(new OnCompleteListener<Void>() {
-                @Override
-                public void onComplete(@NonNull Task<Void> task) {
-                    if(task.isSuccessful()) {
-                        Toast.makeText(ProfileServiceProvider.this, "Registered Successfully", Toast.LENGTH_LONG).show();
-                    }
-                }
-            });
-
-
-            Intent intent = new Intent(ProfileServiceProvider.this, asklocation.class);
-            startActivity(intent);
+            else if (Experience.getText().toString().trim().equalsIgnoreCase(""))
+                Experience.setError("Years of Experience Required");
+            else {
+                Bundle bundle = getIntent().getExtras();
+                bundle.putString("downloadUrlID",downloadUrlID.toString());
+                bundle.putString("downloadUrlPP",downloadUrlPP.toString());
+                bundle.putString("qualifications",Qualifications.getText().toString());
+                bundle.putString("yearsOfExperience",Experience.getText().toString());
+                final String phonenumber = getIntent().getStringExtra("phonenumber");
+                Intent intent = new Intent(ProfileServiceProvider.this, SignupSP_OTP.class);
+                intent.putExtra("phonenumber", phonenumber);
+                intent.putExtras(bundle);
+                startActivity(intent);
+            }
         }
         //if the clicked button is choose
         if (view == buttonChoose1) {

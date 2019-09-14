@@ -27,7 +27,7 @@ import com.google.firebase.database.FirebaseDatabase;
 
 import java.util.concurrent.TimeUnit;
 
-public class Signup_OTP extends AppCompatActivity {
+public class SignupSP_OTP extends AppCompatActivity {
 
     private String otp;
     private FirebaseAuth mAuth;
@@ -39,7 +39,7 @@ public class Signup_OTP extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_signup__otp);
+        setContentView(R.layout.activity_signup_sp__otp);
 
         mAuth = FirebaseAuth.getInstance();
         pbar = findViewById(R.id.loading);
@@ -57,7 +57,7 @@ public class Signup_OTP extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 sendOTP(phonenumber);
-                Toast.makeText(Signup_OTP.this, "OTP sent again", Toast.LENGTH_SHORT).show();
+                Toast.makeText(SignupSP_OTP.this, "OTP sent again", Toast.LENGTH_SHORT).show();
             }
         });
 
@@ -90,19 +90,19 @@ public class Signup_OTP extends AppCompatActivity {
                         if (task.isSuccessful()) {
 
 
-                            Bundle bundle = getIntent().getExtras();
+                           Bundle bundle = getIntent().getExtras();
 
+                                        Toast.makeText(SignupSP_OTP.this, "Registered Successfully", Toast.LENGTH_LONG).show();
 
-
-                            Intent intent = new Intent(Signup_OTP.this, asklocation.class);
-                            intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
-                            intent.putExtras(bundle);
+                            Intent intent = new Intent(SignupSP_OTP.this, asklocationSP.class);
+//                            intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                           intent.putExtras(bundle);
                             startActivity(intent);
                             finish();
 
                         }else{
-                            Intent intent = new Intent(Signup_OTP.this, Signup_OTP.class);
-                            Toast.makeText(Signup_OTP.this,"Wrong OTP!"
+                            Intent intent = new Intent(SignupSP_OTP.this, SignupSP_OTP.class);
+                            Toast.makeText(SignupSP_OTP.this,"Wrong OTP!"
                                     , Toast.LENGTH_LONG).show();
                             startActivity(intent);
                         }
@@ -143,7 +143,7 @@ public class Signup_OTP extends AppCompatActivity {
 
         @Override
         public void onVerificationFailed(@NonNull FirebaseException e) {
-            Toast.makeText(Signup_OTP.this,"Verification Failed! ",Toast.LENGTH_LONG).show();
+            Toast.makeText(SignupSP_OTP.this,"Verification Failed! ",Toast.LENGTH_LONG).show();
         }
     };
 }
