@@ -94,7 +94,7 @@ public class OTP extends AppCompatActivity {
 
 
 
-                            Intent intent = new Intent(OTP.this, asklocation.class);
+                            Intent intent = new Intent(OTP.this, Main2Activity.class);
                             intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
                             intent.putExtras(bundle);
                             startActivity(intent);

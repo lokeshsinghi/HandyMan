@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="#ffffff"
+    android:padding="10dp"
+    tools:context=".selectProviders">
+
+    <ImageView
+        android:layout_width="300dp"
+        android:layout_height="80dp"
+        android:src="@drawable/logo"
+        android:id="@+id/logo_main"
+        android:layout_gravity="center"/>
+
+    <TextView
+        android:id="@+id/service_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:padding="16dp"
+        android:textSize="20sp"
+        android:textColor="#000000"/>
+
+
+
+    <ListView
+        android:id="@+id/service_list"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
+
+</LinearLayout>

@@ -52,7 +52,7 @@ public class Login extends AppCompatActivity  {
                                         Customers c = snapshot.getValue(Customers.class);
                                         if(c.getPhonenum().equals(phone)) {
                                             p=1;
-                                            Intent intent = new Intent(Login.this, Main2Activity.class);
+                                            Intent intent = new Intent(Login.this, OTP.class);
                                             intent.putExtra("phonenumber", "+91" + phone);
                                             startActivity(intent);
                                             break;
