@@ -31,10 +31,6 @@ dependencies {
     implementation "com.google.firebase:firebase-messaging:20.0.0"
     implementation 'com.google.firebase:firebase-auth:19.0.0'
     implementation 'com.firebase:firebase-client-android:2.5.0'
-    implementation 'com.google.firebase:firebase-storage:19.0.0'
-    implementation 'com.google.firebase:firebase-auth:19.0.0'
-    implementation 'com.google.firebase:firebase-storage:19.0.0'
-    implementation 'com.google.firebase:firebase-auth:19.0.0'
     implementation 'androidx.legacy:legacy-support-v4:1.0.0'
     implementation 'androidx.navigation:navigation-fragment:2.1.0'
     implementation 'androidx.navigation:navigation-ui:2.1.0'
