@@ -24,6 +24,7 @@
             android:textSize="25dp" />
 
         <Button
+            android:onClick="onServiceClick"
             android:id="@+id/acrepair_button"
             android:layout_width="300dp"
             android:layout_height="70dp"
@@ -43,6 +44,7 @@
             tools:ignore="HardcodedText,RtlSymmetry,SpUsage,UnusedAttribute" />
 
         <Button
+            android:onClick="onServiceClick"
             android:id="@+id/carpenter_button"
             android:layout_width="300dp"
             android:layout_height="70dp"
@@ -62,6 +64,7 @@
             tools:ignore="HardcodedText,RtlSymmetry,SpUsage,UnusedAttribute" />
 
         <Button
+            android:onClick="onServiceClick"
             android:id="@+id/ceiling_button"
             android:layout_width="300dp"
             android:layout_height="70dp"
@@ -82,6 +85,7 @@
 
         <Button
             android:id="@+id/cleaning_button"
+            android:onClick="onServiceClick"
             android:layout_width="300dp"
             android:layout_height="70dp"
             android:layout_gravity="center"
@@ -100,6 +104,7 @@
             tools:ignore="HardcodedText,RtlSymmetry,SpUsage,UnusedAttribute" />
 
         <Button
+            android:onClick="onServiceClick"
             android:id="@+id/electrician_button"
             android:layout_width="300dp"
             android:layout_height="70dp"
@@ -119,6 +124,7 @@
             tools:ignore="HardcodedText,RtlSymmetry,SpUsage,UnusedAttribute" />
 
         <Button
+            android:onClick="onServiceClick"
             android:id="@+id/flooring_button"
             android:layout_width="300dp"
             android:layout_height="70dp"
@@ -138,6 +144,7 @@
             tools:ignore="HardcodedText,RtlSymmetry,SpUsage,UnusedAttribute" />
 
         <Button
+            android:onClick="onServiceClick"
             android:id="@+id/gardener_button"
             android:layout_width="300dp"
             android:layout_height="70dp"
@@ -157,6 +164,7 @@
             tools:ignore="HardcodedText,RtlSymmetry,SpUsage,UnusedAttribute" />
 
         <Button
+            android:onClick="onServiceClick"
             android:id="@+id/general_button"
             android:layout_width="300dp"
             android:layout_height="70dp"
@@ -176,6 +184,7 @@
             tools:ignore="HardcodedText,RtlSymmetry,SpUsage,UnusedAttribute" />
 
         <Button
+            android:onClick="onServiceClick"
             android:id="@+id/gutter_button"
             android:layout_width="300dp"
             android:layout_height="70dp"
@@ -195,6 +204,7 @@
             tools:ignore="HardcodedText,RtlSymmetry,SpUsage,UnusedAttribute" />
 
         <Button
+            android:onClick="onServiceClick"
             android:id="@+id/interior_button"
             android:layout_width="300dp"
             android:layout_height="70dp"
@@ -214,6 +224,7 @@
             tools:ignore="HardcodedText,RtlSymmetry,SpUsage,UnusedAttribute" />
 
         <Button
+            android:onClick="onServiceClick"
             android:id="@+id/maid_button"
             android:layout_width="300dp"
             android:layout_height="70dp"
@@ -226,13 +237,14 @@
             android:gravity="start|center_vertical"
             android:paddingStart="15dp"
             android:stateListAnimator="@null"
-            android:text="Maid service"
+            android:text="Maid Service"
             android:textAlignment="gravity"
             android:textAllCaps="false"
             android:textSize="20dp"
             tools:ignore="HardcodedText,RtlSymmetry,SpUsage,UnusedAttribute" />
 
         <Button
+            android:onClick="onServiceClick"
             android:id="@+id/painter_button"
             android:layout_width="300dp"
             android:layout_height="70dp"
@@ -252,6 +264,7 @@
             tools:ignore="HardcodedText,RtlSymmetry,SpUsage,UnusedAttribute" />
 
         <Button
+            android:onClick="onServiceClick"
             android:id="@+id/plumber_button"
             android:layout_width="300dp"
             android:layout_height="70dp"
@@ -271,6 +284,7 @@
             tools:ignore="HardcodedText,RtlSymmetry,SpUsage,UnusedAttribute" />
 
         <Button
+            android:onClick="onServiceClick"
             android:id="@+id/pest_button"
             android:layout_width="300dp"
             android:layout_height="70dp"
@@ -283,13 +297,14 @@
             android:gravity="start|center_vertical"
             android:paddingStart="15dp"
             android:stateListAnimator="@null"
-            android:text="Pest control"
+            android:text="Pest Control"
             android:textAlignment="gravity"
             android:textAllCaps="false"
             android:textSize="20dp"
             tools:ignore="HardcodedText,RtlSymmetry,SpUsage,UnusedAttribute" />
 
         <Button
+            android:onClick="onServiceClick"
             android:id="@+id/water_button"
             android:layout_width="300dp"
             android:layout_height="70dp"

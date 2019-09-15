@@ -85,6 +85,16 @@ public class ServiceProviders {
         this.category = category;
     }
 
+    public ServiceProviders(String firstname, String lastname, String emailid, String phonenum, String city, String category,String profilePicUrl) {
+        this.firstname = firstname;
+        this.lastname = lastname;
+        this.emailid = emailid;
+        this.phonenum = phonenum;
+        this.city = city;
+        this.category = category;
+        this.profilePicUrl = profilePicUrl;
+    }
+
 
 
     public String getFirstname() {
