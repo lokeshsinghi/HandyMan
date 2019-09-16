@@ -5,14 +5,18 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.ListView;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -27,6 +31,7 @@ import com.google.firebase.database.ValueEventListener;
 import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 import static android.view.View.GONE;
@@ -35,6 +40,8 @@ public class selectProviders extends AppCompatActivity {
 
     ListView listView;
     FirebaseListAdapter adapter;
+    String Name, ProfilePic, Phone;
+    ProgressBar pbar;
     TextView heading;
 
     @Override
@@ -44,6 +51,7 @@ public class selectProviders extends AppCompatActivity {
 
         listView = findViewById(R.id.service_list);
         heading = findViewById(R.id.service_text);
+        pbar = findViewById(R.id.progressBar);
         final String check = getIntent().getStringExtra("buttontext");
         String display = check + " in your city";
         heading.setText(display);
@@ -56,7 +64,6 @@ public class selectProviders extends AppCompatActivity {
                 .setLayout(R.layout.list_row)
                 .setQuery(query,ServiceProviders.class)
                 .build();
-
         adapter = new FirebaseListAdapter(options) {
             @Override
             protected void populateView(@NonNull View v, @NonNull Object model, int position) {
@@ -66,10 +73,13 @@ public class selectProviders extends AppCompatActivity {
 
                 ServiceProviders sp = (ServiceProviders) model;
 
-
                     name.setText(sp.getFirstname() + " " + sp.getLastname());
+                    Name = sp.getFirstname() + " " + sp.getLastname();
                     info.setText(sp.getPhonenum());
                     Picasso.with(selectProviders.this).load(sp.getProfilePicUrl()).into(dp);
+                    ProfilePic = sp.getProfilePicUrl();
+                    Phone = "+91"+sp.getPhonenum();
+                pbar.setVisibility(GONE);
 
 //                else{
 //                    name.setVisibility(GONE);
@@ -79,7 +89,18 @@ public class selectProviders extends AppCompatActivity {
             }
         };
         listView.setAdapter(adapter);
-
+        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> adapterView, View view, int index, long l) {
+                Intent intent = new Intent(selectProviders.this, profileSP.class);
+                intent.putExtra("name",Name);
+                intent.putExtra("dp",ProfilePic);
+                intent.putExtra("category",check);
+                intent.putExtra("phone",Phone);
+                startActivity(intent);
+                finish();
+            }
+        });
 
     }
 
@@ -94,4 +115,5 @@ public class selectProviders extends AppCompatActivity {
         super.onStop();
         adapter.stopListening();
     }
+
 }
