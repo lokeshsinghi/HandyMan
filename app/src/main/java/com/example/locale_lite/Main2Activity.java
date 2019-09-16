@@ -28,6 +28,7 @@ public class Main2Activity extends AppCompatActivity {
     public void onServiceClick(View v){
         Button b = (Button)v;
         String buttontext = b.getText().toString();
+
         Intent intent = new Intent(Main2Activity.this,selectProviders.class);
         intent.putExtra("buttontext",buttontext);
         startActivity(intent);

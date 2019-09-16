@@ -13,6 +13,10 @@ public class ServiceProviders {
     String category;
     Float yearsOfExperience;
     String qualifications;
+    Double latitude;
+    Double longitude;
+    String profilePicUrl;
+    String idProofUrl;
 
     public Double getLatitude() {
         return latitude;
@@ -30,10 +34,7 @@ public class ServiceProviders {
         this.longitude = longitude;
     }
 
-    Double latitude;
-    Double longitude;
-    String profilePicUrl;
-    String idProofUrl;
+
     public float getYearsOfExperience() {
         return yearsOfExperience;
     }

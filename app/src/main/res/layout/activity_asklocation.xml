@@ -90,7 +90,7 @@
                 android:weightSum="3">
 
                 <androidx.appcompat.widget.AppCompatRadioButton
-                    android:id="@+id/home"
+                    android:id="@+id/checkhome"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
@@ -98,7 +98,7 @@
                     app:buttonTint="@android:color/holo_orange_light" />
 
                 <androidx.appcompat.widget.AppCompatRadioButton
-                    android:id="@+id/work"
+                    android:id="@+id/checkwork"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
@@ -106,7 +106,7 @@
                     app:buttonTint="@android:color/holo_orange_light" />
 
                 <androidx.appcompat.widget.AppCompatRadioButton
-                    android:id="@+id/other"
+                    android:id="@+id/checkother"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
