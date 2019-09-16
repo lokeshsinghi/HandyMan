@@ -34,8 +34,6 @@
         android:layout_gravity="center"
         android:visibility="visible"/>
 
-
-
     <ListView
         android:id="@+id/service_list"
         android:clickable="true"
