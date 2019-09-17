@@ -17,6 +17,7 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
+        <activity android:name=".MapDirections"></activity>
         <activity android:name=".asklocationSP" />
         <activity
             android:name=".Main2Activity"
@@ -44,7 +45,7 @@
         <activity android:name=".OTP" />
         <activity android:name=".profileSP" />
         <activity android:name=".selectProviders" />
-        <activity android:name=".Chat"/>
+        <activity android:name=".Chat" />
     </application>
 
 </manifest>
