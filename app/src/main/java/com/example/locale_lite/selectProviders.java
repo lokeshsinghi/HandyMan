@@ -48,12 +48,14 @@ public class selectProviders extends AppCompatActivity {
     private RecyclerView recyclerView;
     private ListAdapter useradapter;
     private List<ServiceProviders> musers;
+    ProgressBar pbar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_select_providers);
 
+        pbar = findViewById(R.id.progressBar);
         heading = findViewById(R.id.service_text);
         final String check = getIntent().getStringExtra("buttontext");
         String display = check + " in your city";
@@ -85,10 +87,10 @@ public class selectProviders extends AppCompatActivity {
                     if(serviceProviders.getCategory().equalsIgnoreCase(check)){
                         musers.add(serviceProviders);
                     }
+                    pbar.setVisibility(GONE);
                 }
                 useradapter = new ListAdapter(selectProviders.this,musers);
                 recyclerView.setAdapter(useradapter);
-
             }
 
             @Override

@@ -17,6 +17,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.android.gms.common.internal.service.Common;
+import com.google.android.gms.maps.model.LatLng;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
@@ -33,6 +34,7 @@ public class profileSP extends AppCompatActivity implements View.OnClickListener
     FirebaseDatabase database;
     DatabaseReference ratingTbl;
     Button submit, cancel;
+    Double latSP,lngSP;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -52,7 +54,13 @@ public class profileSP extends AppCompatActivity implements View.OnClickListener
         final String category = getIntent().getStringExtra("category");
         final String dpURL = getIntent().getStringExtra("dp");
         final String phone = getIntent().getStringExtra("phone");
+
+
+
         Picasso.with(profileSP.this).load(dpURL).into(DP);
+
+
+
         Name.setText(name);
         Category.setText(category);
         review.setOnClickListener(this);
@@ -95,6 +103,17 @@ public class profileSP extends AppCompatActivity implements View.OnClickListener
         if(view == review)
         {
             showRatingDialog();
+        }
+        if(view == directions)
+        {   Bundle b = getIntent().getExtras();
+            final double latSP = b.getDouble("spLat");
+            final double lngSP = b.getDouble("spLng");
+            Intent intent = new Intent(profileSP.this, MapDirections.class);
+            Bundle b1 = new Bundle();
+            b1.putDouble("spLat",latSP);
+            b1.putDouble("spLng",lngSP);
+            intent.putExtras(b1);
+            startActivity(intent);
         }
         if(view == message)
         {

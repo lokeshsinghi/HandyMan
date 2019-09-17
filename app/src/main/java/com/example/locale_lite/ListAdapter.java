@@ -2,6 +2,7 @@ package com.example.locale_lite;
 
 import android.content.Context;
 import android.content.Intent;
+import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -48,7 +49,12 @@ public class ListAdapter extends RecyclerView.Adapter<ListAdapter.ViewHolder> {
                 intent.putExtra("category",serviceProviders.getCategory());
                 intent.putExtra("phone",serviceProviders.getPhonenum());
                 intent.putExtra("userid",serviceProviders.getId());
+                Bundle b = new Bundle();
+                b.putDouble("spLat",serviceProviders.getLatitude());
+                b.putDouble("spLng",serviceProviders.getLongitude());
+                intent.putExtras(b);
                 mcontext.startActivity(intent);
+
             }
         });
 
