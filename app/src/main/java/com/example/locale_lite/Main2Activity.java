@@ -29,7 +29,6 @@ public class Main2Activity extends AppCompatActivity {
     public void onServiceClick(View v){
         Button b = (Button)v;
         String buttontext = b.getText().toString();
-
         Intent intent = new Intent(Main2Activity.this,selectProviders.class);
         intent.putExtra("buttontext",buttontext);
         startActivity(intent);
@@ -39,6 +38,10 @@ public class Main2Activity extends AppCompatActivity {
         Intent intent=new Intent(Main2Activity.this,MainActivity.class);
         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
+        startActivity(intent);
+    }
+    public void reset(View v){
+        Intent intent = new Intent(Main2Activity.this,ResetPassword.class);
         startActivity(intent);
     }
 

@@ -95,7 +95,6 @@ public class SignupSP_OTP extends AppCompatActivity {
                                         Toast.makeText(SignupSP_OTP.this, "Registered Successfully", Toast.LENGTH_LONG).show();
 
                             Intent intent = new Intent(SignupSP_OTP.this, asklocationSP.class);
-//                            intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
                            intent.putExtras(bundle);
                             startActivity(intent);
                             finish();

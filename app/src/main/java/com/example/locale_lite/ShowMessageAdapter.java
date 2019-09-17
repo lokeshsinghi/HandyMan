@@ -15,12 +15,12 @@ import com.squareup.picasso.Picasso;
 
 import java.util.List;
 
-public class ListAdapter extends RecyclerView.Adapter<ListAdapter.ViewHolder> {
+public class ShowMessageAdapter extends RecyclerView.Adapter<ShowMessageAdapter.ViewHolder> {
 
     private Context mcontext;
-    private List<ServiceProviders> musers;
+    private List<Customers> musers;
 
-    public ListAdapter(Context mcontext, List<ServiceProviders> musers){
+    public ShowMessageAdapter(Context mcontext, List<Customers> musers){
         this.musers = musers;
         this.mcontext = mcontext;
     }
@@ -35,20 +35,18 @@ public class ListAdapter extends RecyclerView.Adapter<ListAdapter.ViewHolder> {
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
 
-        final ServiceProviders serviceProviders = musers.get(position);
-        holder.username.setText(serviceProviders.getFirstname()+" "+serviceProviders.getLastname());
-        Picasso.with(mcontext).load(serviceProviders.getProfilePicUrl()).into(holder.profilepic);
+        final Customers c = musers.get(position);
+        holder.username.setText(c.getFirstname()+" "+c.getLastname());
+        holder.profilepic.setImageResource(R.drawable.cuslogo);
 
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(mcontext,Chat.class);
-                intent.putExtra("type","ServiceProvider");
-                intent.putExtra("name",serviceProviders.getFirstname()+" "+serviceProviders.getLastname());
-                intent.putExtra("dp",serviceProviders.getProfilePicUrl());
-                intent.putExtra("category",serviceProviders.getCategory());
-                intent.putExtra("phone",serviceProviders.getPhonenum());
-                intent.putExtra("userid",serviceProviders.getId());
+                intent.putExtra("type","Customer");
+                intent.putExtra("name",c.getFirstname()+" "+c.getLastname());
+                intent.putExtra("phone",c.getPhonenum());
+                intent.putExtra("userid",c.getId());
                 mcontext.startActivity(intent);
             }
         });

@@ -53,6 +53,7 @@ public class Login extends AppCompatActivity  {
                                         if(c.getPhonenum().equals(phone)) {
                                             p=1;
                                             Intent intent = new Intent(Login.this, OTP.class);
+                                            intent.putExtra("type","Customers");
                                             intent.putExtra("phonenumber", "+91" + phone);
                                             startActivity(intent);
                                             break;
@@ -80,6 +81,7 @@ public class Login extends AppCompatActivity  {
                                             q=1;
                                             pbar.setVisibility(View.GONE);
                                             Intent intent = new Intent(Login.this, OTP.class);
+                                            intent.putExtra("type","ServiceProviders");
                                             intent.putExtra("phonenumber","+91"+phone);
                                             startActivity(intent);
                                             break;
