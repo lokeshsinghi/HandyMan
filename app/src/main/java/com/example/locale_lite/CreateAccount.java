@@ -19,6 +19,8 @@ import android.widget.RadioGroup;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import com.firebase.client.Firebase;
 import com.google.android.gms.auth.api.signin.GoogleSignIn;
 import com.google.android.gms.auth.api.signin.GoogleSignInClient;
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
@@ -27,6 +29,7 @@ import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseAuthSettings;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -164,8 +167,6 @@ public class CreateAccount<findView> extends AppCompatActivity implements Adapte
                             @Override
                             public void onComplete(@NonNull final Task<AuthResult> task) {
                                 progressBar.setVisibility(View.GONE);
-
-
                                 final String phone = phoneNum.getText().toString();
                                 FirebaseDatabase.getInstance().getReference().child("ServiceProviders")
                                         .addValueEventListener(new ValueEventListener() {

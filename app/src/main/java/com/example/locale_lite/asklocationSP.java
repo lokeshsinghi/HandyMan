@@ -33,6 +33,7 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
@@ -125,6 +126,10 @@ public class asklocationSP extends FragmentActivity implements OnMapReadyCallbac
                 sp.setYearsOfExperience(experience);
                 sp.setLatitude(position.latitude);
                 sp.setLongitude(position.longitude);
+                FirebaseUser firebaseUser = FirebaseAuth.getInstance().getCurrentUser();
+                String userid = firebaseUser.getUid();
+                sp.setId(userid);
+
                 FirebaseDatabase.getInstance().getReference("ServiceProviders")
                         .child(FirebaseAuth.getInstance().getCurrentUser().getUid())
                         .setValue(sp).addOnCompleteListener(new OnCompleteListener<Void>() {
