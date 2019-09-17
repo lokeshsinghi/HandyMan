@@ -17,12 +17,17 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 public class EmailLogin extends AppCompatActivity {
 
     TextView useMobile, signup;
+    TextView reset;
     EditText email, pwd;
     Button login;
     ProgressBar pbar;
@@ -41,6 +46,7 @@ public class EmailLogin extends AppCompatActivity {
         useMobile = (TextView) findViewById(R.id.usemobile);
         pbar = (ProgressBar) findViewById(R.id.pBar);
         mAuth = FirebaseAuth.getInstance();
+        reset = findViewById(R.id.forgot);
         signup.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -52,6 +58,13 @@ public class EmailLogin extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(EmailLogin.this, Login.class);
+                startActivity(intent);
+            }
+        });
+        reset.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(EmailLogin.this, ResetPassword.class);
                 startActivity(intent);
             }
         });
@@ -73,8 +86,31 @@ public class EmailLogin extends AppCompatActivity {
                                 public void onComplete(@NonNull Task<AuthResult> task) {
                                     pbar.setVisibility(View.GONE);
                                     if (task.isSuccessful()) {
+                                        FirebaseUser firebaseUser = FirebaseAuth.getInstance().getCurrentUser();
+                                        final String userid = firebaseUser.getUid();
+                                        DatabaseReference database = FirebaseDatabase.getInstance().getReference("Customers");
+                                        database.addValueEventListener(new ValueEventListener() {
+                                            @Override
+                                            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                                                for(DataSnapshot snapshot : dataSnapshot.getChildren()){
+                                                    Customers c = snapshot.getValue(Customers.class);
+                                                    if(c.getId().equals(userid)){
+                                                        Toast.makeText(EmailLogin.this,"Logged in",Toast.LENGTH_SHORT).show();
+                                                        Intent intent = new Intent(EmailLogin.this, Main2Activity.class);
+                                                        startActivity(intent);
+                                                        finish();
+                                                    }
+                                                }
+                                            }
+
+                                            @Override
+                                            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+                                            }
+                                        });
+
                                         Toast.makeText(EmailLogin.this,"Logged in",Toast.LENGTH_SHORT).show();
-                                        Intent intent = new Intent(EmailLogin.this, Main2Activity.class);
+                                        Intent intent = new Intent(EmailLogin.this, sp_homepage.class);
                                         startActivity(intent);
                                         finish();
                                     }

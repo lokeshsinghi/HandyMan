@@ -92,13 +92,20 @@ public class OTP extends AppCompatActivity {
 
                             Bundle bundle = getIntent().getExtras();
 
-
+                            if(getIntent().getStringExtra("type").equals("Customers")){
 
                             Intent intent = new Intent(OTP.this, Main2Activity.class);
                             intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
                             intent.putExtras(bundle);
                             startActivity(intent);
-                            finish();
+                            finish();}
+                            else{
+                                Intent intent = new Intent(OTP.this, sp_homepage.class);
+                                intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                                intent.putExtras(bundle);
+                                startActivity(intent);
+                                finish();
+                            }
 
                         }else{
                             Intent intent = new Intent(OTP.this, OTP.class);

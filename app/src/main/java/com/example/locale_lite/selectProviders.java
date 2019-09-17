@@ -1,4 +1,5 @@
 package com.example.locale_lite;
+
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;

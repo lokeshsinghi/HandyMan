@@ -10,7 +10,8 @@
     android:paddingLeft="16dp"
     android:paddingTop="20dp"
     android:paddingRight="16dp"
-    android:paddingBottom="16dp">
+    android:paddingBottom="16dp"
+    android:background="#ffffff">
 
     <ImageView
         android:layout_width="wrap_content"
@@ -84,6 +85,17 @@
             android:ems="10"
             android:hint="Password"
             android:inputType="textPassword" />
+
+        <TextView
+            android:onClick="forgot"
+            android:id="@+id/forgot"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="right"
+            android:textSize="12dp"
+            android:background="@null"
+            android:textColor="#216EF3"
+            android:text="Forgot password?"/>
 
         <LinearLayout
             android:layout_width="wrap_content"

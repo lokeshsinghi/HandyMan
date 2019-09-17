@@ -47,6 +47,7 @@ public class asklocationSP extends FragmentActivity implements OnMapReadyCallbac
     private GoogleMap mMap;
     private Marker markerCenter;
     Button savebutton;
+    LatLng position;
     private DatabaseReference databaseReference;
 
     @Override
@@ -95,28 +96,29 @@ public class asklocationSP extends FragmentActivity implements OnMapReadyCallbac
         mMap.setOnMyLocationButtonClickListener(this);
         mMap.setOnMyLocationClickListener(this);
         markerCenter = mMap.addMarker(markerOptions.icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_ORANGE)));
+        position = markerCenter.getPosition();
 
         mMap.setOnCameraMoveListener(new GoogleMap.OnCameraMoveListener() {
             public void onCameraMove() {
                 markerCenter.setPosition(mMap.getCameraPosition().target);
-                final LatLng position = markerCenter.getPosition();
+                position = markerCenter.getPosition();
+            }
+        });
+        savebutton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
 
-
-                savebutton.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View view) {
-
-                        Bundle bundle = getIntent().getExtras();
-                        String firstname = bundle.getString("firstname");
-                        String lastname = bundle.getString("lastname");
-                        String emailid = bundle.getString("emailid");
-                        String phonenum = bundle.getString("phonenum");
-                        String city = bundle.getString("city");
-                        String category = bundle.getString("category");
-                        String downloadUrlID = bundle.getString("downloadUrlID");
-                        String downloadUrlPP = bundle.getString("downloadUrlPP");
-                        String qualifications = bundle.getString("qualifications");
-                        Float experience = bundle.getFloat("yearsOfExperience");
+                Bundle bundle = getIntent().getExtras();
+                String firstname = bundle.getString("firstname");
+                String lastname = bundle.getString("lastname");
+                String emailid = bundle.getString("emailid");
+                String phonenum = bundle.getString("phonenum");
+                String city = bundle.getString("city");
+                String category = bundle.getString("category");
+                String downloadUrlID = bundle.getString("downloadUrlID");
+                String downloadUrlPP = bundle.getString("downloadUrlPP");
+                String qualifications = bundle.getString("qualifications");
+                Float experience = bundle.getFloat("yearsOfExperience");
 
 
                 ServiceProviders sp = new ServiceProviders(firstname, lastname, emailid, phonenum, city, category);
@@ -140,10 +142,8 @@ public class asklocationSP extends FragmentActivity implements OnMapReadyCallbac
                         }
                     }
                 });
-                        Intent intent = new Intent(asklocationSP.this, Main2Activity.class);
-                        startActivity(intent);
-                    }
-                });
+                Intent intent = new Intent(asklocationSP.this, Main2Activity.class);
+                startActivity(intent);
             }
         });
 

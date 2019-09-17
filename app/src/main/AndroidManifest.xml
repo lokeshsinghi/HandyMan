@@ -45,6 +45,8 @@
         <activity android:name=".profileSP" />
         <activity android:name=".selectProviders" />
         <activity android:name=".Chat"/>
+        <activity android:name=".sp_homepage"/>
+        <activity android:name=".ResetPassword"/>
     </application>
 
 </manifest>

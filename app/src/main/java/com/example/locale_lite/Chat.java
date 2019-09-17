@@ -40,6 +40,7 @@ public class Chat extends AppCompatActivity {
     MessageAdapter messageAdapter;
     List<ChatBox> mchat;
     RecyclerView recyclerView;
+    String userid,type;
 
     @Override
     protected void onCreate(final Bundle savedInstanceState) {
@@ -58,10 +59,15 @@ public class Chat extends AppCompatActivity {
         linearLayoutManager.setStackFromEnd(true);
         recyclerView.setLayoutManager(linearLayoutManager);
 
-        final String userid = getIntent().getStringExtra("userid");
+        userid = getIntent().getStringExtra("userid");
+        type = getIntent().getStringExtra("type");
 
         firebaseUser = FirebaseAuth.getInstance().getCurrentUser();
-        databaseReference = FirebaseDatabase.getInstance().getReference().child("ServiceProviders").child(userid);
+        if(type.equals("ServiceProvider")){
+        databaseReference = FirebaseDatabase.getInstance().getReference().child("ServiceProviders").child(userid);}
+        else {
+            databaseReference = FirebaseDatabase.getInstance().getReference().child("Customers").child(userid);
+        }
 
         databaseReference.addValueEventListener(new ValueEventListener() {
             @Override
@@ -70,6 +76,9 @@ public class Chat extends AppCompatActivity {
                         String mname = s.getFirstname() + " " + s.getLastname();
                         name.setText(mname);
                         job.setText(s.getCategory());
+                        if(s.getProfilePicUrl()==null){
+                            dp.setImageResource(R.drawable.cuslogo);
+                        }
                         Picasso.with(Chat.this).load(s.getProfilePicUrl()).into(dp);
                     readMessage(firebaseUser.getUid(),userid,s.getProfilePicUrl());
                 }
@@ -108,6 +117,41 @@ public class Chat extends AppCompatActivity {
         hashmap.put("message",message);
 
         reference.child("Chats").push().setValue(hashmap);
+
+        final DatabaseReference dataref = FirebaseDatabase.getInstance().getReference("Chatlist")
+                .child(firebaseUser.getUid())
+                .child(userid);
+
+        dataref.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                    if(!dataSnapshot.exists()){
+                        dataref.child("id").setValue(userid);
+                    }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
+        final DatabaseReference chatRef1 = FirebaseDatabase.getInstance().getReference("Chatlist")
+                .child(receiver).child(firebaseUser.getUid());
+        chatRef1.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                if(!dataSnapshot.exists())
+                {
+                    chatRef1.child("id").setValue(firebaseUser.getUid());
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
+
     }
 
     private void readMessage(final String myid, final String userid, final String imageurl){
