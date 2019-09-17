@@ -11,6 +11,16 @@ public class Customers {
     Double latitude;
     Double longitude;
 
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
+    }
+
+    String id;
+
     public Double getLatitude() {
         return latitude;
     }

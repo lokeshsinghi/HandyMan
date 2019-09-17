@@ -5,7 +5,7 @@ import android.net.Uri;
 import com.google.android.gms.maps.model.LatLng;
 
 public class ServiceProviders {
-    private String firstname;
+    String firstname;
     String lastname;
     String emailid;
     String phonenum;
@@ -17,6 +17,16 @@ public class ServiceProviders {
     Double longitude;
     String profilePicUrl;
     String idProofUrl;
+
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
+    }
+
+    String id;
 
     public Double getLatitude() {
         return latitude;

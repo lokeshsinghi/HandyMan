@@ -79,6 +79,12 @@ public class profileSP extends AppCompatActivity implements View.OnClickListener
         {
             showRatingDialog();
         }
+        if(view == message)
+        {
+            Intent intent = new Intent(profileSP.this,Chat.class);
+            intent.putExtra("userid",getIntent().getStringExtra("userid"));
+            startActivity(intent);
+        }
 
     }
 

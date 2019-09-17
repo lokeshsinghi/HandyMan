@@ -74,8 +74,9 @@ public class EmailLogin extends AppCompatActivity {
                                     pbar.setVisibility(View.GONE);
                                     if (task.isSuccessful()) {
                                         Toast.makeText(EmailLogin.this,"Logged in",Toast.LENGTH_SHORT).show();
-                                      Intent intent = new Intent(EmailLogin.this, Main2Activity.class);
+                                        Intent intent = new Intent(EmailLogin.this, Main2Activity.class);
                                         startActivity(intent);
+                                        finish();
                                     }
                                     else{
                                         Toast.makeText(EmailLogin.this,"Incorrect credentials or User not registered",Toast.LENGTH_LONG).show();

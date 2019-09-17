@@ -4,9 +4,9 @@
     android:layout_height="wrap_content"
     android:padding="16dp">
 
-    <ImageView
-        android:layout_width="100dp"
-        android:layout_height="100dp"
+    <de.hdodenhof.circleimageview.CircleImageView
+        android:layout_width="96dp"
+        android:layout_height="96dp"
         android:src="@drawable/ic_launcher_background"
         android:id="@+id/providers_image"/>
 
