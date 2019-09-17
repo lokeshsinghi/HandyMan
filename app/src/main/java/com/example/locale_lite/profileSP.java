@@ -106,13 +106,8 @@ public class profileSP extends AppCompatActivity implements View.OnClickListener
         }
         if(view == directions)
         {   Bundle b = getIntent().getExtras();
-            final double latSP = b.getDouble("spLat");
-            final double lngSP = b.getDouble("spLng");
             Intent intent = new Intent(profileSP.this, MapDirections.class);
-            Bundle b1 = new Bundle();
-            b1.putDouble("spLat",latSP);
-            b1.putDouble("spLng",lngSP);
-            intent.putExtras(b1);
+            intent.putExtras(b);
             startActivity(intent);
         }
         if(view == message)
