@@ -23,7 +23,6 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
-                android:weightSum="10"
                 android:layout_marginTop="20dp"
                 android:orientation="horizontal">
 
@@ -32,24 +31,8 @@
                     android:id="@+id/name"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_horizontal"
-                    android:layout_marginLeft="30dp"
-                    android:layout_weight="8"
                     android:textSize="21sp"
                     android:textStyle="bold" />
-
-                <ImageView
-                        android:layout_width="36dp"
-                        android:layout_height="36dp"
-                        android:src="@drawable/rating"/>
-                    <TextView
-                        android:textStyle="bold"
-                        android:layout_gravity="center_vertical"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:paddingLeft="20dp"
-                        android:layout_marginTop="5dp"
-                        android:textSize="16sp"
-                        android:text="4.1"/>
             </LinearLayout>
             <LinearLayout
                 android:layout_width="match_parent"
@@ -153,32 +136,102 @@
             </LinearLayout>
         </LinearLayout>
 
-<!--    <android.support.design.widget.FloatingActionButton-->
-<!--        android:id="@+id/btn_rating"-->
-<!--        android:src="@drawable/ic_star_black_24dp"-->
-<!--        android:backgroundTint="@android:color/white"-->
-<!--        android:layout_width="wrap_content"-->
-<!--        android:layout_height="wrap_content"-->
-<!--        app:elevation="6dp"-->
-<!--        app:pressedTranslationZ="12dp"-->
 
-<!--        app:layout_anchorGravity="bottom|right|start"-->
-<!--        app:useCompatPadding="true"-->
-<!--        />-->
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical">
 
-        <RatingBar
+        <Button
+            android:layout_width="250dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="30dp"
+            android:layout_gravity="center"
+            android:text="Request Service"
+            android:backgroundTint="@android:color/holo_orange_light"
+            android:textSize="20sp">
+        </Button>
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="30dp"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/textView3"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:id="@+id/ratingBar"
-            android:max="5"
-            android:rating="0"
-            android:isIndicator="true"/>
+            android:layout_marginStart="16dp"
+            android:layout_marginEnd="8dp"
+            android:layout_marginBottom="24dp"
+            android:text="Ratings &amp; Reviews"
+            android:textAppearance="@style/TextAppearance.AppCompat.Headline"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="parent"
+            android:layout_marginLeft="16dp"
+            android:layout_marginRight="8dp" />
+        <TextView
+                android:id="@+id/textView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="29dp"
+                android:layout_marginEnd="8dp"
+                android:background="?android:selectableItemBackground"
+                android:fontFamily="@font/roboto"
+                android:text="4.6"
+                android:textColor="#333333"
+                android:textSize="26sp"
+                app:layout_constraintEnd_toEndOf="@+id/ratingBar"
+                app:layout_constraintHorizontal_bias="0.36"
+                app:layout_constraintStart_toStartOf="@+id/ratingBar" />
+
+            <RatingBar
+                android:id="@+id/ratingBar"
+                style="@android:style/Widget.Material.Light.RatingBar.Small"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:numStars="5"
+                android:progressTint="#333333"
+                android:rating="4"
+                android:stepSize="1"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/textView"
+                app:layout_constraintVertical_bias="0.07999998"
+                android:layout_marginLeft="16dp" />
+<LinearLayout
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_marginStart="20dp"
+    android:orientation="horizontal">
+            <TextView
+                android:id="@+id/textView2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="2dp"
+                android:text="756, 800"
+                android:textColor="#333333"
+                android:textSize="12sp"
+                app:layout_constraintStart_toStartOf="@+id/ratingBar"
+                app:layout_constraintTop_toBottomOf="@+id/ratingBar"
+                android:layout_marginLeft="8dp" />
+
+            <ImageView
+                android:id="@+id/imageView"
+                android:layout_width="16dp"
+                android:layout_height="16dp"
+                android:layout_marginEnd="8dp"
+                android:backgroundTint="#333333"
+                app:layout_constraintEnd_toEndOf="@+id/ratingBar"
+                app:layout_constraintStart_toEndOf="@+id/textView2"
+                app:layout_constraintTop_toTopOf="@+id/textView2"
+                app:srcCompat="@drawable/person"
+                android:layout_marginRight="8dp" />
+
+
     </LinearLayout>
-
-
-
+    </LinearLayout>
 </LinearLayout>

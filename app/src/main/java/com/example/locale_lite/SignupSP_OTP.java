@@ -83,7 +83,7 @@ public class SignupSP_OTP extends AppCompatActivity {
 
     }
     private void signInWithCredential(PhoneAuthCredential credential)   {
-        mAuth.signInWithCredential(credential)
+        mAuth.getCurrentUser().linkWithCredential(credential)
                 .addOnCompleteListener(new OnCompleteListener<AuthResult>() {
                     @Override
                     public void onComplete(@NonNull Task<AuthResult> task) {

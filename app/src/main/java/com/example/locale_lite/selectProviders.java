@@ -1,5 +1,4 @@
 package com.example.locale_lite;
-
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
@@ -45,10 +44,6 @@ import static android.view.View.GONE;
 
 public class selectProviders extends AppCompatActivity {
 
-    ListView listView;
-    FirebaseListAdapter adapter;
-    String Name, ProfilePic, Phone;
-    ProgressBar pbar;
     TextView heading;
     private RecyclerView recyclerView;
     private ListAdapter useradapter;
@@ -91,7 +86,7 @@ public class selectProviders extends AppCompatActivity {
                         musers.add(serviceProviders);
                     }
                 }
-                useradapter = new ListAdapter(getApplicationContext(),musers);
+                useradapter = new ListAdapter(selectProviders.this,musers);
                 recyclerView.setAdapter(useradapter);
 
             }
