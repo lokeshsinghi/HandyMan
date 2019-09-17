@@ -57,10 +57,7 @@ public class MapDirections extends FragmentActivity implements OnMapReadyCallbac
 
 
 
-        Toast.makeText(MapDirections.this,"s"+spLat,Toast.LENGTH_LONG).show();
-        place1 = new MarkerOptions().position(new LatLng(spLat, spLng)).title("Service Provider");
-        place2 = new MarkerOptions().position(new LatLng(cusLat, cusLng)).title("Location 2");
-//        String url = getRequestUrl(spLocation, spLocation);
+
         MapFragment mapFragment = (MapFragment) getFragmentManager()
                 .findFragmentById(R.id.mapNearBy);
         mapFragment.getMapAsync(this);
@@ -85,22 +82,14 @@ public class MapDirections extends FragmentActivity implements OnMapReadyCallbac
         LatLng cusLocation = new LatLng(cusLat,cusLng);
         mMap = googleMap;
         Log.d("mylog", "Added Markers");
-//        MarkerOptions markerOptions1 = new MarkerOptions();
-//
-//        // Setting latitude and longitude for the marker
-//        markerOptions1.position(spLocation);
-//
-//        // Adding marker on the Google Map
-//        googleMap.addMarker(markerOptions1);
-//
-//
-//        MarkerOptions markerOptions = new MarkerOptions();
-//
-//        // Setting latitude and longitude for the marker
-//        markerOptions.position(cusLocation);
-//
-//        // Adding marker on the Google Map
-//        googleMap.addMarker(markerOptions);
+        MarkerOptions markerOptions1 = new MarkerOptions();
+        markerOptions1.position(spLocation);
+        googleMap.addMarker(markerOptions1);
+
+
+        MarkerOptions markerOptions = new MarkerOptions();
+        markerOptions.position(cusLocation);
+        googleMap.addMarker(markerOptions);
 
         mMap.getUiSettings().setZoomControlsEnabled(true);
         mMap.setMyLocationEnabled(true);
