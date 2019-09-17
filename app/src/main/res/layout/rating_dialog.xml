@@ -63,20 +63,20 @@
         android:layout_marginTop="30dp"
         android:layout_marginBottom="30dp"
         android:layout_gravity="right">
-        <TextView
+        <Button
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="CANCEL"
             android:textSize="18sp"
-            android:textColor="@android:color/holo_orange_dark"
+            android:backgroundTint="@android:color/holo_orange_light"
             android:layout_marginRight="30dp"
             android:clickable="true"
             android:id="@+id/cancel"/>
-        <TextView
+        <Button
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textColor="@android:color/holo_orange_dark"
             android:text="SUBMIT"
+            android:backgroundTint="@android:color/holo_orange_light"
             android:clickable="true"
             android:textSize="18sp"
             android:id="@+id/submit"/>

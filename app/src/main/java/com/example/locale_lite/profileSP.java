@@ -21,23 +21,18 @@ import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.squareup.picasso.Picasso;
-import com.stepstone.apprating.AppRatingDialog;
-import com.stepstone.apprating.listener.RatingDialogListener;
-
-import org.jetbrains.annotations.NotNull;
 
 import java.util.Arrays;
 
-public class profileSP extends AppCompatActivity implements View.OnClickListener, RatingDialogListener {
+public class profileSP extends AppCompatActivity implements View.OnClickListener {
 
     private LinearLayout review, call, message, directions;
     TextView Name, Category;
     ImageView DP;
-    FloatingActionButton btnRating;
     RatingBar ratingBar;
     FirebaseDatabase database;
     DatabaseReference ratingTbl;
-
+    Button submit, cancel;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -68,6 +63,28 @@ public class profileSP extends AppCompatActivity implements View.OnClickListener
 
     }
 
+
+    private void showRatingDialog() {
+        AlertDialog.Builder mBuilder = new AlertDialog.Builder(profileSP.this);
+        View mView = getLayoutInflater().inflate(R.layout.rating_dialog, null);
+        RatingBar rbar = mView.findViewById(R.id.ratingBar);
+        EditText comment = mView.findViewById(R.id.comment);
+        Button submit = mView.findViewById(R.id.submit);
+        Button cancel = mView.findViewById(R.id.cancel);
+        submit.setOnClickListener(this);
+        cancel.setOnClickListener(this);
+
+        mBuilder.setView(mView);
+        AlertDialog dialog = mBuilder.create();
+        dialog.show();
+
+        rbar.setOnRatingBarChangeListener(new RatingBar.OnRatingBarChangeListener() {
+            @Override
+            public void onRatingChanged(RatingBar ratingBar, float v, boolean b) {
+                Toast.makeText(profileSP.this, "Stars" + v, Toast.LENGTH_SHORT).show();
+            }
+        });
+    }
     @Override
     public void onClick(View view) {
         if (view == call) {
@@ -85,29 +102,16 @@ public class profileSP extends AppCompatActivity implements View.OnClickListener
             intent.putExtra("userid",getIntent().getStringExtra("userid"));
             startActivity(intent);
         }
+        if(view == submit)
+        {
+
+        }
+        if(view == cancel)
+        {
+
+        }
 
     }
-
-    private void showRatingDialog() {
-        AlertDialog.Builder mBuilder = new AlertDialog.Builder(profileSP.this);
-        View mView = getLayoutInflater().inflate(R.layout.rating_dialog, null);
-        RatingBar rbar = mView.findViewById(R.id.ratingBar);
-        EditText comment = mView.findViewById(R.id.comment);
-        TextView submit = mView.findViewById(R.id.submit);
-        TextView cancel = mView.findViewById(R.id.cancel);
-
-        mBuilder.setView(mView);
-        AlertDialog dialog = mBuilder.create();
-        dialog.show();
-
-        rbar.setOnRatingBarChangeListener(new RatingBar.OnRatingBarChangeListener() {
-            @Override
-            public void onRatingChanged(RatingBar ratingBar, float v, boolean b) {
-                Toast.makeText(profileSP.this, "Stars" + v, Toast.LENGTH_SHORT).show();
-            }
-        });
-    }
-
 
 
 
@@ -128,13 +132,4 @@ public class profileSP extends AppCompatActivity implements View.OnClickListener
 //                .create(profileSP.this)
 //                .show();
 
-
-    @Override
-    public void onNegativeButtonClicked() {
-
-    }
-
-    @Override
-    public void onPositiveButtonClicked(int value, String comments) {
-    }
 }

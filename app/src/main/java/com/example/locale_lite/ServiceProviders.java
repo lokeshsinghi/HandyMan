@@ -12,11 +12,20 @@ public class ServiceProviders {
     String city;
     String category;
     Float yearsOfExperience;
+    Float rating;
     String qualifications;
     Double latitude;
     Double longitude;
     String profilePicUrl;
     String idProofUrl;
+
+    public Float getRating() {
+        return rating;
+    }
+
+    public void setRating(Float rating) {
+        this.rating = rating;
+    }
 
     public String getId() {
         return id;

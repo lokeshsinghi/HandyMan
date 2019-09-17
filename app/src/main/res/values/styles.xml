@@ -22,7 +22,6 @@
 
     <style name="RatingDialogButtonStyle" parent="@style/Widget.AppCompat.Button.ButtonBar.AlertDialog">
         <item name="android:textColor">@color/colorAccent</item>
-        <item name="android:textSize">@dimen/text_size_medium</item>
     </style>
 
     <style name="RatingDialogFadeAnim" >
