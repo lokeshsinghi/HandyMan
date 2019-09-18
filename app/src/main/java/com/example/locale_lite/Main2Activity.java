@@ -6,7 +6,6 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.CountDownTimer;
-import android.os.Handler;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
@@ -32,7 +31,6 @@ import androidx.navigation.ui.NavigationUI;
 public class Main2Activity extends AppCompatActivity {
 
     public static Double cusLat, cusLng;
-    private static int SPLASH_TIME_OUT = 4000;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -141,6 +139,11 @@ public class Main2Activity extends AppCompatActivity {
     public void changelocation(View v)
     {
         Intent intent = new Intent(Main2Activity.this,asklocation.class);
+        startActivity(intent);
+    }
+    public void sentrequestlist(View view){
+
+        Intent intent = new Intent(Main2Activity.this,Requests.class);
         startActivity(intent);
     }
 

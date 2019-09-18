@@ -78,8 +78,8 @@ public class Chat extends AppCompatActivity {
                         job.setText(s.getCategory());
                         if(s.getProfilePicUrl()==null){
                             dp.setImageResource(R.drawable.cuslogo);
-                        }
-                        Picasso.with(Chat.this).load(s.getProfilePicUrl()).into(dp);
+                        }else{
+                        Picasso.with(Chat.this).load(s.getProfilePicUrl()).into(dp);}
                     readMessage(firebaseUser.getUid(),userid,s.getProfilePicUrl());
                 }
 

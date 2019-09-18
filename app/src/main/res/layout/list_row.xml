@@ -5,8 +5,8 @@
     android:padding="16dp">
 
     <de.hdodenhof.circleimageview.CircleImageView
-        android:layout_width="96dp"
-        android:layout_height="96dp"
+        android:layout_width="76dp"
+        android:layout_height="76dp"
         android:src="@drawable/ic_launcher_background"
         android:id="@+id/providers_image"/>
 

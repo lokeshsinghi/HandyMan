@@ -25,7 +25,7 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_gravity="center_vertical"
-            android:layout_weight="1.5"
+            android:layout_weight="2"
             android:textColor="@android:color/black"
             android:text="Date"
             android:textSize="20sp" />
@@ -36,7 +36,7 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:hint="Pick a Date"
-            android:layout_weight="8.5"
+            android:layout_weight="8"
             android:inputType="none"
             android:focusable="false" />
 
@@ -55,7 +55,7 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_gravity="center_vertical"
-            android:layout_weight="1.5"
+            android:layout_weight="2"
             android:textColor="@android:color/black"
             android:text="Time"
             android:textSize="20sp" />
@@ -66,7 +66,7 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:hint="Pick a Time"
-            android:layout_weight="8.5"
+            android:layout_weight="8"
             android:inputType="none"
             android:focusable="false" />
 

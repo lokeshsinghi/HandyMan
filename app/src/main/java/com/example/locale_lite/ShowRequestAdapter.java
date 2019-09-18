@@ -16,14 +16,16 @@ import com.squareup.picasso.Picasso;
 
 import java.util.List;
 
-public class ShowMessageAdapter extends RecyclerView.Adapter<ShowMessageAdapter.ViewHolder> {
+public class ShowRequestAdapter extends RecyclerView.Adapter<ShowRequestAdapter.ViewHolder> {
 
     private Context mcontext;
     private List<Customers> musers;
+    private String status;
 
-    public ShowMessageAdapter(Context mcontext, List<Customers> musers){
+    public ShowRequestAdapter(Context mcontext, List<Customers> musers,String status){
         this.musers = musers;
         this.mcontext = mcontext;
+        this.status = status;
     }
 
     @Override
@@ -44,13 +46,15 @@ public class ShowMessageAdapter extends RecyclerView.Adapter<ShowMessageAdapter.
             @Override
             public void onClick(View v) {
 
-                Intent intent = new Intent(mcontext,Chat.class);
-                intent.putExtra("type","Customer");
-                intent.putExtra("name",c.getFirstname()+" "+c.getLastname());
-                intent.putExtra("phone",c.getPhonenum());
-                intent.putExtra("userid",c.getId());
-                mcontext.startActivity(intent);}
-
+                if (status.equals("pending")) {
+                    Intent intent = new Intent(mcontext, ShowPendingRequest.class);
+                    intent.putExtra("type", "Customer");
+                    intent.putExtra("name", c.getFirstname() + " " + c.getLastname());
+                    intent.putExtra("phone", c.getPhonenum());
+                    intent.putExtra("userid", c.getId());
+                    mcontext.startActivity(intent);
+                }
+            }
         });
 
 

@@ -1,6 +1,7 @@
 package com.example.locale_lite;
 //
 //import androidx.appcompat.app.AlertDialog;
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.app.DatePickerDialog;
@@ -15,6 +16,7 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RatingBar;
+import android.widget.ScrollView;
 import android.widget.TextView;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
@@ -23,10 +25,18 @@ import android.widget.TimePicker;
 import android.widget.Toast;
 
 import java.util.Calendar;
+
+import com.google.android.gms.common.SignInButton;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 import com.squareup.picasso.Picasso;
 import java.text.DecimalFormat;
+import java.util.HashMap;
 
 public class profileSP extends AppCompatActivity implements View.OnClickListener {
 
@@ -43,7 +53,9 @@ public class profileSP extends AppCompatActivity implements View.OnClickListener
     int numRate, totalRate;
     float avRate;
 
-
+    String userid;
+    FirebaseUser fuser;
+    DatabaseReference databaseReference;
     EditText date,time,jobdes;
     Button send;
     private DatePickerDialog.OnDateSetListener onDateSetListener;
@@ -76,7 +88,32 @@ public class profileSP extends AppCompatActivity implements View.OnClickListener
         avRate = getIntent().getFloatExtra("avRate",0);
         totalRate = getIntent().getIntExtra("totalRate",0);
 
+        fuser = FirebaseAuth.getInstance().getCurrentUser();
+        userid = getIntent().getStringExtra("userid");
+        final String currentid = fuser.getUid();
+        databaseReference = FirebaseDatabase.getInstance().getReference("Requests");
+        databaseReference.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                for(DataSnapshot snapshot : dataSnapshot.getChildren()){
+                    RequestBox requestBox = snapshot.getValue(RequestBox.class);
+                    if(currentid.equals(requestBox.getSender()) && userid.equals(requestBox.getReceiver()) &&
+                            (!requestBox.getStatus().equals("completed") || !requestBox.getStatus().equals("declined"))){
+                        request.setText("Request Sent");
+                        request.setClickable(false);
+                    }
+                    if(requestBox.getStatus().equals("completed") || requestBox.getStatus().equals("declined")){
+                        request.setText("REQUEST SERVICE");
+                        request.setClickable(true);
+                    }
+                }
+            }
 
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
 
 
 
@@ -122,7 +159,7 @@ public class profileSP extends AppCompatActivity implements View.OnClickListener
         submit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                final String userid = getIntent().getStringExtra("userid");
+                userid = getIntent().getStringExtra("userid");
                 DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference().child("ServiceProviders").child(userid);
                 numRate++;
                 totalRate+=rbar.getRating();
@@ -176,7 +213,24 @@ public class profileSP extends AppCompatActivity implements View.OnClickListener
         send.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                String datetext = date.getText().toString();
+                String timetext = time.getText().toString();
+                String destext = jobdes.getText().toString();
+                String status = "pending";
+                userid = getIntent().getStringExtra("userid");
+                fuser = FirebaseAuth.getInstance().getCurrentUser();
+                if(!datetext.equals("") && !timetext.equals("") && !destext.equals("")){
+                    Toast.makeText(profileSP.this,"Request Sent",Toast.LENGTH_SHORT).show();
+                    sendMessage(fuser.getUid(),userid,datetext,timetext,destext,status);
+                    String sent = "Request Sent";
+                    //request.setText(sent);
+                    request.setBackgroundColor(Color.GRAY);
+                    //request.setClickable(false);
+                    dialog.hide();
+                }
+                else{
+                    Toast.makeText(profileSP.this,"Fill out all the fields",Toast.LENGTH_SHORT).show();
+                }
             }
         });
 
@@ -289,6 +343,7 @@ public class profileSP extends AppCompatActivity implements View.OnClickListener
         {
             Intent intent = new Intent(profileSP.this,Chat.class);
             intent.putExtra("userid",getIntent().getStringExtra("userid"));
+            intent.putExtra("type","ServiceProvider");
             startActivity(intent);
         }
         if(view == submit)
@@ -304,6 +359,63 @@ public class profileSP extends AppCompatActivity implements View.OnClickListener
             showPayDialog();
         }
 
+    }
+
+    public void sendMessage(String sender, String receiver, String datetext, String timetext, String destext, String status){
+        DatabaseReference reference = FirebaseDatabase.getInstance().getReference("Requests").push();
+        String key = reference.getKey();
+        HashMap<String, Object> hashmap = new HashMap<>();
+        hashmap.put("sender",sender);
+        hashmap.put("receiver",receiver);
+        hashmap.put("date",datetext);
+        hashmap.put("time",timetext);
+        hashmap.put("description",destext);
+        hashmap.put("status",status);
+        hashmap.put("id",key);
+
+        reference.setValue(hashmap);
+
+        final DatabaseReference dataref = FirebaseDatabase.getInstance().getReference("Requestlist")
+                .child(fuser.getUid())
+                .child(userid);
+
+        dataref.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                if(!dataSnapshot.exists()){
+                    dataref.child("id").setValue(userid);
+                    dataref.child("status").setValue("pending");
+                }
+                if(dataSnapshot.exists()){
+                    dataref.child("status").setValue("pending");
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
+        final DatabaseReference chatRef1 = FirebaseDatabase.getInstance().getReference("Requestlist")
+                .child(receiver).child(fuser.getUid());
+        chatRef1.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                if(!dataSnapshot.exists())
+                {
+                    chatRef1.child("id").setValue(fuser.getUid());
+                    chatRef1.child("status").setValue("pending");
+                }
+                if(dataSnapshot.exists()){
+                    dataref.child("status").setValue("pending");
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
     }
 
 }

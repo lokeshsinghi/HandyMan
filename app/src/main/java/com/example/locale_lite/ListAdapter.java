@@ -12,6 +12,7 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.locale_lite.ui.dashboard.DashboardFragment;
 import com.squareup.picasso.Picasso;
 
 import java.util.List;
@@ -43,21 +44,42 @@ public class ListAdapter extends RecyclerView.Adapter<ListAdapter.ViewHolder> {
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(mcontext,profileSP.class);
-                intent.putExtra("name",serviceProviders.getFirstname()+" "+serviceProviders.getLastname());
-                intent.putExtra("dp",serviceProviders.getProfilePicUrl());
-                intent.putExtra("category",serviceProviders.getCategory());
-                intent.putExtra("phone",serviceProviders.getPhonenum());
-                intent.putExtra("userid",serviceProviders.getId());
-                intent.putExtra("numRate",serviceProviders.getNumrate());
-                intent.putExtra("totalRate",serviceProviders.getTotalrate());
-                intent.putExtra("avRate",serviceProviders.getAvrate());
-                Bundle b = new Bundle();
-                b.putDouble("spLat",serviceProviders.getLatitude());
-                b.putDouble("spLng",serviceProviders.getLongitude());
-                intent.putExtras(b);
-                mcontext.startActivity(intent);
-
+                if(mcontext instanceof Main2Activity){
+                    Intent intent = new Intent(mcontext,Chat.class);
+                    intent.putExtra("name",serviceProviders.getFirstname()+" "+serviceProviders.getLastname());
+                    intent.putExtra("dp",serviceProviders.getProfilePicUrl());
+                    intent.putExtra("category",serviceProviders.getCategory());
+                    intent.putExtra("phone",serviceProviders.getPhonenum());
+                    intent.putExtra("userid",serviceProviders.getId());
+                    intent.putExtra("type","ServiceProvider");
+                    mcontext.startActivity(intent);
+                }
+                if(mcontext instanceof Requests){
+                    Intent intent = new Intent(mcontext,ShowSentRequest.class);
+                    intent.putExtra("name",serviceProviders.getFirstname()+" "+serviceProviders.getLastname());
+                    intent.putExtra("dp",serviceProviders.getProfilePicUrl());
+                    intent.putExtra("category",serviceProviders.getCategory());
+                    intent.putExtra("phone",serviceProviders.getPhonenum());
+                    intent.putExtra("userid",serviceProviders.getId());
+                    intent.putExtra("type","ServiceProvider");
+                    mcontext.startActivity(intent);
+                }
+                if(mcontext instanceof selectProviders) {
+                    Intent intent = new Intent(mcontext, profileSP.class);
+                    intent.putExtra("name", serviceProviders.getFirstname() + " " + serviceProviders.getLastname());
+                    intent.putExtra("dp", serviceProviders.getProfilePicUrl());
+                    intent.putExtra("category", serviceProviders.getCategory());
+                    intent.putExtra("phone", serviceProviders.getPhonenum());
+                    intent.putExtra("userid", serviceProviders.getId());
+                    intent.putExtra("numRate", serviceProviders.getNumrate());
+                    intent.putExtra("totalRate", serviceProviders.getTotalrate());
+                    intent.putExtra("avRate", serviceProviders.getAvrate());
+                    Bundle b = new Bundle();
+                    b.putDouble("spLat", serviceProviders.getLatitude());
+                    b.putDouble("spLng", serviceProviders.getLongitude());
+                    intent.putExtras(b);
+                    mcontext.startActivity(intent);
+                }
             }
         });
 
