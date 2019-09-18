@@ -8,7 +8,6 @@ import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
-import android.os.Handler;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -36,7 +35,6 @@ public class MainActivity extends AppCompatActivity{
 
     FirebaseUser firebaseUser;
     String userid;
-    private static int SPLASH_TIME_OUT = 4000;
 
 
     @Override
@@ -45,6 +43,7 @@ public class MainActivity extends AppCompatActivity{
 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
         ViewPager viewPager = (ViewPager) findViewById(R.id.startPager);
         ImageAdapter adapter = new ImageAdapter(this);
         viewPager.setAdapter(adapter);
@@ -58,85 +57,60 @@ public class MainActivity extends AppCompatActivity{
             database.addValueEventListener(new ValueEventListener() {
                 @Override
                 public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                    int count = 0;
+                    int count=0;
                     for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
                         Customers c = snapshot.getValue(Customers.class);
                         if (c.getId().equals(userid)) {
-                            count = 1;
+                            count=1;
                         }
                     }
-                    if (count == 1) {
+                    if(count==1)
+                    {
                         Intent intent = new Intent(MainActivity.this, Main2Activity.class);
                         startActivity(intent);
                         finish();
-                    } else {
-
-                        DatabaseReference database1 = FirebaseDatabase.getInstance().getReference("ServiceProviders");
-                        database1.addValueEventListener(new ValueEventListener() {
-                            @Override
-                            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                                int cont = 0;
-                                for (DataSnapshot dataSnapshot1 : dataSnapshot.getChildren()) {
-                                    ServiceProviders sp = dataSnapshot1.getValue(ServiceProviders.class);
-                                    if (sp.getId().equals(userid) && sp.getPending().equals(true)) {
-                                        cont = 1;
-                                        break;
-                                    }
-                                }
-                                if (cont == 1) {
-                                    Toast.makeText(MainActivity.this, "Logged in", Toast.LENGTH_SHORT).show();
-                                    Intent intent = new Intent(MainActivity.this, sp_homepage.class);
-                                    startActivity(intent);
-                                    finish();
-                                } else {
-                                    Toast.makeText(MainActivity.this, "Not verified yet", Toast.LENGTH_SHORT).show();
-                                    Intent intent = new Intent(MainActivity.this, Pending.class);
-                                    startActivity(intent);
-                                    finish();
-
-                                }
-                            }
-
-
-                            @Override
-                            public void onCancelled(@NonNull DatabaseError databaseError) {
-
-                            }
-
-
-                        });
-
+                    }
+                    else
+                    {
+                        Intent intent = new Intent(MainActivity.this, sp_homepage.class);
+                        startActivity(intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK));
+                        finish();
 
                     }
-
-
-                    Button createNew = (Button) findViewById(R.id.createnew);
-                    createNew.setOnClickListener(new View.OnClickListener() {
-                        @Override
-                        public void onClick(View view) {
-                            Intent intent = new Intent(MainActivity.this, CreateAccount.class);
-                            startActivity(intent);
-                        }
-                    });
-                    Button logIn = (Button) findViewById(R.id.login);
-                    logIn.setOnClickListener(new View.OnClickListener() {
-                        @Override
-                        public void onClick(View view) {
-                            Intent i2 = new Intent(MainActivity.this, Login.class);
-                            startActivity(i2);
-                        }
-                    });
                 }
 
                 @Override
                 public void onCancelled(@NonNull DatabaseError databaseError) {
 
                 }
-            });
-        }
-    }
 
-                @Override
+
+            });
+
+
+        }
+
+
+
+
+        Button createNew = (Button) findViewById(R.id.createnew);
+        createNew.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(MainActivity.this, CreateAccount.class);
+                startActivity(intent);
+            }
+        });
+        Button logIn = (Button) findViewById(R.id.login);
+        logIn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent i2 = new Intent(MainActivity.this, Login.class);
+                startActivity(i2);
+            }
+        });
+    }
+    @Override
     public void onBackPressed() {
 
         final AlertDialog.Builder builder = new AlertDialog.Builder(MainActivity.this);
@@ -163,6 +137,7 @@ public class MainActivity extends AppCompatActivity{
 
 
     }
+
 
 
 }
