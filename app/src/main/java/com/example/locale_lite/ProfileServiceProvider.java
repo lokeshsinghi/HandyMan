@@ -19,6 +19,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Spinner;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -44,7 +45,8 @@ public class ProfileServiceProvider extends AppCompatActivity implements View.On
     private Button buttonChoose1,buttonChoose2;
     private Button buttonUpload1,buttonUpload2;
     private Button next;
-    private ImageView imageView1,imageView2;
+    private TextView chose;
+    private ImageView imageView1;
     private String fname;
     EditText Qualifications, Experience;
     private String uploadId;
@@ -77,7 +79,7 @@ public class ProfileServiceProvider extends AppCompatActivity implements View.On
         Qualifications = findViewById(R.id.Qualifications);
         Experience = findViewById(R.id.experience);
         imageView1 = findViewById(R.id.imageView1);
-
+        chose=findViewById(R.id.chose);
         //attaching listener
         buttonChoose1.setOnClickListener(this);
         buttonUpload1.setOnClickListener(this);
@@ -106,6 +108,7 @@ public class ProfileServiceProvider extends AppCompatActivity implements View.On
             filePath1 = data.getData();
             try {
                 Bitmap bitmap1 = MediaStore.Images.Media.getBitmap(getContentResolver(), filePath1);
+                chose.setText("Your chosen image is shown");
                 imageView1.setImageBitmap(bitmap1);
 
             } catch (IOException e) {
@@ -137,6 +140,9 @@ public class ProfileServiceProvider extends AppCompatActivity implements View.On
                             //hiding the progress dialog
 
                             progressDialog.dismiss();
+                            imageView1.setImageResource(0);
+                            chose.setText("Choose your image");
+                            Toast.makeText(ProfileServiceProvider.this, "Uploaded", Toast.LENGTH_SHORT).show();
 
                             //and displaying a success toast
                             profileRef.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
@@ -155,6 +161,7 @@ public class ProfileServiceProvider extends AppCompatActivity implements View.On
                             //if the upload is not successfull
                             //hiding the progress dialog
                             progressDialog.dismiss();
+                           
 
                             //and displaying error message
                             Toast.makeText(getApplicationContext(), exception.getMessage(), Toast.LENGTH_LONG).show();
@@ -164,10 +171,14 @@ public class ProfileServiceProvider extends AppCompatActivity implements View.On
                         @Override
                         public void onProgress(UploadTask.TaskSnapshot taskSnapshot) {
                             //calculating progress percentage
-                            double progress = 100.0 * (taskSnapshot.getBytesTransferred()/ taskSnapshot.getTotalByteCount());
+                                        double progress=0;
 
-                            //displaying percentage in progress dialog
-                            progressDialog.setMessage("Uploaded " + ((int) progress) + "%...");
+                               progress = (double) (100.0 * taskSnapshot.getBytesTransferred()) / taskSnapshot.getTotalByteCount();
+
+                               //displaying percentage in progress dialog
+                               progressDialog.setMessage("Uploaded " + ((int) progress) + "%...");
+
+
 
                         }
 

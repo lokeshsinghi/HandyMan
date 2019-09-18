@@ -12,6 +12,7 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.locale_lite.ui.dashboard.DashboardFragment;
 import com.squareup.picasso.Picasso;
 
 import java.util.List;
@@ -43,19 +44,35 @@ public class ListAdapter extends RecyclerView.Adapter<ListAdapter.ViewHolder> {
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(mcontext,Chat.class);
-                intent.putExtra("type","ServiceProvider");
-                intent.putExtra("name",serviceProviders.getFirstname()+" "+serviceProviders.getLastname());
-                intent.putExtra("dp",serviceProviders.getProfilePicUrl());
-                intent.putExtra("category",serviceProviders.getCategory());
-                intent.putExtra("phone",serviceProviders.getPhonenum());
-                intent.putExtra("userid",serviceProviders.getId());
-                Bundle b = new Bundle();
-                b.putDouble("spLat",serviceProviders.getLatitude());
-                b.putDouble("spLng",serviceProviders.getLongitude());
-                intent.putExtras(b);
-                mcontext.startActivity(intent);
-
+                if(mcontext instanceof Main2Activity) {
+                    Intent intent = new Intent(mcontext, Chat.class);
+                    intent.putExtra("type", "ServiceProvider");
+                    intent.putExtra("name", serviceProviders.getFirstname() + " " + serviceProviders.getLastname());
+                    intent.putExtra("dp", serviceProviders.getProfilePicUrl());
+                    intent.putExtra("category", serviceProviders.getCategory());
+                    intent.putExtra("phone", serviceProviders.getPhonenum());
+                    intent.putExtra("userid", serviceProviders.getId());
+                    Bundle b = new Bundle();
+                    b.putDouble("spLat", serviceProviders.getLatitude());
+                    b.putDouble("spLng", serviceProviders.getLongitude());
+                    intent.putExtras(b);
+                    mcontext.startActivity(intent);
+                }
+                else
+                {
+                    Intent intent = new Intent(mcontext, profileSP.class);
+                    intent.putExtra("type", "ServiceProvider");
+                    intent.putExtra("name", serviceProviders.getFirstname() + " " + serviceProviders.getLastname());
+                    intent.putExtra("dp", serviceProviders.getProfilePicUrl());
+                    intent.putExtra("category", serviceProviders.getCategory());
+                    intent.putExtra("phone", serviceProviders.getPhonenum());
+                    intent.putExtra("userid", serviceProviders.getId());
+                    Bundle b = new Bundle();
+                    b.putDouble("spLat", serviceProviders.getLatitude());
+                    b.putDouble("spLng", serviceProviders.getLongitude());
+                    intent.putExtras(b);
+                    mcontext.startActivity(intent);
+                }
             }
         });
 

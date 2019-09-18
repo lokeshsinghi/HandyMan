@@ -4,6 +4,8 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.viewpager.widget.ViewPager;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
@@ -34,6 +36,7 @@ public class MainActivity extends AppCompatActivity{
     FirebaseUser firebaseUser;
     String userid;
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 
@@ -45,22 +48,34 @@ public class MainActivity extends AppCompatActivity{
         ImageAdapter adapter = new ImageAdapter(this);
         viewPager.setAdapter(adapter);
 
-        firebaseUser=FirebaseAuth.getInstance().getCurrentUser();
 
-        if (firebaseUser!=null)
-        {
+        firebaseUser = FirebaseAuth.getInstance().getCurrentUser();
+
+        if (firebaseUser != null) {
             userid = firebaseUser.getUid();
             DatabaseReference database = FirebaseDatabase.getInstance().getReference("Customers");
             database.addValueEventListener(new ValueEventListener() {
                 @Override
                 public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                    for(DataSnapshot snapshot : dataSnapshot.getChildren()){
+                    int count=0;
+                    for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
                         Customers c = snapshot.getValue(Customers.class);
-                        if(c.getId().equals(userid)){
-                            Intent intent = new Intent(MainActivity.this, Main2Activity.class);
-                            startActivity(intent);
-                            finish();
+                        if (c.getId().equals(userid)) {
+                            count=1;
                         }
+                    }
+                    if(count==1)
+                    {
+                        Intent intent = new Intent(MainActivity.this, Main2Activity.class);
+                        startActivity(intent);
+                        finish();
+                    }
+                    else
+                    {
+                        Intent intent = new Intent(MainActivity.this, sp_homepage.class);
+                        startActivity(intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK));
+                        finish();
+
                     }
                 }
 
@@ -68,11 +83,11 @@ public class MainActivity extends AppCompatActivity{
                 public void onCancelled(@NonNull DatabaseError databaseError) {
 
                 }
+
+
             });
 
-            Intent intent = new Intent(MainActivity.this, sp_homepage.class);
-            startActivity(intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK));
-            finish();
+
         }
 
 
@@ -93,4 +108,6 @@ public class MainActivity extends AppCompatActivity{
             }
         });
     }
+
+
 }
