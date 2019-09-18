@@ -7,6 +7,7 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:textStyle="bold"
         android:text="Fill out the Service Details"
         android:layout_gravity="center"
         android:textSize="25sp"
