@@ -20,7 +20,7 @@ public class ServiceProviders {
 
 
 
-    static int totalrate;
+    static int totalrate=0;
     int numrate;
     float avrate;
 
