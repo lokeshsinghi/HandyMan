@@ -21,15 +21,16 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.Button;
 
 
 public class sp_homepage extends AppCompatActivity {
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_sp_homepage);
+
 
         BottomNavigationView navView = findViewById(R.id.nav_view_sp);
 
@@ -96,5 +97,10 @@ public class sp_homepage extends AppCompatActivity {
         Intent intent=new Intent(sp_homepage.this,ResetPassword.class);
         startActivity(intent);
 
+    }
+    public void changelocation(View v)
+    {
+        Intent intent = new Intent(sp_homepage.this,asklocationSP.class);
+        startActivity(intent);
     }
 }

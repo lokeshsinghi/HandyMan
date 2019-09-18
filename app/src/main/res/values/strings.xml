@@ -207,6 +207,7 @@
         <item>Plumber</item>
         <item>Pest Control</item>
         <item>Water Purification</item>
+        <item>Others</item>
 
     </string-array>
     <string name="title_activity_main2">Main2Activity</string>

@@ -131,6 +131,7 @@ public class asklocationSP extends FragmentActivity implements OnMapReadyCallbac
                 FirebaseUser firebaseUser = FirebaseAuth.getInstance().getCurrentUser();
                 String userid = firebaseUser.getUid();
                 sp.setId(userid);
+                sp.setPending(false);
 
                 FirebaseDatabase.getInstance().getReference("ServiceProviders")
                         .child(FirebaseAuth.getInstance().getCurrentUser().getUid())
@@ -142,7 +143,7 @@ public class asklocationSP extends FragmentActivity implements OnMapReadyCallbac
                         }
                     }
                 });
-                Intent intent = new Intent(asklocationSP.this, Main2Activity.class);
+                Intent intent = new Intent(asklocationSP.this, Pending.class);
                 startActivity(intent);
             }
         });

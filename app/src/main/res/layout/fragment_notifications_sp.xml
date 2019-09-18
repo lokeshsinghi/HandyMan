@@ -46,8 +46,8 @@
                     android:layout_width="100dp"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="2dp"
-
-                    android:hint="City name"
+                    android:id="@+id/cityname"
+                    android:hint="Allahabad"
                     android:textSize="14sp" />
 
                 <TextView
@@ -55,10 +55,10 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:textSize="12dp"
-
                     android:layout_marginLeft="70dp"
                     android:layout_marginTop="-5dp"
                     android:layout_gravity="end"
+                    android:clickable="true"
                     android:text="Change location"
                     android:textColor="#093E7A" />
 
@@ -78,33 +78,32 @@
         android:layout_height="wrap_content">
         <ImageView
             android:layout_width="35dp"
-            android:layout_height="40dp"
+            android:layout_height="35dp"
             android:layout_marginTop="95dp"
             android:layout_marginLeft="20dp"
-            android:src="@drawable/request"/>
+            android:src="@drawable/history"/>
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="87dp"
             android:layout_marginLeft="15dp"
-            android:gravity="clip_horizontal"
             >
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Requests Sent"
+
+                android:text="Services History"
                 android:textSize="18dp"
                 android:layout_marginTop="0dp"
                 android:textStyle="bold"/>
-
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="30dp"
-                android:layout_marginLeft="2dp"
-                android:text="Click to see sent requests"
+                android:text="Click to see provided services"
                 android:textSize="12dp"
-                android:textStyle="bold" />
+                android:layout_marginLeft="2dp"
+                android:layout_marginTop="30dp"
+                android:textStyle="bold"/>
         </RelativeLayout>
     </LinearLayout>
     <TextView
@@ -122,51 +121,11 @@
             android:layout_height="35dp"
             android:layout_marginTop="165dp"
             android:layout_marginLeft="20dp"
-            android:src="@drawable/history"/>
-        <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="157dp"
-            android:layout_marginLeft="15dp"
-            >
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-
-                android:text="Services History"
-                android:textSize="18dp"
-                android:layout_marginTop="0dp"
-                android:textStyle="bold"/>
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Click to see purchased services"
-                android:textSize="12dp"
-                android:layout_marginLeft="2dp"
-                android:layout_marginTop="30dp"
-                android:textStyle="bold"/>
-        </RelativeLayout>
-    </LinearLayout>
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="@drawable/createnew2"
-        android:layout_marginTop="210dp"
-
-        android:text=" "/>
-    <LinearLayout
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content">
-        <ImageView
-            android:layout_width="35dp"
-            android:layout_height="35dp"
-            android:layout_marginTop="235dp"
-            android:layout_marginLeft="20dp"
             android:src="@drawable/password"/>
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="227dp"
+            android:layout_marginTop="157dp"
             android:layout_marginLeft="15dp"
             >
             <TextView
@@ -191,7 +150,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@drawable/createnew2"
-        android:layout_marginTop="280dp"
+        android:layout_marginTop="210dp"
 
         android:text=" "/>
     <LinearLayout
@@ -200,13 +159,13 @@
         <ImageView
             android:layout_width="33dp"
             android:layout_height="31dp"
-            android:layout_marginTop="308dp"
+            android:layout_marginTop="238dp"
             android:layout_marginLeft="20dp"
             android:src="@drawable/logout"/>
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="297dp"
+            android:layout_marginTop="227dp"
             android:layout_marginLeft="15dp"
             >
             <TextView
@@ -231,24 +190,19 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@drawable/createnew2"
-        android:layout_marginTop="350dp"
+        android:layout_marginTop="280dp"
 
         android:text=" "/>
     <Button
         android:id="@+id/change_location"
+        android:onClick="changelocation"
         android:layout_width="match_parent"
         android:layout_height="75dp"
         android:layout_marginTop="0dp"
         android:background="@null"
 
         />
-    <Button
-        android:id="@+id/request_sent"
-        android:layout_width="match_parent"
-        android:layout_height="70dp"
-        android:layout_marginTop="80dp"
-        android:background="@null"
-        />
+
     <Button
         android:id="@+id/service_history"
         android:layout_width="match_parent"

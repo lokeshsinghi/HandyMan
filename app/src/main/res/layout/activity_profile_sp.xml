@@ -142,6 +142,16 @@
             android:backgroundTint="@android:color/holo_orange_light"
             android:textSize="20sp">
         </Button>
+        <Button
+            android:layout_width="250dp"
+            android:layout_height="wrap_content"
+            android:id="@+id/pay"
+            android:layout_marginTop="30dp"
+            android:layout_gravity="center"
+            android:text="Make Payment"
+            android:backgroundTint="@android:color/holo_orange_light"
+            android:textSize="20sp">
+        </Button>
     </LinearLayout>
     <LinearLayout
         android:layout_width="match_parent"
