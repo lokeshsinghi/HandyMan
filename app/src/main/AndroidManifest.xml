@@ -48,6 +48,7 @@
         <activity android:name=".Chat"/>
         <activity android:name=".ResetPassword"/>
         <activity android:name=".sp_homepage"/>
+        <activity android:name=".Pending"/>
     </application>
 
 </manifest>

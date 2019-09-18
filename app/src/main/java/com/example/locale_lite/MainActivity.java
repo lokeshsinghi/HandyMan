@@ -8,6 +8,7 @@ import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -36,9 +37,10 @@ public class MainActivity extends AppCompatActivity{
     FirebaseUser firebaseUser;
     String userid;
 
-
+Handler handler;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+
 
 
         super.onCreate(savedInstanceState);
@@ -71,12 +73,46 @@ public class MainActivity extends AppCompatActivity{
                         finish();
                     }
                     else
-                    {
-                        Intent intent = new Intent(MainActivity.this, sp_homepage.class);
-                        startActivity(intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK));
-                        finish();
 
-                    }
+                        {
+                            DatabaseReference database1 = FirebaseDatabase.getInstance().getReference("ServiceProviders");
+                            database1.addValueEventListener(new ValueEventListener() {
+                                @Override
+                                public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                                    int cont =0;
+                                    for(DataSnapshot dataSnapshot1 : dataSnapshot.getChildren()){
+                                        ServiceProviders sp = dataSnapshot1.getValue(ServiceProviders.class);
+                                        if(sp.getId().equals(userid) && sp.getPending().equals(true)){
+                                            cont=1;
+                                            break;
+                                        }
+                                    }
+                                    if(cont==1)
+                                    {
+                                        Toast.makeText(MainActivity.this,"Logged in",Toast.LENGTH_SHORT).show();
+                                        Intent intent = new Intent(MainActivity.this, sp_homepage.class);
+                                        startActivity(intent);
+                                        finish();
+                                    }
+                                    else{
+                                        Toast.makeText(MainActivity.this,"Not verified yet",Toast.LENGTH_SHORT).show();
+                                        Intent intent = new Intent(MainActivity.this, Pending.class);
+                                        startActivity(intent);
+                                        finish();
+
+                                    }
+                                }
+
+                                @Override
+                                public void onCancelled(@NonNull DatabaseError databaseError) {
+
+                                }
+                            });
+
+
+                        }
+
+
                 }
 
                 @Override

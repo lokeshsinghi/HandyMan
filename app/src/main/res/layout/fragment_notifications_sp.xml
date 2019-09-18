@@ -207,24 +207,24 @@
         android:id="@+id/service_history"
         android:layout_width="match_parent"
         android:layout_height="70dp"
-        android:layout_marginTop="150dp"
+        android:layout_marginTop="80dp"
         android:background="@null"
-        />
-
-    <Button
-        android:onClick="logout"
-        android:id="@+id/logout"
-        android:layout_width="match_parent"
-        android:layout_height="70dp"
-        android:background="@null"
-        android:layout_marginTop="290dp"
         />
     <Button
         android:onClick="reset"
         android:id="@+id/change_password"
         android:layout_width="match_parent"
         android:layout_height="70dp"
-        android:layout_marginTop="220dp"
+        android:layout_marginTop="150dp"
         android:background="@null"
         />
+    <Button
+        android:onClick="logout"
+        android:id="@+id/logout"
+        android:layout_width="match_parent"
+        android:layout_height="70dp"
+        android:background="@null"
+        android:layout_marginTop="220dp"
+        />
+
 </RelativeLayout>
