@@ -49,7 +49,10 @@ public class MessageAdapter extends RecyclerView.Adapter<MessageAdapter.ViewHold
     public void onBindViewHolder(@NonNull MessageAdapter.ViewHolder holder, int position) {
             ChatBox chatBox = mchat.get(position);
             holder.show_message.setText((chatBox.getMessage()));
-            Picasso.with(mcontext).load(imageurl).into(holder.profilepic);
+            if(imageurl==null){
+                holder.profilepic.setImageResource(R.drawable.cuslogo);
+            }
+            else{Picasso.with(mcontext).load(imageurl).into(holder.profilepic);}
 
     }
 

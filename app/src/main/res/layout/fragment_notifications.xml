@@ -54,13 +54,13 @@
 
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:textSize="12dp"
+                    android:layout_gravity="end"
 
                     android:layout_marginLeft="70dp"
                     android:layout_marginTop="-5dp"
-                    android:layout_gravity="end"
                     android:text="Change location"
-                    android:textColor="#093E7A" />
+                    android:textColor="#093E7A"
+                    android:textSize="12dp" />
 
             </LinearLayout>
         </RelativeLayout>
@@ -244,6 +244,7 @@
 
         />
     <Button
+        android:onClick="sentrequestlist"
         android:id="@+id/request_sent"
         android:layout_width="match_parent"
         android:layout_height="70dp"

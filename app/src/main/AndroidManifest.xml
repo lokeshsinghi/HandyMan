@@ -17,7 +17,11 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".MapDirections"></activity>
+        <activity android:name=".ShowActiveRequests"></activity>
+        <activity android:name=".ShowPendingRequest" />
+        <activity android:name=".RequestStatus" />
+        <activity android:name=".Requests" />
+        <activity android:name=".MapDirections" />
         <activity android:name=".asklocationSP" />
         <activity
             android:name=".Main2Activity"
@@ -45,10 +49,11 @@
         <activity android:name=".OTP" />
         <activity android:name=".profileSP" />
         <activity android:name=".selectProviders" />
-        <activity android:name=".Chat"/>
-        <activity android:name=".ResetPassword"/>
-        <activity android:name=".sp_homepage"/>
-        <activity android:name=".Pending"/>
+        <activity android:name=".Chat" />
+        <activity android:name=".ResetPassword" />
+        <activity android:name=".sp_homepage" />
+        <activity android:name=".ShowSentRequest" />
+        <activity android:name=".Pending" />
     </application>
 
 </manifest>

@@ -26,16 +26,28 @@ import android.widget.Button;
 
 public class sp_homepage extends AppCompatActivity {
 
+    Button active,pending,completed;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_sp_homepage);
 
-
         BottomNavigationView navView = findViewById(R.id.nav_view_sp);
 
         NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment_sp);
         NavigationUI.setupWithNavController(navView, navController);
+
+//        active = findViewById(R.id.request_active);
+//        pending = findViewById(R.id.request_pending);
+//        completed = findViewById(R.id.request_completed);
+//
+//        pending.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//
+//            }
+//        });
 
     }
     @Override
@@ -101,6 +113,14 @@ public class sp_homepage extends AppCompatActivity {
     public void changelocation(View v)
     {
         Intent intent = new Intent(sp_homepage.this,asklocationSP.class);
+        startActivity(intent);
+    }
+    public void onServiceClick(View v){
+        Button b = (Button)v;
+        String buttontext = b.getText().toString();
+
+        Intent intent = new Intent(sp_homepage.this,RequestStatus.class);
+        intent.putExtra("buttontext",buttontext);
         startActivity(intent);
     }
 }
