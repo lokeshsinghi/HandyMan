@@ -48,6 +48,7 @@ public class ShowMessageAdapter extends RecyclerView.Adapter<ShowMessageAdapter.
                 intent.putExtra("phone",c.getPhonenum());
                 intent.putExtra("userid",c.getId());
                 mcontext.startActivity(intent);
+
             }
         });
 

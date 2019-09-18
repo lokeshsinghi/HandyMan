@@ -2,11 +2,15 @@ package com.example.locale_lite;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -26,7 +30,8 @@ public class Login extends AppCompatActivity  {
     TextView useEmail;
     ProgressBar pbar;
     Button logIn;
-
+    LinearLayout mainLayout;
+    Intent intent;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -34,10 +39,12 @@ public class Login extends AppCompatActivity  {
         pNum = findViewById(R.id.phonenum);
         logIn =(Button) findViewById(R.id.login);
         pbar = findViewById(R.id.loading);
-
+        mainLayout = (LinearLayout)findViewById(R.id.container1);
         logIn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                InputMethodManager imm = (InputMethodManager)getSystemService(Context.INPUT_METHOD_SERVICE);
+                imm.hideSoftInputFromWindow(mainLayout.getWindowToken(), 0);
                 final String phone = pNum.getText().toString();
                 if (pNum.getText().toString().length()<10)
                     pNum.setError("Enter valid Phone Number");
@@ -52,10 +59,10 @@ public class Login extends AppCompatActivity  {
                                         Customers c = snapshot.getValue(Customers.class);
                                         if(c.getPhonenum().equals(phone)) {
                                             p=1;
-                                            Intent intent = new Intent(Login.this, OTP.class);
+                                            intent = new Intent(Login.this, OTP.class);
                                             intent.putExtra("type","Customers");
                                             intent.putExtra("phonenumber", "+91" + phone);
-                                            startActivity(intent);
+
                                             break;
                                         }
                                         else
@@ -83,7 +90,7 @@ public class Login extends AppCompatActivity  {
                                             Intent intent = new Intent(Login.this, OTP.class);
                                             intent.putExtra("type","ServiceProviders");
                                             intent.putExtra("phonenumber","+91"+phone);
-                                            startActivity(intent);
+
                                             break;
                                         }
                                         else
@@ -93,6 +100,9 @@ public class Login extends AppCompatActivity  {
                                     if(p==0 && q==0){
                                         pbar.setVisibility(View.GONE);
                                         Toast.makeText(Login.this, "Mobile Number not registered. Sign up", Toast.LENGTH_SHORT).show();
+                                    }
+                                    else {
+                                        startActivity(intent);
                                     }
                                 }
                                 @Override
@@ -112,6 +122,7 @@ public class Login extends AppCompatActivity  {
 
                 Intent in1 = new Intent(Login.this, EmailLogin.class);
                 startActivity(in1);
+                finish();
             }
         });
 
@@ -124,4 +135,9 @@ public class Login extends AppCompatActivity  {
             }
         });
     }
+//    @Override
+//    public void onBackPressed(){
+//
+//        finish();
+//    }
 }
