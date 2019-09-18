@@ -98,10 +98,9 @@ public class Signup_OTP extends AppCompatActivity {
                             finish();
 
                         }else{
-                            Intent intent = new Intent(Signup_OTP.this, Signup_OTP.class);
+
                             Toast.makeText(Signup_OTP.this,"Wrong OTP!"
                                     , Toast.LENGTH_LONG).show();
-                            startActivity(intent);
                         }
                     }
                 });

@@ -141,8 +141,8 @@ public class asklocation extends FragmentActivity implements OnMapReadyCallback,
                 });
 
 
-                Intent intent = new Intent(asklocation.this, Main2Activity.class);
-                startActivity(intent);
+//                Intent intent = new Intent(asklocation.this, Main2Activity.class);
+//                startActivity(intent);
             }
         });
 

@@ -140,11 +140,12 @@ public class asklocationSP extends FragmentActivity implements OnMapReadyCallbac
                     public void onComplete(@NonNull Task<Void> task) {
                         if (task.isSuccessful()) {
                             Toast.makeText(asklocationSP.this, "Registered Successfully", Toast.LENGTH_LONG).show();
+                            Intent intent = new Intent(asklocationSP.this, Pending.class);
+                            startActivity(intent);
                         }
                     }
                 });
-                Intent intent = new Intent(asklocationSP.this, Pending.class);
-                startActivity(intent);
+
             }
         });
 
