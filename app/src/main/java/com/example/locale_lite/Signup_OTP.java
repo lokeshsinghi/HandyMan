@@ -89,10 +89,7 @@ public class Signup_OTP extends AppCompatActivity {
                     public void onComplete(@NonNull Task<AuthResult> task) {
                         if (task.isSuccessful()) {
 
-
                             Bundle bundle = getIntent().getExtras();
-
-
 
                             Intent intent = new Intent(Signup_OTP.this, asklocation.class);
                             intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);

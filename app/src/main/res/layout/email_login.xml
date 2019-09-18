@@ -10,7 +10,8 @@
     android:paddingLeft="16dp"
     android:paddingTop="20dp"
     android:paddingRight="16dp"
-    android:paddingBottom="16dp">
+    android:paddingBottom="16dp"
+    android:background="#ffffff">
 
     <ImageView
         android:layout_width="wrap_content"
@@ -85,6 +86,17 @@
             android:hint="Password"
             android:inputType="textPassword" />
 
+        <TextView
+            android:onClick="forgot"
+            android:id="@+id/forgot"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="right"
+            android:textSize="12dp"
+            android:background="@null"
+            android:textColor="#216EF3"
+            android:text="Forgot password?"/>
+
         <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -102,14 +114,6 @@
         </LinearLayout>
     </LinearLayout>
 
-    <ProgressBar
-        android:id="@+id/pBar"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:minWidth="50dp"
-        android:minHeight="50dp"
-        android:visibility="invisible"></ProgressBar>
     <Button
         android:id="@+id/login"
         android:layout_width="195dp"
@@ -154,5 +158,15 @@
             android:textAlignment="center"
             android:textColor="#216EF3" />
     </LinearLayout>
+    <ProgressBar
+        android:id="@+id/pBar"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:layout_gravity="center"
+        android:layout_marginTop="40dp"
+        android:minWidth="50dp"
+        android:minHeight="50dp"
+        android:visibility="invisible"></ProgressBar>
+
 
 </LinearLayout>

@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_marginTop="15dp">
+
+    <Button
+        android:onClick="onServiceClick"
+        android:id="@+id/request_active"
+        android:layout_width="300dp"
+        android:layout_height="70dp"
+        android:layout_gravity="center"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:layout_marginBottom="15dp"
+        android:background="@drawable/createnew"
+        android:drawableEnd="@drawable/ic_chevron_right_black_24dp"
+        android:gravity="start|center_vertical"
+        android:paddingStart="15dp"
+        android:stateListAnimator="@null"
+        android:text="Active Request"
+        android:textAlignment="gravity"
+        android:textAllCaps="false"
+        android:textSize="20dp" />
+
+    <Button
+        android:onClick="onServiceClick"
+        android:id="@+id/request_pending"
+        android:layout_width="300dp"
+        android:layout_height="70dp"
+        android:layout_gravity="center"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:layout_marginBottom="15dp"
+        android:background="@drawable/createnew"
+        android:drawableEnd="@drawable/ic_chevron_right_black_24dp"
+        android:gravity="start|center_vertical"
+        android:paddingStart="15dp"
+        android:stateListAnimator="@null"
+        android:text="Pending Requests"
+        android:textAlignment="gravity"
+        android:textAllCaps="false"
+        android:textSize="20dp" />
+
+    <Button
+        android:onClick="onServiceClick"
+        android:id="@+id/request_completed"
+        android:layout_width="300dp"
+        android:layout_height="70dp"
+        android:layout_gravity="center"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:layout_marginBottom="15dp"
+        android:background="@drawable/createnew"
+        android:drawableEnd="@drawable/ic_chevron_right_black_24dp"
+        android:gravity="start|center_vertical"
+        android:paddingStart="15dp"
+        android:stateListAnimator="@null"
+        android:text="Completed Requests"
+        android:textAlignment="gravity"
+        android:textAllCaps="false"
+        android:textSize="20dp" />
+
+
+
+</LinearLayout>
