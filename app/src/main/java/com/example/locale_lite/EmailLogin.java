@@ -3,12 +3,15 @@ package com.example.locale_lite;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Patterns;
 import android.view.View;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -17,16 +20,22 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 public class EmailLogin extends AppCompatActivity {
 
     TextView useMobile, signup;
+    TextView reset;
     EditText email, pwd;
     Button login;
     ProgressBar pbar;
     private FirebaseAuth mAuth;
+    LinearLayout mainLayout;
 
 
     @Override
@@ -41,6 +50,9 @@ public class EmailLogin extends AppCompatActivity {
         useMobile = (TextView) findViewById(R.id.usemobile);
         pbar = (ProgressBar) findViewById(R.id.pBar);
         mAuth = FirebaseAuth.getInstance();
+        reset = findViewById(R.id.forgot);
+        mainLayout = (LinearLayout)findViewById(R.id.container);
+
         signup.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -53,12 +65,23 @@ public class EmailLogin extends AppCompatActivity {
             public void onClick(View view) {
                 Intent intent = new Intent(EmailLogin.this, Login.class);
                 startActivity(intent);
+                finish();
             }
         });
+        reset.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(EmailLogin.this, ResetPassword.class);
+                startActivity(intent);
+            }
+        });
+
 
         login.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                InputMethodManager imm = (InputMethodManager)getSystemService(Context.INPUT_METHOD_SERVICE);
+                imm.hideSoftInputFromWindow(mainLayout.getWindowToken(), 0);
                 final String emailid = email.getText().toString();
                 final String pword = pwd.getText().toString();
                 if (email.getText().toString().isEmpty() || !Patterns.EMAIL_ADDRESS.matcher(email.getText().toString()).matches())
@@ -73,10 +96,44 @@ public class EmailLogin extends AppCompatActivity {
                                 public void onComplete(@NonNull Task<AuthResult> task) {
                                     pbar.setVisibility(View.GONE);
                                     if (task.isSuccessful()) {
-                                        Toast.makeText(EmailLogin.this,"Logged in",Toast.LENGTH_SHORT).show();
-                                        Intent intent = new Intent(EmailLogin.this, Main2Activity.class);
-                                        startActivity(intent);
-                                        finish();
+                                        FirebaseUser firebaseUser = FirebaseAuth.getInstance().getCurrentUser();
+                                        final String userid = firebaseUser.getUid();
+                                        DatabaseReference database = FirebaseDatabase.getInstance().getReference("Customers");
+                                        database.addValueEventListener(new ValueEventListener() {
+                                            @Override
+                                            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                                                int count= 0;
+                                                for(DataSnapshot snapshot : dataSnapshot.getChildren()){
+                                                    Customers c = snapshot.getValue(Customers.class);
+                                                    if(c.getId().equals(userid)){
+                                                        count=1;
+                                                        break;
+                                                    }
+                                                }
+
+                                                if(count==1)
+                                                {
+                                                    Toast.makeText(EmailLogin.this,"Logged in",Toast.LENGTH_SHORT).show();
+                                                    Intent intent = new Intent(EmailLogin.this, Main2Activity.class);
+                                                    startActivity(intent);
+                                                    finish();
+                                                }
+                                                else{
+                                                    Toast.makeText(EmailLogin.this,"Logged in",Toast.LENGTH_SHORT).show();
+                                                    Intent intent = new Intent(EmailLogin.this, sp_homepage.class);
+                                                    startActivity(intent);
+                                                    finish();
+
+                                                }
+                                            }
+
+                                            @Override
+                                            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+                                            }
+                                        });
+
+
                                     }
                                     else{
                                         Toast.makeText(EmailLogin.this,"Incorrect credentials or User not registered",Toast.LENGTH_LONG).show();
@@ -87,4 +144,10 @@ public class EmailLogin extends AppCompatActivity {
 
         });
     }
+//    @Override
+//    public void onBackPressed(){
+//        Intent intent=new Intent(EmailLogin.this,Login.class);
+//        startActivity(intent);
+//        finish();
+//    }
 }

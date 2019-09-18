@@ -49,6 +49,7 @@ public class asklocation extends FragmentActivity implements OnMapReadyCallback,
     private GoogleMap mMap;
     private Marker markerCenter;
     Button savebutton;
+    LatLng position;
     private DatabaseReference databaseReference;
 
     @Override
@@ -101,49 +102,47 @@ public class asklocation extends FragmentActivity implements OnMapReadyCallback,
         mMap.setOnMyLocationButtonClickListener(this);
         mMap.setOnMyLocationClickListener(this);
         markerCenter = mMap.addMarker(markerOptions.icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_ORANGE)));
-
+        position = markerCenter.getPosition();
         mMap.setOnCameraMoveListener(new GoogleMap.OnCameraMoveListener() {
             public void onCameraMove() {
                 markerCenter.setPosition(mMap.getCameraPosition().target);
-                final LatLng position = markerCenter.getPosition();
+                position = markerCenter.getPosition();
+            }
+        });
+        savebutton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                Bundle bundle = getIntent().getExtras();
+                String firstname = bundle.getString("firstname");
+                String lastname = bundle.getString("lastname");
+                String emailid = bundle.getString("emailid");
+                String phonenum = bundle.getString("phonenum");
+                String city = bundle.getString("city");
 
 
-                savebutton.setOnClickListener(new View.OnClickListener() {
+                Customers customer = new Customers(firstname, lastname, emailid, phonenum, city);
+                customer.setLatitude(position.latitude);
+                customer.setLongitude(position.longitude);
+                FirebaseUser firebaseUser = FirebaseAuth.getInstance().getCurrentUser();
+                String userid = firebaseUser.getUid();
+                customer.setId(userid);
+                FirebaseDatabase.getInstance().getReference("Customers")
+                        .child(FirebaseAuth.getInstance().getCurrentUser().getUid())
+                        .setValue(customer).addOnCompleteListener(new OnCompleteListener<Void>() {
                     @Override
-                    public void onClick(View view) {
-
-                        Bundle bundle = getIntent().getExtras();
-                        String firstname = bundle.getString("firstname");
-                        String lastname = bundle.getString("lastname");
-                        String emailid = bundle.getString("emailid");
-                        String phonenum = bundle.getString("phonenum");
-                        String city = bundle.getString("city");
-
-
-                        Customers customer = new Customers(firstname, lastname, emailid, phonenum, city);
-                        customer.setLatitude(position.latitude);
-                        customer.setLongitude(position.longitude);
-                        FirebaseUser firebaseUser = FirebaseAuth.getInstance().getCurrentUser();
-                        String userid = firebaseUser.getUid();
-                        customer.setId(userid);
-                        FirebaseDatabase.getInstance().getReference("Customers")
-                                .child(FirebaseAuth.getInstance().getCurrentUser().getUid())
-                                .setValue(customer).addOnCompleteListener(new OnCompleteListener<Void>() {
-                            @Override
-                            public void onComplete(@NonNull Task<Void> task) {
-                                if(task.isSuccessful()) {
-                                    Toast.makeText(asklocation.this, "Registered Successfully", Toast.LENGTH_LONG).show();
-                                }
-                                Intent intent = new Intent(asklocation.this, Main2Activity.class);
-                                startActivity(intent);
-                            }
-                        });
-
-
+                    public void onComplete(@NonNull Task<Void> task) {
+                        if(task.isSuccessful()) {
+                            Toast.makeText(asklocation.this, "Registered Successfully", Toast.LENGTH_LONG).show();
+                        }
                         Intent intent = new Intent(asklocation.this, Main2Activity.class);
                         startActivity(intent);
                     }
                 });
+
+
+                Intent intent = new Intent(asklocation.this, Main2Activity.class);
+                startActivity(intent);
             }
         });
 
