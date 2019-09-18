@@ -143,6 +143,11 @@ public class ProfileServiceProvider extends AppCompatActivity implements View.On
                             imageView1.setImageResource(0);
                             chose.setText("Choose your image");
                             Toast.makeText(ProfileServiceProvider.this, "Uploaded", Toast.LENGTH_SHORT).show();
+                            buttonChoose1.setClickable(false);
+                            buttonUpload1.setClickable(false);
+                            buttonUpload1.setBackgroundColor(Color.GRAY);
+                            buttonChoose1.setBackgroundColor(Color.GRAY);
+
 
                             //and displaying a success toast
                             profileRef.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
@@ -211,6 +216,11 @@ public class ProfileServiceProvider extends AppCompatActivity implements View.On
                             //hiding the progress dialog
 
                             progressDialog.dismiss();
+                            Toast.makeText(ProfileServiceProvider.this, "Uploaded", Toast.LENGTH_SHORT).show();
+                            buttonChoose2.setClickable(false);
+                            buttonUpload2.setClickable(false);
+                            buttonUpload2.setBackgroundColor(Color.GRAY);
+                            buttonChoose2.setBackgroundColor(Color.GRAY);
 
                             //and displaying a success toast
                             profileRef.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
@@ -239,7 +249,9 @@ public class ProfileServiceProvider extends AppCompatActivity implements View.On
                         @Override
                         public void onProgress(UploadTask.TaskSnapshot taskSnapshot) {
                             //calculating progress percentage
-                            double progress = 100.0 * (taskSnapshot.getBytesTransferred()/ taskSnapshot.getTotalByteCount());
+                            double progress=0;
+
+                            progress = (double) (100.0 * taskSnapshot.getBytesTransferred()) / taskSnapshot.getTotalByteCount();
 
                             //displaying percentage in progress dialog
                             progressDialog.setMessage("Uploaded " + ((int) progress) + "%...");

@@ -18,6 +18,15 @@ public class ServiceProviders {
     String profilePicUrl;
     String idProofUrl;
 
+    public Boolean getPending() {
+        return pending;
+    }
+
+    public void setPending(Boolean pending) {
+        this.pending = pending;
+    }
+
+    Boolean pending;
 
 
     int totalrate;

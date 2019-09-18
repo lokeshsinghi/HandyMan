@@ -36,7 +36,7 @@ public class profileSP extends AppCompatActivity implements View.OnClickListener
     RatingBar ratingBar,avbar;
     FirebaseDatabase database;
     DatabaseReference ratingTbl;
-    Button submit, cancel, request;
+    Button submit, cancel, request, pay;
     Double latSP,lngSP;
     int numRate, totalRate;
     float avRate;
@@ -64,6 +64,17 @@ public class profileSP extends AppCompatActivity implements View.OnClickListener
         nrate = findViewById(R.id.nrate);
         avrate = findViewById(R.id.avRate);
         avbar = findViewById(R.id.avBar);
+        pay = findViewById(R.id.pay);
+        pay.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                String url = "http://www.paytm.com";
+                Intent i = new Intent(Intent.ACTION_VIEW);
+                i.setData(Uri.parse(url));
+                startActivity(i);
+            }
+        });
+
 
         final String name = getIntent().getStringExtra("name");
         final String category = getIntent().getStringExtra("category");

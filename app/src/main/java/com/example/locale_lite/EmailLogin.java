@@ -98,7 +98,7 @@ public class EmailLogin extends AppCompatActivity {
                                     if (task.isSuccessful()) {
                                         FirebaseUser firebaseUser = FirebaseAuth.getInstance().getCurrentUser();
                                         final String userid = firebaseUser.getUid();
-                                        DatabaseReference database = FirebaseDatabase.getInstance().getReference("Customers");
+                                        final DatabaseReference database = FirebaseDatabase.getInstance().getReference("Customers");
                                         database.addValueEventListener(new ValueEventListener() {
                                             @Override
                                             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
@@ -119,10 +119,40 @@ public class EmailLogin extends AppCompatActivity {
                                                     finish();
                                                 }
                                                 else{
-                                                    Toast.makeText(EmailLogin.this,"Logged in",Toast.LENGTH_SHORT).show();
-                                                    Intent intent = new Intent(EmailLogin.this, sp_homepage.class);
-                                                    startActivity(intent);
-                                                    finish();
+                                                    DatabaseReference database1 = FirebaseDatabase.getInstance().getReference("ServiceProviders");
+                                                    database1.addValueEventListener(new ValueEventListener() {
+                                                        @Override
+                                                        public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                                                            int cont =0;
+                                                            for(DataSnapshot dataSnapshot1 : dataSnapshot.getChildren()){
+                                                                ServiceProviders sp = dataSnapshot1.getValue(ServiceProviders.class);
+                                                                if(sp.getId().equals(userid) && sp.getPending().equals(true)){
+                                                                    cont=1;
+                                                                    break;
+                                                                }
+                                                            }
+                                                            if(cont==1)
+                                                            {
+                                                                Toast.makeText(EmailLogin.this,"Logged in",Toast.LENGTH_SHORT).show();
+                                                                Intent intent = new Intent(EmailLogin.this, sp_homepage.class);
+                                                                startActivity(intent);
+                                                                finish();
+                                                            }
+                                                            else{
+                                                                Toast.makeText(EmailLogin.this,"Not verified yet",Toast.LENGTH_SHORT).show();
+                                                                Intent intent = new Intent(EmailLogin.this, Pending.class);
+                                                                startActivity(intent);
+                                                                finish();
+
+                                                            }
+                                                        }
+
+                                                        @Override
+                                                        public void onCancelled(@NonNull DatabaseError databaseError) {
+
+                                                        }
+                                                    });
+
 
                                                 }
                                             }
