@@ -12,19 +12,40 @@ public class ServiceProviders {
     String city;
     String category;
     Float yearsOfExperience;
-    Float rating;
     String qualifications;
     Double latitude;
     Double longitude;
     String profilePicUrl;
     String idProofUrl;
 
-    public Float getRating() {
-        return rating;
+
+
+    static int totalrate;
+    int numrate;
+    float avrate;
+
+    public int getTotalrate() {
+        return totalrate;
     }
 
-    public void setRating(Float rating) {
-        this.rating = rating;
+    public void setTotalrate(int totalrate) {
+        this.totalrate = totalrate;
+    }
+
+    public int getNumrate() {
+        return numrate;
+    }
+
+    public void setNumrate(int numrate) {
+        this.numrate = numrate;
+    }
+
+    public float getAvrate() {
+        return avrate;
+    }
+
+    public void setAvrate(float avrate) {
+        this.avrate = avrate;
     }
 
     public String getId() {
@@ -103,6 +124,8 @@ public class ServiceProviders {
         this.phonenum = phonenum;
         this.city = city;
         this.category = category;
+        this.numrate =0;
+        this.totalrate=0;
     }
 
     public ServiceProviders(String firstname, String lastname, String emailid, String phonenum, String city, String category,String profilePicUrl) {
@@ -113,6 +136,8 @@ public class ServiceProviders {
         this.city = city;
         this.category = category;
         this.profilePicUrl = profilePicUrl;
+        this.numrate = 0;
+        this.totalrate =0;
     }
 
 

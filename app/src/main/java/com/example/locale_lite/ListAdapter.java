@@ -49,6 +49,9 @@ public class ListAdapter extends RecyclerView.Adapter<ListAdapter.ViewHolder> {
                 intent.putExtra("category",serviceProviders.getCategory());
                 intent.putExtra("phone",serviceProviders.getPhonenum());
                 intent.putExtra("userid",serviceProviders.getId());
+                intent.putExtra("numRate",serviceProviders.getNumrate());
+                intent.putExtra("totalRate",serviceProviders.getTotalrate());
+                intent.putExtra("avRate",serviceProviders.getAvrate());
                 Bundle b = new Bundle();
                 b.putDouble("spLat",serviceProviders.getLatitude());
                 b.putDouble("spLng",serviceProviders.getLongitude());
