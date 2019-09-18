@@ -20,6 +20,8 @@ import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.widget.DatePicker;
 import android.widget.TimePicker;
+import android.widget.Toast;
+
 import java.util.Calendar;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
@@ -65,17 +67,7 @@ public class profileSP extends AppCompatActivity implements View.OnClickListener
         avrate = findViewById(R.id.avRate);
         avbar = findViewById(R.id.avBar);
         pay = findViewById(R.id.pay);
-        pay.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                String url = "http://www.paytm.com";
-                Intent i = new Intent(Intent.ACTION_VIEW);
-                i.setData(Uri.parse(url));
-                startActivity(i);
-            }
-        });
-
-
+        pay.setOnClickListener(this);
         final String name = getIntent().getStringExtra("name");
         final String category = getIntent().getStringExtra("category");
         final String dpURL = getIntent().getStringExtra("dp");
@@ -246,6 +238,34 @@ public class profileSP extends AppCompatActivity implements View.OnClickListener
 
     }
 
+    private void showPayDialog() {
+        AlertDialog.Builder mBuilder = new AlertDialog.Builder(profileSP.this);
+        final View mView = getLayoutInflater().inflate(R.layout.payment_dialog, null);
+
+        mBuilder.setView(mView);
+        final AlertDialog dialog = mBuilder.create();
+        dialog.show();
+        LinearLayout paytm = mView.findViewById(R.id.paytm);
+        paytm.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                String url = "http://www.paytm.com";
+                Intent i = new Intent(Intent.ACTION_VIEW);
+                i.setData(Uri.parse(url));
+                startActivity(i);
+            }
+        });
+        LinearLayout cash = mView.findViewById(R.id.cash);
+        cash.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Toast.makeText(profileSP.this, "Cash mode selected", Toast.LENGTH_LONG).show();
+                dialog.cancel();
+            }
+        });
+    }
+
+
 
 
     @Override
@@ -278,6 +298,10 @@ public class profileSP extends AppCompatActivity implements View.OnClickListener
         if(view == request)
         {
             showRequestDialog();
+        }
+        if(view == pay)
+        {
+            showPayDialog();
         }
 
     }

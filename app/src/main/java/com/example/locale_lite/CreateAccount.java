@@ -45,7 +45,7 @@ public class CreateAccount<findView> extends AppCompatActivity implements Adapte
 
     EditText firstName, lastName, emailId, phoneNum, password, cpassword;
     TextView signIn;
-    ImageView googleSignup;
+
     Button next, submit;
     Spinner cityList, categories;
     Bundle bundle;
@@ -53,165 +53,152 @@ public class CreateAccount<findView> extends AppCompatActivity implements Adapte
     RadioButton male, female, others, typecus, typeser;
     ProgressBar progressBar;
     private FirebaseAuth mAuth;
-    private GoogleSignInClient googleSignInClient;
+
     int p=0,q=0;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_create_account);
         categories = (Spinner) findViewById(R.id.categories);
-    firstName = (EditText)findViewById(R.id.firstname);
-    lastName = (EditText) findViewById(R.id.lastname);
-    emailId = (EditText) findViewById(R.id.email);
-    phoneNum = (EditText)findViewById(R.id.phone);
-    password = (EditText)findViewById(R.id.pwd);
-    cpassword = (EditText) findViewById(R.id.confirmpwd);
-    cityList = (Spinner) findViewById(R.id.citylist);
-    gender = (RadioGroup) findViewById(R.id.gender);
-    male = (RadioButton) findViewById(R.id.checkMale);
-    female = (RadioButton) findViewById(R.id.checkFemale);
-    others = (RadioButton) findViewById(R.id.checkOthers);
-    typecus = (RadioButton) findViewById(R.id.checkCustomer);
-    typeser = (RadioButton) findViewById(R.id.checkServiceProvider);
-    accType = (RadioGroup) findViewById(R.id.acctype);
-    googleSignup = (ImageView) findViewById(R.id.google);
-    progressBar = (ProgressBar) findViewById(R.id.pBar);
-    progressBar.setVisibility(View.GONE);
+        firstName = (EditText)findViewById(R.id.firstname);
+        lastName = (EditText) findViewById(R.id.lastname);
+        emailId = (EditText) findViewById(R.id.email);
+        phoneNum = (EditText)findViewById(R.id.phone);
+        password = (EditText)findViewById(R.id.pwd);
+        cpassword = (EditText) findViewById(R.id.confirmpwd);
+        cityList = (Spinner) findViewById(R.id.citylist);
+        gender = (RadioGroup) findViewById(R.id.gender);
+        male = (RadioButton) findViewById(R.id.checkMale);
+        female = (RadioButton) findViewById(R.id.checkFemale);
+        others = (RadioButton) findViewById(R.id.checkOthers);
+        typecus = (RadioButton) findViewById(R.id.checkCustomer);
+        typeser = (RadioButton) findViewById(R.id.checkServiceProvider);
+        accType = (RadioGroup) findViewById(R.id.acctype);
 
-    mAuth = FirebaseAuth.getInstance();
+        progressBar = (ProgressBar) findViewById(R.id.pBar);
+        progressBar.setVisibility(View.GONE);
+
+        mAuth = FirebaseAuth.getInstance();
 
 
-    GoogleSignInOptions gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
-                .requestId()
-                .requestEmail()
-                .build();
-        googleSignInClient = GoogleSignIn.getClient(this, gso);
-        googleSignup.setOnClickListener(new View.OnClickListener() {
+        signIn = (TextView) findViewById(R.id.signin);
+        signIn.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View v) {
-                Intent signInIntent = googleSignInClient.getSignInIntent();
-                startActivityForResult(signInIntent, 101);
+            public void onClick(View view)  {
+                Intent intent = new Intent(CreateAccount.this, Login.class);
+                startActivity(intent);
             }
         });
-
-    signIn = (TextView) findViewById(R.id.signin);
-    signIn.setOnClickListener(new View.OnClickListener() {
-        @Override
-        public void onClick(View view)  {
-            Intent intent = new Intent(CreateAccount.this, Login.class);
-            startActivity(intent);
-        }
-    });
         final ArrayList<ServiceProviders> serviceprovidersArrayList = new ArrayList<>();
-    next = (Button)findViewById(R.id.btNext);
-    next.setOnClickListener(new View.OnClickListener() {
-        @Override
-        public void onClick(View view) {
-            final String firstname = firstName.getText().toString().trim();
-            final String lastname = lastName.getText().toString().trim();
-            final String emailid = emailId.getText().toString();
-            final String phonenum = phoneNum.getText().toString();
-            final String city = cityList.getSelectedItem().toString();
-            final String pword = password.getText().toString();
-            final String cpword = cpassword.getText().toString();
-            final String category = categories.getSelectedItem().toString();
-            if (firstName.getText().toString().trim().equalsIgnoreCase(""))
-                firstName.setError("First name is required!");
+        next = (Button)findViewById(R.id.btNext);
+        next.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                final String firstname = firstName.getText().toString().trim();
+                final String lastname = lastName.getText().toString().trim();
+                final String emailid = emailId.getText().toString();
+                final String phonenum = phoneNum.getText().toString();
+                final String city = cityList.getSelectedItem().toString();
+                final String pword = password.getText().toString();
+                final String cpword = cpassword.getText().toString();
+                final String category = categories.getSelectedItem().toString();
+                if (firstName.getText().toString().trim().equalsIgnoreCase(""))
+                    firstName.setError("First name is required!");
 
-            else if (lastName.getText().toString().trim().equalsIgnoreCase(""))
-                lastName.setError("Last name is required!");
+                else if (lastName.getText().toString().trim().equalsIgnoreCase(""))
+                    lastName.setError("Last name is required!");
 
-            else if (emailId.getText().toString().isEmpty() || !Patterns.EMAIL_ADDRESS.matcher(emailId.getText().toString()).matches())
-                emailId.setError("Enter valid Email Id!");
+                else if (emailId.getText().toString().isEmpty() || !Patterns.EMAIL_ADDRESS.matcher(emailId.getText().toString()).matches())
+                    emailId.setError("Enter valid Email Id!");
 
-            else if (phoneNum.getText().toString().length()<10)
-                phoneNum.setError("Enter valid Phone Number!");
-            else if (gender.getCheckedRadioButtonId() == -1)
-            {
-                Toast toast = Toast.makeText(getApplicationContext(),
-                        "Please Select Gender!",
+                else if (phoneNum.getText().toString().length()<10)
+                    phoneNum.setError("Enter valid Phone Number!");
+                else if (gender.getCheckedRadioButtonId() == -1)
+                {
+                    Toast toast = Toast.makeText(getApplicationContext(),
+                            "Please Select Gender!",
+                            Toast.LENGTH_LONG);
+                    toast.show();
+                }
+                else if(cityList.getSelectedItem().toString().matches("Select City"))
+                { Toast toast = Toast.makeText(getApplicationContext(),
+                        "Select City!",
                         Toast.LENGTH_LONG);
-                toast.show();
-            }
-            else if(cityList.getSelectedItem().toString().matches("Select City"))
-            { Toast toast = Toast.makeText(getApplicationContext(),
-                    "Select City!",
-                    Toast.LENGTH_LONG);
-                toast.show();
-            }
-            else if(password.getText().toString().length()<8)
-                password.setError("Password of minimum 8 characters is required");
-            else if(!password.getText().toString().matches(cpassword.getText().toString()))
-                password.setError("Passwords do not match. Try again!");
-            else if(categories.getSelectedItem().toString().matches("Select Category"))
-            { Toast toast = Toast.makeText(getApplicationContext(),
-                    "Select Category!",
-                    Toast.LENGTH_LONG);
-                toast.show();
-            }
-            else    {
-                progressBar.setVisibility(View.VISIBLE);
+                    toast.show();
+                }
+                else if(password.getText().toString().length()<8)
+                    password.setError("Password of minimum 8 characters is required");
+                else if(!password.getText().toString().matches(cpassword.getText().toString()))
+                    password.setError("Passwords do not match. Try again!");
+                else if(categories.getSelectedItem().toString().matches("Select Category"))
+                { Toast toast = Toast.makeText(getApplicationContext(),
+                        "Select Category!",
+                        Toast.LENGTH_LONG);
+                    toast.show();
+                }
+                else    {
+                    progressBar.setVisibility(View.VISIBLE);
 
 
-                final Bundle bundle = new Bundle();
-                bundle.putString("firstname",firstname);
-                bundle.putString("lastname",lastname);
-                bundle.putString("emailid",emailid);
-                bundle.putString("phonenum",phonenum);
-                bundle.putString("city",city);
-                bundle.putString("category",category);
+                    final Bundle bundle = new Bundle();
+                    bundle.putString("firstname",firstname);
+                    bundle.putString("lastname",lastname);
+                    bundle.putString("emailid",emailid);
+                    bundle.putString("phonenum",phonenum);
+                    bundle.putString("city",city);
+                    bundle.putString("category",category);
 
 
-                mAuth.createUserWithEmailAndPassword(emailid,pword)
-                        .addOnCompleteListener(new OnCompleteListener<AuthResult>() {
-                            @Override
-                            public void onComplete(@NonNull final Task<AuthResult> task) {
-                                progressBar.setVisibility(View.GONE);
-                                final String phone = phoneNum.getText().toString();
-                                FirebaseDatabase.getInstance().getReference().child("ServiceProviders")
-                                        .addValueEventListener(new ValueEventListener() {
-                                            @Override
-                                            public void onDataChange(DataSnapshot dataSnapshot) {
-                                                for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
-                                                    ServiceProviders s = snapshot.getValue(ServiceProviders.class);
-                                                    serviceprovidersArrayList.add(s);
-                                                    if(s.getPhonenum().toString().equals(phone)) {
-                                                        p=1;
-                                                        break;
+                    mAuth.createUserWithEmailAndPassword(emailid,pword)
+                            .addOnCompleteListener(new OnCompleteListener<AuthResult>() {
+                                @Override
+                                public void onComplete(@NonNull final Task<AuthResult> task) {
+                                    progressBar.setVisibility(View.GONE);
+                                    final String phone = phoneNum.getText().toString();
+                                    FirebaseDatabase.getInstance().getReference().child("ServiceProviders")
+                                            .addValueEventListener(new ValueEventListener() {
+                                                @Override
+                                                public void onDataChange(DataSnapshot dataSnapshot) {
+                                                    for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
+                                                        ServiceProviders s = snapshot.getValue(ServiceProviders.class);
+                                                        serviceprovidersArrayList.add(s);
+                                                        if(s.getPhonenum().toString().equals(phone)) {
+                                                            p=1;
+                                                            break;
+                                                        }
+                                                        else
+                                                            p=0;
                                                     }
-                                                    else
-                                                        p=0;
+                                                    if(p==1)
+                                                    {
+                                                        Toast.makeText(CreateAccount.this, "This Phone Number is already registered", Toast.LENGTH_SHORT).show();
+                                                    }
+                                                    else if (p==0 && task.isSuccessful()) {
+                                                        String phoneNumber = "+91" + phonenum;
+                                                        Intent intent = new Intent(CreateAccount.this, ProfileServiceProvider.class);
+                                                        intent.putExtra("phonenumber",phoneNumber);
+                                                        intent.putExtras(bundle);
+                                                        startActivity(intent);
+                                                    }
+                                                    else{
+                                                        Toast.makeText(CreateAccount.this, "This Email Id is already registered",Toast.LENGTH_LONG).show();
+                                                    }
                                                 }
-                                                if(p==1)
-                                                {
-                                                    Toast.makeText(CreateAccount.this, "This Phone Number is already registered", Toast.LENGTH_SHORT).show();
+                                                @Override
+                                                public void onCancelled(DatabaseError databaseError) {
                                                 }
-                                                else if (p==0 && task.isSuccessful()) {
-                                                    String phoneNumber = "+91" + phonenum;
-                                                    Intent intent = new Intent(CreateAccount.this, ProfileServiceProvider.class);
-                                                    intent.putExtra("phonenumber",phoneNumber);
-                                                    intent.putExtras(bundle);
-                                                    startActivity(intent);
-                                                }
-                                                else{
-                                                    Toast.makeText(CreateAccount.this, "This Email Id is already registered",Toast.LENGTH_LONG).show();
-                                                }
-                                            }
-                                            @Override
-                                            public void onCancelled(DatabaseError databaseError) {
-                                            }
-                                        });
+                                            });
 
 
 
-                            }
-                        });
-        }}
+                                }
+                            });
+                }}
 
-    });
-         final ArrayList<Customers> customersArrayList = new ArrayList<>();
+        });
+        final ArrayList<Customers> customersArrayList = new ArrayList<>();
 
-    submit = (Button)findViewById(R.id.btSubmit);
+        submit = (Button)findViewById(R.id.btSubmit);
         submit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -346,15 +333,15 @@ public class CreateAccount<findView> extends AppCompatActivity implements Adapte
             case R.id.checkCustomer:
                 if (checked)
                     next.setVisibility(View.INVISIBLE);
-                    submit.setVisibility(View.VISIBLE);
-                    categories.setVisibility(View.INVISIBLE);
-                    break;
+                submit.setVisibility(View.VISIBLE);
+                categories.setVisibility(View.INVISIBLE);
+                break;
             case R.id.checkServiceProvider:
                 if (checked)
                     next.setVisibility(View.VISIBLE);
-                    submit.setVisibility(View.INVISIBLE);
-                    categories.setVisibility(View.VISIBLE);
-                    break;
+                submit.setVisibility(View.INVISIBLE);
+                categories.setVisibility(View.VISIBLE);
+                break;
         }
     }
     @Override

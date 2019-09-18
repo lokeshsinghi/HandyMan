@@ -6,6 +6,7 @@
     android:layout_height="wrap_content"
     android:orientation="vertical"
     android:padding="10dp"
+    android:background="@android:color/white"
     android:fillViewport="false">
     <LinearLayout
         android:layout_width="match_parent"
@@ -36,29 +37,12 @@
             android:textSize="24dp"
             />
 
-        <ImageView
-            android:id="@+id/google"
-            android:layout_width="180dp"
-            android:layout_gravity="center"
-            android:layout_height="45dp"
-            android:layout_marginTop="20dp"
-            android:layout_marginBottom="30dp"
-            android:layout_weight="2"
-            app:srcCompat="@drawable/gsignup" />
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:layout_marginTop="-10dp"
-            android:layout_weight="1"
-            android:text="OR"
-            android:textSize="15dp"/>
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:weightSum="2"
             android:layout_weight="1"
+            android:layout_marginTop="25dp"
             android:orientation="horizontal">
 
             <com.google.android.material.textfield.TextInputEditText
@@ -189,7 +173,7 @@
                 android:layout_marginRight="10dp"
                 android:text="Customer"
                 android:onClick="onRadioButtonClicked"/>
-                />
+            />
 
             <RadioButton
                 android:id="@+id/checkServiceProvider"
@@ -198,7 +182,7 @@
                 android:layout_weight="1"
                 android:text="Service Provider"
                 android:onClick="onRadioButtonClicked"/>
-                 />
+            />
         </RadioGroup>
 
         <LinearLayout
@@ -246,21 +230,21 @@
             android:text="Select City"
             android:textSize="16sp" />
 
-            <ProgressBar
-                android:id="@+id/pBar"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:minWidth="50dp"
-                android:minHeight="50dp"
-                android:visibility="invisible"></ProgressBar>
+        <ProgressBar
+            android:id="@+id/pBar"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:minWidth="50dp"
+            android:minHeight="50dp"
+            android:visibility="invisible"></ProgressBar>
 
-            <Button
+        <Button
             android:id="@+id/btSubmit"
             android:layout_width="98dp"
             android:layout_height="wrap_content"
             android:layout_gravity="end"
-            android:layout_marginTop="10dp"
+            android:layout_marginTop="-28dp"
             android:layout_weight="2"
             android:background="@drawable/loginbutton"
             android:clickable="false"
@@ -270,7 +254,7 @@
             android:layout_width="98dp"
             android:layout_height="wrap_content"
             android:layout_gravity="end"
-            android:layout_marginTop="10dp"
+            android:layout_marginTop="-27dp"
             android:layout_weight="2"
             android:background="@drawable/loginbutton"
             android:clickable="false"
@@ -281,12 +265,12 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:layout_gravity="bottom"
+            android:layout_gravity="top"
             android:orientation="horizontal">
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="40dp"
+                android:layout_marginTop="10dp"
                 android:text="Already have an Account?"
                 android:textSize="14sp" />
 
@@ -294,7 +278,7 @@
                 android:id="@+id/signin"
                 android:layout_width="159dp"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="40dp"
+                android:layout_marginTop="10dp"
                 android:layout_marginLeft="10dp"
                 android:text="Sign in"
                 android:textColor="#216EF3" />
