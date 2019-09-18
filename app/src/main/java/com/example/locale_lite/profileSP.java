@@ -1,12 +1,14 @@
 package com.example.locale_lite;
-
-import androidx.appcompat.app.AlertDialog;
+//
+//import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.app.DatePickerDialog;
+import android.app.TimePickerDialog;
+import android.app.AlertDialog;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
-import android.text.Layout;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -14,18 +16,15 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RatingBar;
 import android.widget.TextView;
-import android.widget.Toast;
-
-import com.google.android.gms.common.internal.service.Common;
-import com.google.android.gms.maps.model.LatLng;
-import com.google.android.material.floatingactionbutton.FloatingActionButton;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
+import android.widget.DatePicker;
+import android.widget.TimePicker;
+import java.util.Calendar;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.squareup.picasso.Picasso;
-
-import org.w3c.dom.Text;
-
-import java.util.Arrays;
+import java.text.DecimalFormat;
 
 public class profileSP extends AppCompatActivity implements View.OnClickListener {
 
@@ -41,12 +40,18 @@ public class profileSP extends AppCompatActivity implements View.OnClickListener
     Double latSP,lngSP;
     int numRate, totalRate;
     float avRate;
+
+
+    EditText date,time,jobdes;
+    Button send;
+    private DatePickerDialog.OnDateSetListener onDateSetListener;
+    private TimePickerDialog.OnTimeSetListener onTimeSetListener;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_profile_sp);
         database = FirebaseDatabase.getInstance();
-        ratingTbl = database.getReference("Rating");
         review = findViewById(R.id.addreview);
         call = findViewById(R.id.call);
         Name = findViewById(R.id.name);
@@ -85,7 +90,7 @@ public class profileSP extends AppCompatActivity implements View.OnClickListener
         directions.setOnClickListener(this);
         request.setOnClickListener(this);
         nrate.setText(""+numRate);
-        avrate.setText(""+avRate);
+        avrate.setText(new DecimalFormat("#.#").format(avRate));
         avbar.setRating(avRate);
 
     }
@@ -116,16 +121,16 @@ public class profileSP extends AppCompatActivity implements View.OnClickListener
             public void onClick(View view) {
                 final String userid = getIntent().getStringExtra("userid");
                 DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference().child("ServiceProviders").child(userid);
-                   numRate++;
-                   totalRate+=rbar.getRating();
-                  databaseReference.child("numrate").setValue(numRate);
-                  databaseReference.child("totalrate").setValue(totalRate);
-                  float av = (float)totalRate/(float)numRate;
-                  databaseReference.child("avrate").setValue(av);
-                  avRate = av;
-                  avrate.setText(""+avRate);
-                  nrate.setText(""+numRate);
-                  avbar.setRating(avRate);
+                numRate++;
+                totalRate+=rbar.getRating();
+                databaseReference.child("numrate").setValue(numRate);
+                databaseReference.child("totalrate").setValue(totalRate);
+                float av = (float)totalRate/(float)numRate;
+                databaseReference.child("avrate").setValue(av);
+                avRate = av;
+                avrate.setText(new DecimalFormat("#.#").format(avRate));
+                nrate.setText(""+numRate);
+                avbar.setRating(avRate);
                 dialog.cancel();
 
             }
@@ -134,19 +139,100 @@ public class profileSP extends AppCompatActivity implements View.OnClickListener
         rbar.setOnRatingBarChangeListener(new RatingBar.OnRatingBarChangeListener() {
             @Override
             public void onRatingChanged(RatingBar ratingBar, float v, boolean b) {
-                    int V = (int) v;
-                    if (V == 1)
-                        Word.setText("Very Bad");
-                    if (V == 2)
-                        Word.setText("Not Good");
-                    if (V == 3)
-                        Word.setText("Quite Ok");
-                    if (V==4)
-                        Word.setText("Very Good");
-                    if(V==5)
-                        Word.setText("Excellent");
+                int V = (int) v;
+                if (V == 1)
+                    Word.setText("Very Bad");
+                if (V == 2)
+                    Word.setText("Not Good");
+                if (V == 3)
+                    Word.setText("Quite Ok");
+                if (V==4)
+                    Word.setText("Very Good");
+                if(V==5)
+                    Word.setText("Excellent");
             }
         });
+    }
+
+
+    private void showRequestDialog()
+    {
+        AlertDialog.Builder mBuilder = new AlertDialog.Builder(profileSP.this);
+        final View mView = getLayoutInflater().inflate(R.layout.request_service, null);
+
+        mBuilder.setView(mView);
+        final AlertDialog dialog = mBuilder.create();
+        dialog.show();
+
+
+        date = mView.findViewById(R.id.date_text);
+        time = mView.findViewById(R.id.time_text);
+        jobdes = mView.findViewById(R.id.job_text);
+        send = mView.findViewById(R.id.send_service_request_btn);
+
+        send.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+            }
+        });
+
+
+        date.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Calendar cal = Calendar.getInstance();
+                int year = cal.get(Calendar.YEAR);
+                int month = cal.get(Calendar.MONTH);
+                int day = cal.get(Calendar.DAY_OF_MONTH);
+
+                DatePickerDialog datePickerDialog = new DatePickerDialog(profileSP.this,
+                        AlertDialog.THEME_HOLO_DARK,
+                        onDateSetListener,
+                        year,month,day);
+                datePickerDialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+                datePickerDialog.show();
+            }
+        });
+
+        time.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Calendar c = Calendar.getInstance();
+                int hour = c.get(Calendar.HOUR_OF_DAY);
+                int min = c.get(Calendar.MINUTE);
+
+                TimePickerDialog timePickerDialog = new TimePickerDialog(profileSP.this,
+                        AlertDialog.THEME_HOLO_DARK,
+                        onTimeSetListener,
+                        hour,min,false);
+                timePickerDialog.show();
+            }
+        });
+
+        onDateSetListener = new DatePickerDialog.OnDateSetListener() {
+            @Override
+            public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
+                month = month + 1;
+                String datetext = dayOfMonth + "/" + month + "/" + year;
+                date.setText(datetext);
+            }
+        };
+
+        onTimeSetListener = new TimePickerDialog.OnTimeSetListener() {
+            @Override
+            public void onTimeSet(TimePicker view, int hourOfDay, int minute) {
+                String a;
+                if(hourOfDay > 12){
+                    hourOfDay = hourOfDay - 12;
+                    a = "PM";
+                }else
+                    a = "AM";
+                String timetext = hourOfDay + ":" + minute + " " + a;
+                time.setText(timetext);
+            }
+        };
+
     }
 
 
@@ -178,10 +264,10 @@ public class profileSP extends AppCompatActivity implements View.OnClickListener
         {
 
         }
-//        if(view == request)
-//        {
-//            showRequestDialog();
-//        }
+        if(view == request)
+        {
+            showRequestDialog();
+        }
 
     }
 

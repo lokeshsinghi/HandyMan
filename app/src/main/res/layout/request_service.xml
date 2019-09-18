@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="16dp">
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Fill out the Service Details"
+        android:layout_gravity="center"
+        android:textSize="25sp"
+        android:maxLines="1"
+        android:textColor="#000000"/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_marginTop="20dp"
+        android:weightSum="10">
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:layout_weight="1.5"
+            android:textColor="@android:color/black"
+            android:text="Date"
+            android:textSize="20sp" />
+
+        <EditText
+            android:id="@+id/date_text"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:hint="Pick a Date"
+            android:layout_weight="8.5"
+            android:inputType="none"
+            android:focusable="false" />
+
+
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:weightSum="10"
+        android:orientation="horizontal"
+        android:layout_marginTop="10dp">
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:layout_weight="1.5"
+            android:textColor="@android:color/black"
+            android:text="Time"
+            android:textSize="20sp" />
+
+        <EditText
+            android:id="@+id/time_text"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:hint="Pick a Time"
+            android:layout_weight="8.5"
+            android:inputType="none"
+            android:focusable="false" />
+
+
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_marginTop="10dp">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:layout_weight="3"
+            android:textColor="@android:color/black"
+            android:text="Description"
+            android:textSize="20sp" />
+
+
+        <EditText
+            android:id="@+id/job_text"
+            android:defaultFocusHighlightEnabled="false"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:hint="Job Description"
+            android:inputType="textMultiLine"
+            android:cursorVisible="false"
+            android:focusableInTouchMode="true"
+            android:gravity="left|top" />
+
+    </LinearLayout>
+
+    <Button
+        android:id="@+id/send_service_request_btn"
+        android:layout_marginTop="20dp"
+        android:layout_width="100dp"
+        android:layout_height="50dp"
+        android:background="@drawable/loginbutton"
+        android:text="Send"
+        android:textSize="15sp"
+        android:layout_gravity="center"/>
+
+</LinearLayout>
