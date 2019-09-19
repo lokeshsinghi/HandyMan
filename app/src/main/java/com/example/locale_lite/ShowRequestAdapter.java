@@ -2,6 +2,7 @@ package com.example.locale_lite;
 
 import android.content.Context;
 import android.content.Intent;
+import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -52,6 +53,10 @@ public class ShowRequestAdapter extends RecyclerView.Adapter<ShowRequestAdapter.
                     intent.putExtra("name", c.getFirstname() + " " + c.getLastname());
                     intent.putExtra("phone", c.getPhonenum());
                     intent.putExtra("userid", c.getId());
+                    Bundle b = new Bundle();
+                    b.putDouble("cusLat", c.getLatitude());
+                    b.putDouble("cusLng", c.getLongitude());
+                    intent.putExtras(b);
                     mcontext.startActivity(intent);
                 }
             }

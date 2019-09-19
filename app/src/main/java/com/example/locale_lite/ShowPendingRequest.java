@@ -4,9 +4,12 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.google.firebase.auth.FirebaseAuth;
@@ -26,6 +29,7 @@ import de.hdodenhof.circleimageview.CircleImageView;
 public class ShowPendingRequest extends AppCompatActivity {
 
     CircleImageView dp;
+    private LinearLayout call, message, directions;
     TextView name;
     TextView job,time,date,des;
     FirebaseUser firebaseUser;
@@ -50,6 +54,12 @@ public class ShowPendingRequest extends AppCompatActivity {
         accept = findViewById(R.id.accept_btn);
         decline = findViewById(R.id.decline_btn);
 
+        call = findViewById(R.id.call);
+        message = findViewById(R.id.message);
+        directions = findViewById(R.id.directions);
+
+
+
 
         userid = getIntent().getStringExtra("userid");
         firebaseUser = FirebaseAuth.getInstance().getCurrentUser();
@@ -71,6 +81,33 @@ public class ShowPendingRequest extends AppCompatActivity {
 
             }
         });
+
+        call.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(Intent.ACTION_DIAL);
+                intent.setData(Uri.parse("tel:" + getIntent().getStringExtra("phone")));
+                startActivity(intent);
+
+            }});
+        message.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(ShowPendingRequest.this,Chat.class);
+                intent.putExtra("userid",getIntent().getStringExtra("userid"));
+                intent.putExtra("type","Customer");
+                startActivity(intent);
+
+            }});
+        directions.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Bundle b = getIntent().getExtras();
+                Intent intent = new Intent(ShowPendingRequest.this, DirectionsSp.class);
+                intent.putExtras(b);
+                startActivity(intent);
+
+            }});
 
         accept.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -137,5 +174,8 @@ public class ShowPendingRequest extends AppCompatActivity {
 
             }
         });
+
+
     }
+
 }

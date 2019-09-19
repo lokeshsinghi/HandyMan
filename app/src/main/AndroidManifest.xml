@@ -17,7 +17,8 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".ShowActiveRequests"></activity>
+        <activity android:name=".DirectionsSp"></activity>
+        <activity android:name=".ShowActiveRequests" />
         <activity android:name=".ShowPendingRequest" />
         <activity android:name=".RequestStatus" />
         <activity android:name=".Requests" />
