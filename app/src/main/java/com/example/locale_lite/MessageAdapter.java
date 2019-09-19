@@ -33,20 +33,20 @@ public class MessageAdapter extends RecyclerView.Adapter<MessageAdapter.ViewHold
     }
 
     @Override
-    public MessageAdapter.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+    public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         if(viewType==MSG_TYPE_RIGHT) {
             View view = LayoutInflater.from(mcontext).inflate(R.layout.chat_item_right, parent, false);
-            MessageAdapter.ViewHolder viewHolder = new MessageAdapter.ViewHolder(view);
+            ViewHolder viewHolder = new ViewHolder(view);
             return viewHolder;
         }else{
             View view = LayoutInflater.from(mcontext).inflate(R.layout.chat_item_left, parent, false);
-            MessageAdapter.ViewHolder viewHolder = new MessageAdapter.ViewHolder(view);
+            ViewHolder viewHolder = new ViewHolder(view);
             return viewHolder;
         }
     }
 
     @Override
-    public void onBindViewHolder(@NonNull MessageAdapter.ViewHolder holder, int position) {
+    public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
             ChatBox chatBox = mchat.get(position);
             holder.show_message.setText((chatBox.getMessage()));
             if(imageurl==null){

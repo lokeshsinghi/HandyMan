@@ -1,4 +1,4 @@
-//package com.example.locale_lite;
+package com.example.locale_lite;//package com.example.locale_lite;
 //
 //import androidx.appcompat.app.AppCompatActivity;
 //

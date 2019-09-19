@@ -56,7 +56,7 @@ public class DirectionsSp extends FragmentActivity implements OnMapReadyCallback
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_map_directions);
+        setContentView(R.layout.activity_directions_sp);
         getDirection = findViewById(R.id.btnGetDirection);
         Bundle b = getIntent().getExtras();
         final double cusLat = b.getDouble("cusLat");
@@ -74,12 +74,6 @@ public class DirectionsSp extends FragmentActivity implements OnMapReadyCallback
 
         fetchLastLocation();
 
-
-
-
-//        SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
-//                .findFragmentById(R.id.map);
-//        mapFragment.getMapAsync(MapDirections.this);
     }
     private void fetchLastLocation() {
         if (ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION)
@@ -105,23 +99,29 @@ public class DirectionsSp extends FragmentActivity implements OnMapReadyCallback
         final double cusLat = b.getDouble("cusLat");
         final double cusLng = b.getDouble("cusLng");
 
-        double spLat = Main2Activity.cusLat;
-        double spLng = Main2Activity.cusLng;
+        double spLat = sp_homepage.spLat;
+        double spLng = sp_homepage.spLng;
 
         LatLng spLocation = new LatLng(spLat,spLng);
         LatLng cusLocation = new LatLng(cusLat,cusLng);
         mMap = googleMap;
         Log.d("mylog", "Added Markers");
-        MarkerOptions markerOptions1 = new MarkerOptions();
-        markerOptions1.position(spLocation)
-                .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_ORANGE));;
-
-        mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(spLocation, 16));
-
         MarkerOptions markerOptions = new MarkerOptions();
         markerOptions.position(cusLocation)
                 .title("You need to reach here");
-        googleMap.addMarker(markerOptions1).showInfoWindow();
+        googleMap.addMarker(markerOptions).showInfoWindow();
+
+        mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(cusLocation, 16));
+
+        MarkerOptions markerOptions1 = new MarkerOptions();
+        markerOptions1.position(spLocation)
+                .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_ORANGE));
+        googleMap.addMarker(markerOptions1);
+
+
+
+
+
 
         googleMap.addMarker(markerOptions);
         mMap.getUiSettings().setZoomControlsEnabled(true);

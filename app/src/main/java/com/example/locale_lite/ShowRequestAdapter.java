@@ -59,6 +59,18 @@ public class ShowRequestAdapter extends RecyclerView.Adapter<ShowRequestAdapter.
                     intent.putExtras(b);
                     mcontext.startActivity(intent);
                 }
+                if (status.equals("active")) {
+                    Intent intent = new Intent(mcontext, ShowActiveRequests.class);
+                    intent.putExtra("type", "Customer");
+                    intent.putExtra("name", c.getFirstname() + " " + c.getLastname());
+                    intent.putExtra("phone", c.getPhonenum());
+                    intent.putExtra("userid", c.getId());
+                    Bundle b = new Bundle();
+                    b.putDouble("cusLat", c.getLatitude());
+                    b.putDouble("cusLng", c.getLongitude());
+                    intent.putExtras(b);
+                    mcontext.startActivity(intent);
+                }
             }
         });
 
