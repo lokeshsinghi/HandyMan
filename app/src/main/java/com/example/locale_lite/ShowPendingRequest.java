@@ -5,12 +5,14 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
+import android.graphics.Color;
 import android.net.Uri;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -82,6 +84,27 @@ public class ShowPendingRequest extends AppCompatActivity {
             }
         });
 
+        databaseReference = FirebaseDatabase.getInstance().getReference("Requestlist").child(firebaseUser.getUid());
+        databaseReference.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                for(DataSnapshot dataSnapshot1 : dataSnapshot.getChildren()){
+                    RequestList requestList = dataSnapshot1.getValue(RequestList.class);
+                    if(requestList.getStatus().equals("active")){
+                        Toast.makeText(ShowPendingRequest.this,"You already have an active request",Toast.LENGTH_SHORT).show();
+//                        finish();
+                        accept.setClickable(false);
+                        accept.setBackgroundColor(Color.GRAY);
+                    }
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
+
         call.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -112,6 +135,7 @@ public class ShowPendingRequest extends AppCompatActivity {
         accept.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
                 databaseReference = FirebaseDatabase.getInstance().getReference("Requests");
                 databaseReference.child(requestid)
                 .child("status").setValue("active");
@@ -160,7 +184,8 @@ public class ShowPendingRequest extends AppCompatActivity {
                 for(DataSnapshot snapshot : dataSnapshot.getChildren()){
                     RequestBox requestBox = snapshot.getValue(RequestBox.class);
                     if(requestBox.getReceiver().equals(myid) && requestBox.getSender().equals(userid) ||
-                            requestBox.getReceiver().equals(userid) && requestBox.getSender().equals(myid)){
+                            requestBox.getReceiver().equals(userid) && requestBox.getSender().equals(myid) &&
+                                requestBox.getStatus().equals("pending")){
                         date.setText(requestBox.getDate());
                         time.setText(requestBox.getTime());
                         des.setText(requestBox.getDescription());

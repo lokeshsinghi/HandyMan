@@ -94,6 +94,7 @@ public class RequestStatus extends AppCompatActivity {
                     }
                     pbar.setVisibility(GONE);
                 }
+
                 listAdapter = new ShowRequestAdapter(RequestStatus.this, musers,status);
                 recyclerView.setAdapter(listAdapter);
             }

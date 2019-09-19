@@ -63,11 +63,28 @@ public class Chat extends AppCompatActivity {
         type = getIntent().getStringExtra("type");
 
         firebaseUser = FirebaseAuth.getInstance().getCurrentUser();
-        if(type.equals("ServiceProvider")){
-        databaseReference = FirebaseDatabase.getInstance().getReference().child("ServiceProviders").child(userid);}
+        if(type.equals("Customer")){
+        databaseReference = FirebaseDatabase.getInstance().getReference().child("Customers").child(userid);
+            databaseReference.addValueEventListener(new ValueEventListener() {
+                @Override
+                public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                    Customers s = dataSnapshot.getValue(Customers.class);
+                    String mname = s.getFirstname() + " " + s.getLastname();
+                    name.setText(mname);
+                    job.setText(s.getPhonenum());
+                        dp.setImageResource(R.drawable.cuslogo);
+                    readMessage(firebaseUser.getUid(),userid,null);
+                }
+
+
+                @Override
+                public void onCancelled(@NonNull DatabaseError databaseError) {
+
+                }
+            });}
         else {
-            databaseReference = FirebaseDatabase.getInstance().getReference().child("Customers").child(userid);
-        }
+            databaseReference = FirebaseDatabase.getInstance().getReference().child("ServiceProviders").child(userid);
+
 
         databaseReference.addValueEventListener(new ValueEventListener() {
             @Override
@@ -76,10 +93,7 @@ public class Chat extends AppCompatActivity {
                         String mname = s.getFirstname() + " " + s.getLastname();
                         name.setText(mname);
                         job.setText(s.getCategory());
-                        if(s.getProfilePicUrl()==null){
-                            dp.setImageResource(R.drawable.cuslogo);
-                        }else{
-                        Picasso.with(Chat.this).load(s.getProfilePicUrl()).into(dp);}
+                        Picasso.with(Chat.this).load(s.getProfilePicUrl()).into(dp);
                     readMessage(firebaseUser.getUid(),userid,s.getProfilePicUrl());
                 }
 
@@ -88,7 +102,7 @@ public class Chat extends AppCompatActivity {
             public void onCancelled(@NonNull DatabaseError databaseError) {
 
             }
-        });
+        });}
 
         send.setOnClickListener(new View.OnClickListener() {
             @Override

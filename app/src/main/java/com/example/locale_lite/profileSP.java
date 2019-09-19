@@ -280,13 +280,20 @@ public class profileSP extends AppCompatActivity implements View.OnClickListener
             @Override
             public void onTimeSet(TimePicker view, int hourOfDay, int minute) {
                 String a;
+                String timetext;
                 if(hourOfDay > 12){
                     hourOfDay = hourOfDay - 12;
                     a = "PM";
                 }else
                     a = "AM";
-                String timetext = hourOfDay + ":" + minute + " " + a;
-                time.setText(timetext);
+                if(minute<10){
+                timetext = hourOfDay + ":" + "0"+ minute + " " + a;
+                    time.setText(timetext);
+                }else{
+                    timetext= hourOfDay + ":" + minute + " " + a;
+                    time.setText(timetext);
+                }
+
             }
         };
 
@@ -397,7 +404,7 @@ public class profileSP extends AppCompatActivity implements View.OnClickListener
             }
         });
         final DatabaseReference chatRef1 = FirebaseDatabase.getInstance().getReference("Requestlist")
-                .child(receiver).child(fuser.getUid());
+                .child(userid).child(fuser.getUid());
         chatRef1.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
@@ -407,7 +414,7 @@ public class profileSP extends AppCompatActivity implements View.OnClickListener
                     chatRef1.child("status").setValue("pending");
                 }
                 if(dataSnapshot.exists()){
-                    dataref.child("status").setValue("pending");
+                    chatRef1.child("status").setValue("pending");
                 }
             }
 

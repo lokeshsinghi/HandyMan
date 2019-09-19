@@ -17,15 +17,16 @@
         android:roundIcon="@drawable/handyman"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".ChangeLocationSP"></activity>
-        <activity android:name=".ChangeLocationCustomer" />
-        <activity android:name=".DirectionsSp" />
+        <activity android:name=".ShowCompletedRequest"></activity>
         <activity android:name=".ShowActiveRequests" />
+        <activity android:name=".DirectionsSp"></activity>
         <activity android:name=".ShowPendingRequest" />
         <activity android:name=".RequestStatus" />
         <activity android:name=".Requests" />
         <activity android:name=".MapDirections" />
         <activity android:name=".asklocationSP" />
+        <activity android:name=".ChangeLocationCustomer"/>
+        <activity android:name=".ChangeLocationSP"/>
         <activity
             android:name=".Main2Activity"
             android:label="@string/title_activity_main2" />
@@ -57,7 +58,7 @@
         <activity android:name=".sp_homepage" />
         <activity android:name=".ShowSentRequest" />
         <activity android:name=".Pending" />
-        <activity android:name=".contact_us" />
+        <activity android:name=".contact_us"/>
     </application>
 
 </manifest>

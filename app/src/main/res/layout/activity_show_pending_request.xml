@@ -17,98 +17,80 @@
             android:id="@+id/chat_dp"
             android:layout_width="50dp"
             android:layout_height="50dp" />
-<LinearLayout
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
-    android:orientation="horizontal">
         <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="50dp"
-            android:layout_marginLeft="15dp"
-            android:orientation="vertical">
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:layout_marginLeft="15dp"
+                android:orientation="vertical">
 
-            <TextView
-                android:id="@+id/chat_name"
+                <TextView
+                    android:id="@+id/chat_name"
+                    android:layout_width="wrap_content"
+                    android:layout_height="30dp"
+                    android:text="Aryan Karn"
+                    android:textColor="#000000"
+                    android:textSize="20sp" />
+
+                <TextView
+                    android:id="@+id/chat_job"
+                    android:layout_width="wrap_content"
+                    android:layout_height="20dp"
+                    android:text="AC Repring"
+                    android:textSize="15sp" />
+
+
+            </LinearLayout>
+            <LinearLayout
                 android:layout_width="wrap_content"
-                android:layout_height="30dp"
-                android:text="Aryan Karn"
-                android:textColor="#000000"
-                android:textSize="20sp" />
+                android:layout_height="wrap_content"
+                android:layout_weight="2"
+                android:layout_marginTop="10dp"
+                android:clickable="true"
+                android:id="@+id/directions"
+                android:orientation="vertical">
+                <ImageView
+                    android:layout_width="28dp"
+                    android:layout_height="28dp"
 
-            <TextView
-                android:id="@+id/chat_job"
+                    android:layout_marginLeft="27dp"
+                    android:src="@drawable/ic_directions_black_24dp"/>
+            </LinearLayout>
+            <LinearLayout
                 android:layout_width="wrap_content"
-                android:layout_height="20dp"
-                android:text="AC Repring"
-                android:textSize="15sp" />
+                android:layout_height="wrap_content"
+                android:layout_weight="2"
+                android:layout_marginTop="10dp"
+                android:id="@+id/call"
+                android:clickable="true"
+                android:orientation="vertical">
+                <ImageView
+                    android:layout_width="28dp"
+                    android:layout_height="28dp"
+                    android:layout_marginLeft="21dp"
 
+                    android:src="@drawable/ic_call_black_24dp"/>
 
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="2"
+                android:layout_marginTop="10dp"
+                android:clickable="true"
+                android:id="@+id/message"
+                android:orientation="vertical">
+                <ImageView
+                    android:layout_width="28dp"
+                    android:layout_height="28dp"
+
+                    android:layout_marginLeft="21dp"
+                    android:src="@drawable/ic_message_black_24dp"/>
+            </LinearLayout>
         </LinearLayout>
-    <LinearLayout
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_weight="2"
-        android:clickable="true"
-        android:id="@+id/directions"
-        android:orientation="vertical">
-        <ImageView
-            android:layout_width="28dp"
-            android:layout_height="28dp"
-            android:layout_gravity="center"
-            android:layout_marginLeft="7dp"
-            android:src="@drawable/ic_directions_black_24dp"/>
-        <TextView
-            android:textSize="12sp"
-            android:layout_gravity="center_horizontal"
-            android:layout_width="wrap_content"
-            android:textAlignment="center"
-            android:layout_height="wrap_content"
-            android:paddingLeft="20dp"
-            android:text="Directions"/>
-    </LinearLayout>
-    <LinearLayout
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_weight="2"
-        android:id="@+id/call"
-        android:clickable="true"
-        android:orientation="vertical">
-        <ImageView
-            android:layout_width="28dp"
-            android:layout_height="28dp"
-            android:layout_marginLeft="11dp"
-            android:layout_gravity="center"
-            android:src="@drawable/ic_call_black_24dp"/>
-        <TextView
-            android:textSize="12sp"
-            android:layout_gravity="center_horizontal"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:paddingLeft="20dp"
-            android:text="Call"/>
-    </LinearLayout>
-    <LinearLayout
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_weight="2"
-        android:clickable="true"
-        android:id="@+id/message"
-        android:orientation="vertical">
-        <ImageView
-            android:layout_width="28dp"
-            android:layout_height="28dp"
-            android:layout_gravity="center"
-            android:layout_marginLeft="7dp"
-            android:src="@drawable/ic_message_black_24dp"/>
-        <TextView
-            android:textSize="12sp"
-            android:layout_gravity="center_horizontal"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:paddingLeft="20dp"
-            android:text="Message"/>
-    </LinearLayout>
-</LinearLayout>
 
     </LinearLayout>
 
@@ -117,9 +99,12 @@
         android:layout_height="match_parent"
         android:id="@+id/message_recycler"
         android:padding="5dp"
-        android:layout_marginTop="20dp"
+        android:layout_marginTop="5dp"
         android:layout_above="@+id/layout_bottom"
         android:layout_below="@+id/layout_top">
+
+
+
         <TextView
             android:id="@+id/date"
             android:layout_width="wrap_content"

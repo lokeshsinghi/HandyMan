@@ -42,6 +42,7 @@ public class ShowRequestAdapter extends RecyclerView.Adapter<ShowRequestAdapter.
         final Customers c = musers.get(position);
         holder.username.setText(c.getFirstname()+" "+c.getLastname());
         holder.profilepic.setImageResource(R.drawable.cuslogo);
+        holder.phone.setText(c.getPhonenum());
 
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -71,6 +72,23 @@ public class ShowRequestAdapter extends RecyclerView.Adapter<ShowRequestAdapter.
                     intent.putExtras(b);
                     mcontext.startActivity(intent);
                 }
+                if (status.equals("active")) {
+                    Intent intent = new Intent(mcontext, ShowActiveRequests.class);
+                    intent.putExtra("type", "Customer");
+                    intent.putExtra("name", c.getFirstname() + " " + c.getLastname());
+                    intent.putExtra("phone", c.getPhonenum());
+                    intent.putExtra("userid", c.getId());
+                    mcontext.startActivity(intent);
+                }
+                if (status.equals("completed")) {
+                    Intent intent = new Intent(mcontext, ShowCompletedRequest.class);
+                    intent.putExtra("type", "Customer");
+                    intent.putExtra("name", c.getFirstname() + " " + c.getLastname());
+                    intent.putExtra("phone", c.getPhonenum());
+                    intent.putExtra("userid", c.getId());
+                    mcontext.startActivity(intent);
+                }
+
             }
         });
 
@@ -85,12 +103,14 @@ public class ShowRequestAdapter extends RecyclerView.Adapter<ShowRequestAdapter.
     public class ViewHolder extends RecyclerView.ViewHolder{
         public TextView username;
         public ImageView profilepic;
+        public TextView phone;
 
         public ViewHolder(View itemView){
             super(itemView);
 
             username = itemView.findViewById(R.id.name_list);
             profilepic = itemView.findViewById(R.id.providers_image);
+            phone = itemView.findViewById(R.id.info_list);
         }
     }
 }

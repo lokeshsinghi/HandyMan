@@ -43,8 +43,6 @@ public class Login extends AppCompatActivity  {
         logIn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                InputMethodManager imm = (InputMethodManager)getSystemService(Context.INPUT_METHOD_SERVICE);
-                imm.hideSoftInputFromWindow(mainLayout.getWindowToken(), 0);
                 final String phone = pNum.getText().toString();
                 if (pNum.getText().toString().length()<10)
                     pNum.setError("Enter valid Phone Number");
@@ -62,7 +60,7 @@ public class Login extends AppCompatActivity  {
                                             intent = new Intent(Login.this, OTP.class);
                                             intent.putExtra("type","Customers");
                                             intent.putExtra("phonenumber", "+91" + phone);
-
+                                            startActivity(intent);
                                             break;
                                         }
                                         else
@@ -90,7 +88,7 @@ public class Login extends AppCompatActivity  {
                                             Intent intent = new Intent(Login.this, OTP.class);
                                             intent.putExtra("type","ServiceProviders");
                                             intent.putExtra("phonenumber","+91"+phone);
-
+                                            startActivity(intent);
                                             break;
                                         }
                                         else
@@ -101,9 +99,7 @@ public class Login extends AppCompatActivity  {
                                         pbar.setVisibility(View.GONE);
                                         Toast.makeText(Login.this, "Mobile Number not registered. Sign up", Toast.LENGTH_SHORT).show();
                                     }
-                                    else {
-                                        startActivity(intent);
-                                    }
+
                                 }
                                 @Override
                                 public void onCancelled(DatabaseError databaseError) {
