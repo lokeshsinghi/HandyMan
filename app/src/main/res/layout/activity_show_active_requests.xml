@@ -54,6 +54,7 @@
                 <ImageView
                     android:layout_width="28dp"
                     android:layout_height="28dp"
+                    android:layout_marginLeft="8dp"
                     android:layout_gravity="center"
                     android:src="@drawable/ic_directions_black_24dp"/>
                 <TextView
@@ -76,6 +77,7 @@
                     android:layout_width="28dp"
                     android:layout_height="28dp"
                     android:layout_gravity="center"
+                    android:layout_marginLeft="9dp"
                     android:src="@drawable/ic_call_black_24dp"/>
                 <TextView
                     android:textSize="12sp"
@@ -96,6 +98,7 @@
                     android:layout_width="28dp"
                     android:layout_height="28dp"
                     android:layout_gravity="center"
+                    android:layout_marginLeft="10dp"
                     android:src="@drawable/ic_message_black_24dp"/>
                 <TextView
                     android:textSize="12sp"
@@ -114,7 +117,7 @@
         android:layout_height="match_parent"
         android:id="@+id/message_recycler"
         android:padding="5dp"
-        android:layout_marginTop="5dp"
+        android:layout_marginTop="20dp"
         android:layout_above="@+id/layout_bottom"
         android:layout_below="@+id/layout_top">
 

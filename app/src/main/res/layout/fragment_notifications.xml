@@ -46,21 +46,21 @@
                     android:layout_width="100dp"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="2dp"
-                    android:id="@+id/cityname"
-                    android:hint="Allahabad"
+
+                    android:hint="City name"
                     android:textSize="14sp" />
 
                 <TextView
 
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_gravity="end"
+                    android:textSize="12dp"
 
                     android:layout_marginLeft="70dp"
                     android:layout_marginTop="-5dp"
+                    android:layout_gravity="end"
                     android:text="Change location"
-                    android:textColor="#093E7A"
-                    android:textSize="12dp" />
+                    android:textColor="#093E7A" />
 
             </LinearLayout>
         </RelativeLayout>
@@ -202,11 +202,51 @@
             android:layout_height="31dp"
             android:layout_marginTop="308dp"
             android:layout_marginLeft="20dp"
-            android:src="@drawable/logout"/>
+            android:src="@drawable/ic_call_black_24dp"/>
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="297dp"
+            android:layout_marginLeft="15dp"
+            >
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+
+                android:text="Contact Us"
+                android:textSize="18dp"
+                android:layout_marginTop="0dp"
+                android:textStyle="bold"/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Click here to get details"
+                android:textSize="12dp"
+                android:layout_marginLeft="2dp"
+                android:layout_marginTop="30dp"
+                android:textStyle="bold"/>
+        </RelativeLayout>
+    </LinearLayout>
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/createnew2"
+        android:layout_marginTop="350dp"
+
+        android:text=" "/>
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+        <ImageView
+            android:layout_width="33dp"
+            android:layout_height="31dp"
+            android:layout_marginTop="378dp"
+            android:layout_marginLeft="20dp"
+            android:src="@drawable/logout"/>
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="367dp"
             android:layout_marginLeft="15dp"
             >
             <TextView
@@ -231,12 +271,12 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@drawable/createnew2"
-        android:layout_marginTop="350dp"
+        android:layout_marginTop="420dp"
 
         android:text=" "/>
+
     <Button
         android:id="@+id/change_location"
-        android:onClick="changelocation"
         android:layout_width="match_parent"
         android:layout_height="75dp"
         android:layout_marginTop="0dp"
@@ -244,7 +284,6 @@
 
         />
     <Button
-        android:onClick="sentrequestlist"
         android:id="@+id/request_sent"
         android:layout_width="match_parent"
         android:layout_height="70dp"
@@ -259,14 +298,7 @@
         android:background="@null"
         />
 
-    <Button
-        android:onClick="logout"
-        android:id="@+id/logout"
-        android:layout_width="match_parent"
-        android:layout_height="70dp"
-        android:background="@null"
-        android:layout_marginTop="290dp"
-        />
+
     <Button
         android:onClick="reset"
         android:id="@+id/change_password"
@@ -274,5 +306,21 @@
         android:layout_height="70dp"
         android:layout_marginTop="220dp"
         android:background="@null"
+        />
+    <Button
+        android:onClick="contact"
+        android:id="@+id/contact_us"
+        android:layout_width="match_parent"
+        android:layout_height="70dp"
+        android:layout_marginTop="290dp"
+        android:background="@null"
+        />
+    <Button
+        android:onClick="logout"
+        android:id="@+id/logout"
+        android:layout_width="match_parent"
+        android:layout_height="70dp"
+        android:background="@null"
+        android:layout_marginTop="360dp"
         />
 </RelativeLayout>

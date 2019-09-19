@@ -159,13 +159,53 @@
         <ImageView
             android:layout_width="33dp"
             android:layout_height="31dp"
-            android:layout_marginTop="238dp"
+            android:layout_marginTop="240dp"
+            android:layout_marginLeft="25dp"
+            android:src="@drawable/ic_call_black_24dp"/>
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="230dp"
+            android:layout_marginLeft="10dp"
+            >
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+
+                android:text="Contact Us"
+                android:textSize="18dp"
+                android:layout_marginTop="0dp"
+                android:textStyle="bold"/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Click here to get details"
+                android:textSize="12dp"
+                android:layout_marginLeft="2dp"
+                android:layout_marginTop="30dp"
+                android:textStyle="bold"/>
+        </RelativeLayout>
+    </LinearLayout>
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/createnew2"
+        android:layout_marginTop="280dp"
+
+        android:text=" "/>
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+        <ImageView
+            android:layout_width="33dp"
+            android:layout_height="31dp"
+            android:layout_marginTop="308dp"
             android:layout_marginLeft="20dp"
             android:src="@drawable/logout"/>
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="227dp"
+            android:layout_marginTop="297dp"
             android:layout_marginLeft="15dp"
             >
             <TextView
@@ -186,6 +226,15 @@
                 android:textStyle="bold"/>
         </RelativeLayout>
     </LinearLayout>
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/createnew2"
+        android:layout_marginTop="350dp"
+
+        android:text=" "/>
+
+
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -219,12 +268,21 @@
         android:background="@null"
         />
     <Button
+        android:onClick="contact"
+        android:id="@+id/contact"
+        android:layout_width="match_parent"
+        android:layout_height="70dp"
+        android:layout_marginTop="220dp"
+        android:background="@null"
+        />
+
+    <Button
         android:onClick="logout"
         android:id="@+id/logout"
         android:layout_width="match_parent"
         android:layout_height="70dp"
         android:background="@null"
-        android:layout_marginTop="220dp"
+        android:layout_marginTop="290dp"
         />
 
 </RelativeLayout>

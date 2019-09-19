@@ -106,6 +106,13 @@ public class Main2Activity extends AppCompatActivity {
         startActivity(intent);
 
     }
+
+    public void contact(View v) {
+
+        Intent intent = new Intent(Main2Activity.this,contact_us.class);
+        startActivity(intent);
+
+    }
     public void logout(View v){
 
 

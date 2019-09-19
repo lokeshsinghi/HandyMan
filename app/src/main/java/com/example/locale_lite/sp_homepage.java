@@ -34,7 +34,7 @@ import android.widget.Button;
 public class sp_homepage extends AppCompatActivity {
 
     Button active,pending,completed;
-
+    public static Double spLat, spLng;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -47,8 +47,8 @@ public class sp_homepage extends AppCompatActivity {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 ServiceProviders c = dataSnapshot.getValue(ServiceProviders.class);
-                Double spLat = c.getLatitude();
-                Double spLng = c.getLongitude();
+                spLat = c.getLatitude();
+                spLng = c.getLongitude();
             }
 
             @Override
@@ -126,6 +126,12 @@ public class sp_homepage extends AppCompatActivity {
 
         AlertDialog alertDialog=builder.create();
         alertDialog.show();
+
+    }
+
+    public void contact(View v){
+        Intent intent=new Intent(sp_homepage.this,contact_us.class);
+        startActivity(intent);
 
     }
     public void reset(View v)

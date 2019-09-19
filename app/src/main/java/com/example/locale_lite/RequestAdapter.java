@@ -32,14 +32,14 @@ public class RequestAdapter extends RecyclerView.Adapter<RequestAdapter.ViewHold
     }
 
     @Override
-    public RequestAdapter.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+    public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
             View view = LayoutInflater.from(mcontext).inflate(R.layout.request_item_right, parent, false);
-            RequestAdapter.ViewHolder viewHolder = new RequestAdapter.ViewHolder(view);
+            ViewHolder viewHolder = new ViewHolder(view);
             return viewHolder;
     }
 
     @Override
-    public void onBindViewHolder(@NonNull RequestAdapter.ViewHolder holder, int position) {
+    public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         RequestBox requestBox = mchat.get(position);
         holder.show_date.setText((requestBox.getDate()));
         holder.show_time.setText((requestBox.getTime()));
