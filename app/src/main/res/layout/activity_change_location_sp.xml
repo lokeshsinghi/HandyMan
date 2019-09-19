@@ -70,14 +70,6 @@
 
             </com.google.android.material.textfield.TextInputLayout>
 
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_marginLeft="17dp"
-                android:layout_marginRight="12dp"
-                android:layout_marginBottom="10dp"
-                android:text="NickName for Address" />
-
 
 
             <EditText
