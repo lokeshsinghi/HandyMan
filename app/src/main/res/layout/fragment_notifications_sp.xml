@@ -29,7 +29,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="0dp"
-                android:text="Your location"
+                android:text="Change location"
                 android:textSize="18sp"
                 android:textStyle="bold"
                 />
@@ -41,26 +41,6 @@
 
 
                 android:orientation="horizontal">
-
-                <TextView
-                    android:layout_width="100dp"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="2dp"
-                    android:id="@+id/cityname"
-                    android:hint="Allahabad"
-                    android:textSize="14sp" />
-
-                <TextView
-
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:textSize="12dp"
-                    android:layout_marginLeft="70dp"
-                    android:layout_marginTop="-5dp"
-                    android:layout_gravity="end"
-                    android:clickable="true"
-                    android:text="Change location"
-                    android:textColor="#093E7A" />
 
             </LinearLayout>
         </RelativeLayout>
@@ -253,6 +233,7 @@
         />
 
     <Button
+        android:onClick="servicehistory"
         android:id="@+id/service_history"
         android:layout_width="match_parent"
         android:layout_height="70dp"

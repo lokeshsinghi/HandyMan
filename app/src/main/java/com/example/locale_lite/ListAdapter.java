@@ -40,6 +40,7 @@ public class ListAdapter extends RecyclerView.Adapter<ListAdapter.ViewHolder> {
         final ServiceProviders serviceProviders = musers.get(position);
         holder.username.setText(serviceProviders.getFirstname()+" "+serviceProviders.getLastname());
         Picasso.with(mcontext).load(serviceProviders.getProfilePicUrl()).into(holder.profilepic);
+        holder.info.setText(serviceProviders.getPhonenum());
 
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -93,12 +94,14 @@ public class ListAdapter extends RecyclerView.Adapter<ListAdapter.ViewHolder> {
     public class ViewHolder extends RecyclerView.ViewHolder{
         public TextView username;
         public ImageView profilepic;
+        public TextView info;
 
         public ViewHolder(View itemView){
             super(itemView);
 
             username = itemView.findViewById(R.id.name_list);
             profilepic = itemView.findViewById(R.id.providers_image);
+            info = itemView.findViewById(R.id.info_list);
         }
     }
 }

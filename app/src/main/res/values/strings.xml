@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">Locale-lite</string>
+    <string name="app_name">HandyMan</string>
     <string-array name="Cities">
         <item>Select City</item>
         <item>Agartala</item>

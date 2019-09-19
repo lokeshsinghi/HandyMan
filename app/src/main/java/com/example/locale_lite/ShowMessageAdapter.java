@@ -39,6 +39,7 @@ public class ShowMessageAdapter extends RecyclerView.Adapter<ShowMessageAdapter.
         final Customers c = musers.get(position);
         holder.username.setText(c.getFirstname()+" "+c.getLastname());
         holder.profilepic.setImageResource(R.drawable.cuslogo);
+        holder.phone.setText(c.getPhonenum());
 
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -64,12 +65,14 @@ public class ShowMessageAdapter extends RecyclerView.Adapter<ShowMessageAdapter.
     public class ViewHolder extends RecyclerView.ViewHolder{
         public TextView username;
         public ImageView profilepic;
+        public TextView phone;
 
         public ViewHolder(View itemView){
             super(itemView);
 
             username = itemView.findViewById(R.id.name_list);
             profilepic = itemView.findViewById(R.id.providers_image);
+            phone = itemView.findViewById(R.id.info_list);
         }
     }
 }

@@ -14,6 +14,7 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.LinearLayout;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.Spinner;
@@ -36,24 +37,27 @@ public class MainActivity extends AppCompatActivity{
 
     FirebaseUser firebaseUser;
     String userid;
+    LinearLayout mainact1,mainact2;
 
 Handler handler;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-
-
-
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
         ViewPager viewPager = (ViewPager) findViewById(R.id.startPager);
         ImageAdapter adapter = new ImageAdapter(this);
         viewPager.setAdapter(adapter);
+        mainact1=findViewById(R.id.mainact1);
+        mainact2=findViewById(R.id.mainact2);
+
 
 
         firebaseUser = FirebaseAuth.getInstance().getCurrentUser();
 
         if (firebaseUser != null) {
+            mainact1.setVisibility(View.INVISIBLE);
+            mainact2.setVisibility(View.VISIBLE);
             userid = firebaseUser.getUid();
             DatabaseReference database = FirebaseDatabase.getInstance().getReference("Customers");
             database.addValueEventListener(new ValueEventListener() {

@@ -62,17 +62,6 @@ public class sp_homepage extends AppCompatActivity {
         NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment_sp);
         NavigationUI.setupWithNavController(navView, navController);
 
-//        active = findViewById(R.id.request_active);
-//        pending = findViewById(R.id.request_pending);
-//        completed = findViewById(R.id.request_completed);
-//
-//        pending.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//
-//            }
-//        });
-
     }
     @Override
     public void onBackPressed() {
@@ -152,5 +141,11 @@ public class sp_homepage extends AppCompatActivity {
         Intent intent = new Intent(sp_homepage.this,RequestStatus.class);
         intent.putExtra("buttontext",buttontext);
         startActivity(intent);
+    }
+    public void servicehistory(View v){
+        Intent intent = new Intent(sp_homepage.this,RequestStatus.class);
+        intent.putExtra("buttontext","Completed Requests");
+        startActivity(intent);
+
     }
 }

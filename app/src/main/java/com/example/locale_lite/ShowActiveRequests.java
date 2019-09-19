@@ -4,6 +4,7 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
+import android.graphics.Color;
 import android.net.Uri;
 import android.os.Bundle;
 import android.view.View;
@@ -115,6 +116,10 @@ public class ShowActiveRequests extends AppCompatActivity {
                 databaseReference = FirebaseDatabase.getInstance().getReference("Requestlist");
                 databaseReference.child(firebaseUser.getUid())
                         .child(userid).child("status").setValue("completed");
+
+                complete.setClickable(false);
+                complete.setText("Completed");
+                complete.setBackgroundColor(Color.GRAY);
 
                 finish();
             }
