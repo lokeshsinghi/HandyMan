@@ -17,7 +17,9 @@
         android:roundIcon="@drawable/handyman"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".DirectionsSp"></activity>
+        <activity android:name=".ChangeLocationSP"></activity>
+        <activity android:name=".ChangeLocationCustomer" />
+        <activity android:name=".DirectionsSp" />
         <activity android:name=".ShowActiveRequests" />
         <activity android:name=".ShowPendingRequest" />
         <activity android:name=".RequestStatus" />
@@ -55,7 +57,7 @@
         <activity android:name=".sp_homepage" />
         <activity android:name=".ShowSentRequest" />
         <activity android:name=".Pending" />
-        <activity android:name=".contact_us"/>
+        <activity android:name=".contact_us" />
     </application>
 
 </manifest>

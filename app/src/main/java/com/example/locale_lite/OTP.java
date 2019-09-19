@@ -88,7 +88,7 @@ public class OTP extends AppCompatActivity {
                     @Override
                     public void onComplete(@NonNull Task<AuthResult> task) {
                         if (task.isSuccessful()) {
-
+                            Toast.makeText(OTP.this,"OTP Verified",Toast.LENGTH_LONG).show();
 
                             Bundle bundle = getIntent().getExtras();
 

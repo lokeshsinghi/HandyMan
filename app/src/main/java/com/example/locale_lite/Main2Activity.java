@@ -145,7 +145,7 @@ public class Main2Activity extends AppCompatActivity {
     }
     public void changelocation(View v)
     {
-        Intent intent = new Intent(Main2Activity.this,asklocation.class);
+        Intent intent = new Intent(Main2Activity.this,ChangeLocationCustomer.class);
         startActivity(intent);
     }
     public void sentrequestlist(View view){
