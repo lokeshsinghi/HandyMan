@@ -5,9 +5,6 @@ An android application that provides an all-in-one platform for customers to hir
 ## Description
 
 Two different modes for users to create their account: 
-1. Customer Mode 
-2. Service Provider Mode
-
 
 1. Customer Mode
 
