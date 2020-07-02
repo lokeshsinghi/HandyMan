@@ -47,15 +47,9 @@ public class ProfileServiceProvider extends AppCompatActivity implements View.On
     private Button next;
     private TextView chose;
     private ImageView imageView1;
-    private String fname;
     EditText Qualifications, Experience;
-    private String uploadId;
     Uri downloadUrlPP, downloadUrlID;
-    String qualifications;
-    float experience;
     private StorageReference storageReference;
-    private DatabaseReference databaseReference;
-    //a Uri object to store file path
     private Uri filePath1;
     static int count=0;
 
@@ -70,7 +64,6 @@ public class ProfileServiceProvider extends AppCompatActivity implements View.On
         setContentView(R.layout.activity_profile_service_provider);
 
         storageReference= FirebaseStorage.getInstance().getReference("uploads");
-        //getting buttons from layout
         buttonChoose1 =  findViewById(R.id.chooser1);
         buttonUpload1 =  findViewById(R.id.uploader1);
         buttonChoose2 =  findViewById(R.id.chooser2);
@@ -80,7 +73,6 @@ public class ProfileServiceProvider extends AppCompatActivity implements View.On
         Experience = findViewById(R.id.experience);
         imageView1 = findViewById(R.id.imageView1);
         chose=findViewById(R.id.chose);
-        //attaching listener
         buttonChoose1.setOnClickListener(this);
         buttonUpload1.setOnClickListener(this);
         buttonChoose2.setOnClickListener(this);
@@ -92,7 +84,6 @@ public class ProfileServiceProvider extends AppCompatActivity implements View.On
 
     }
 
-    //method to show file chooser
     private void showFileChooser() {
         Intent intent = new Intent();
         intent.setType("image/*");
@@ -100,7 +91,6 @@ public class ProfileServiceProvider extends AppCompatActivity implements View.On
         startActivityForResult(Intent.createChooser(intent, "Select Picture"), PICK_IMAGE_REQUEST);
     }
 
-    //handling the image chooser activity result
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);

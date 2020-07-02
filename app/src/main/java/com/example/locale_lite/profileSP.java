@@ -145,8 +145,6 @@ public class profileSP extends AppCompatActivity implements View.OnClickListener
         Button cancel = mView.findViewById(R.id.cancel);
         final TextView Word = mView.findViewById(R.id.word);
 
-
-
         mBuilder.setView(mView);
         final AlertDialog dialog = mBuilder.create();
         dialog.show();

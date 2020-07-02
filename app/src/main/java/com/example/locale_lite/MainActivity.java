@@ -77,7 +77,6 @@ Handler handler;
                         finish();
                     }
                     else
-
                         {
                             DatabaseReference database1 = FirebaseDatabase.getInstance().getReference("ServiceProviders");
                             database1.addValueEventListener(new ValueEventListener() {
@@ -130,9 +129,6 @@ Handler handler;
 
         }
 
-
-
-
         Button createNew = (Button) findViewById(R.id.createnew);
         createNew.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -174,8 +170,6 @@ Handler handler;
 
         AlertDialog alertDialog = builder.create();
         alertDialog.show();
-
-
     }
 
 

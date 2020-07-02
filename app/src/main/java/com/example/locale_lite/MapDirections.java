@@ -6,51 +6,28 @@ import android.content.pm.PackageManager;
 import android.location.Location;
 import android.net.Uri;
 import android.os.Bundle;
-//import android.support.annotation.Nullable;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 import androidx.fragment.app.FragmentActivity;
 
-import com.example.locale_lite.R;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
-import com.google.android.gms.maps.MapFragment;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
-import com.google.android.gms.maps.model.BitmapDescriptor;
 import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
-import com.google.android.gms.maps.model.Polyline;
-import com.google.android.gms.maps.model.Marker;
-
-import com.google.android.gms.maps.model.PolylineOptions;
-import com.google.android.gms.tasks.OnSuccessListener;
-import com.google.android.gms.tasks.Task;
-import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.auth.FirebaseUser;
-import com.google.firebase.database.DataSnapshot;
-import com.google.firebase.database.DatabaseError;
-import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.ValueEventListener;
-
 
 public class MapDirections extends FragmentActivity implements OnMapReadyCallback, GoogleMap.OnMyLocationClickListener,
         GoogleMap.OnMyLocationButtonClickListener {
     private GoogleMap mMap;
-    private MarkerOptions place1, place2;
-    Double spLat, spLng, cusLat, cusLng;
     Button getDirection;
-    private Polyline currentPolyline;
     private static final int REQUEST_CODE = 101;
 
     @Override
@@ -61,7 +38,6 @@ public class MapDirections extends FragmentActivity implements OnMapReadyCallbac
         Bundle b = getIntent().getExtras();
         final double spLat = b.getDouble("spLat");
         final double spLng = b.getDouble("spLng");
-        final LatLng spLocation = new LatLng(spLat,spLng);
         getDirection.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -73,13 +49,6 @@ public class MapDirections extends FragmentActivity implements OnMapReadyCallbac
         });
 
         fetchLastLocation();
-
-
-
-
-//        SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
-//                .findFragmentById(R.id.map);
-//        mapFragment.getMapAsync(MapDirections.this);
     }
     private void fetchLastLocation() {
         if (ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION)
@@ -88,15 +57,10 @@ public class MapDirections extends FragmentActivity implements OnMapReadyCallbac
             return;
         }
 
-                    SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
-                            .findFragmentById(R.id.map);
-                    mapFragment.getMapAsync(MapDirections.this);
-                }
-
-//    private String getRequestUrl(LatLng origin, LatLng destin) {
-//
-//    }
-
+        SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
+                .findFragmentById(R.id.map);
+        mapFragment.getMapAsync(MapDirections.this);
+    }
 
     @Override
     public void onMapReady(GoogleMap googleMap) {

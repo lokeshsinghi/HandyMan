@@ -54,7 +54,7 @@ public class CreateAccount<findView> extends AppCompatActivity implements Adapte
     ProgressBar progressBar;
     private FirebaseAuth mAuth;
 
-    int p=0,q=0;
+    int p=0;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

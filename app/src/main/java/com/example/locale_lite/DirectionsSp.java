@@ -47,10 +47,7 @@ import com.google.firebase.database.ValueEventListener;
 public class DirectionsSp extends FragmentActivity implements OnMapReadyCallback, GoogleMap.OnMyLocationClickListener,
         GoogleMap.OnMyLocationButtonClickListener {
     private GoogleMap mMap;
-    private MarkerOptions place1, place2;
-    Double spLat, spLng, cusLat, cusLng;
     Button getDirection;
-    private Polyline currentPolyline;
     private static final int REQUEST_CODE = 101;
 
     @Override
@@ -86,10 +83,6 @@ public class DirectionsSp extends FragmentActivity implements OnMapReadyCallback
                 .findFragmentById(R.id.map);
         mapFragment.getMapAsync(DirectionsSp.this);
     }
-
-//    private String getRequestUrl(LatLng origin, LatLng destin) {
-//
-//    }
 
 
     @Override

@@ -48,13 +48,12 @@ public class asklocationSP extends FragmentActivity implements OnMapReadyCallbac
     private Marker markerCenter;
     Button savebutton;
     LatLng position;
-    private DatabaseReference databaseReference;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_asklocation_sp);
-        nickaddress = (EditText) findViewById(R.id.nickname_other);
+        nickaddress = findViewById(R.id.nickname_other);
         savebutton = findViewById(R.id.save_button);
         fusedLocationProviderClient = LocationServices.getFusedLocationProviderClient(this);
         fetchLastLocation();

@@ -53,7 +53,6 @@ public class ChangeLocationCustomer extends FragmentActivity implements OnMapRea
     private Marker markerCenter;
     Button savebutton;
     LatLng position;
-    private DatabaseReference databaseReference;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

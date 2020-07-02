@@ -51,7 +51,7 @@ public class EmailLogin extends AppCompatActivity {
         pbar = (ProgressBar) findViewById(R.id.pBar);
         mAuth = FirebaseAuth.getInstance();
         reset = findViewById(R.id.forgot);
-        mainLayout = (LinearLayout)findViewById(R.id.container);
+        mainLayout = (LinearLayout) findViewById(R.id.container);
 
         signup.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -80,17 +80,17 @@ public class EmailLogin extends AppCompatActivity {
         login.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                InputMethodManager imm = (InputMethodManager)getSystemService(Context.INPUT_METHOD_SERVICE);
+                InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
                 imm.hideSoftInputFromWindow(mainLayout.getWindowToken(), 0);
                 final String emailid = email.getText().toString();
                 final String pword = pwd.getText().toString();
                 if (email.getText().toString().isEmpty() || !Patterns.EMAIL_ADDRESS.matcher(email.getText().toString()).matches())
                     email.setError("Enter valid Email Id!");
-                else if(pwd.getText().toString().isEmpty())
+                else if (pwd.getText().toString().isEmpty())
                     pwd.setError("Enter password");
-                else    {
+                else {
                     pbar.setVisibility(View.VISIBLE);
-                    mAuth.signInWithEmailAndPassword(emailid,pword)
+                    mAuth.signInWithEmailAndPassword(emailid, pword)
                             .addOnCompleteListener(EmailLogin.this, new OnCompleteListener<AuthResult>() {
                                 @Override
                                 public void onComplete(@NonNull Task<AuthResult> task) {
@@ -102,44 +102,40 @@ public class EmailLogin extends AppCompatActivity {
                                         database.addValueEventListener(new ValueEventListener() {
                                             @Override
                                             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                                                int count= 0;
-                                                for(DataSnapshot snapshot : dataSnapshot.getChildren()){
+                                                int count = 0;
+                                                for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
                                                     Customers c = snapshot.getValue(Customers.class);
-                                                    if(c.getId().equals(userid)){
-                                                        count=1;
+                                                    if (c.getId().equals(userid)) {
+                                                        count = 1;
                                                         break;
                                                     }
                                                 }
 
-                                                if(count==1)
-                                                {
-                                                    Toast.makeText(EmailLogin.this,"Logged in",Toast.LENGTH_SHORT).show();
+                                                if (count == 1) {
+                                                    Toast.makeText(EmailLogin.this, "Logged in", Toast.LENGTH_SHORT).show();
                                                     Intent intent = new Intent(EmailLogin.this, Main2Activity.class);
                                                     startActivity(intent);
                                                     finish();
-                                                }
-                                                else{
+                                                } else {
                                                     DatabaseReference database1 = FirebaseDatabase.getInstance().getReference("ServiceProviders");
                                                     database1.addValueEventListener(new ValueEventListener() {
                                                         @Override
                                                         public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                                                            int cont =0;
-                                                            for(DataSnapshot dataSnapshot1 : dataSnapshot.getChildren()){
+                                                            int cont = 0;
+                                                            for (DataSnapshot dataSnapshot1 : dataSnapshot.getChildren()) {
                                                                 ServiceProviders sp = dataSnapshot1.getValue(ServiceProviders.class);
-                                                                if(sp.getId().equals(userid) && sp.getPending().equals(true)){
-                                                                    cont=1;
+                                                                if (sp.getId().equals(userid) && sp.getPending().equals(true)) {
+                                                                    cont = 1;
                                                                     break;
                                                                 }
                                                             }
-                                                            if(cont==1)
-                                                            {
-                                                                Toast.makeText(EmailLogin.this,"Logged in",Toast.LENGTH_SHORT).show();
+                                                            if (cont == 1) {
+                                                                Toast.makeText(EmailLogin.this, "Logged in", Toast.LENGTH_SHORT).show();
                                                                 Intent intent = new Intent(EmailLogin.this, sp_homepage.class);
                                                                 startActivity(intent);
                                                                 finish();
-                                                            }
-                                                            else{
-                                                                Toast.makeText(EmailLogin.this,"Not verified yet",Toast.LENGTH_SHORT).show();
+                                                            } else {
+                                                                Toast.makeText(EmailLogin.this, "Not verified yet", Toast.LENGTH_SHORT).show();
                                                                 Intent intent = new Intent(EmailLogin.this, Pending.class);
                                                                 startActivity(intent);
                                                                 finish();
@@ -164,20 +160,14 @@ public class EmailLogin extends AppCompatActivity {
                                         });
 
 
-                                    }
-                                    else{
-                                        Toast.makeText(EmailLogin.this,"Incorrect credentials or User not registered",Toast.LENGTH_LONG).show();
+                                    } else {
+                                        Toast.makeText(EmailLogin.this, "Incorrect credentials or User not registered", Toast.LENGTH_LONG).show();
                                     }
                                 }
                             });
-                }}
+                }
+            }
 
         });
     }
-//    @Override
-//    public void onBackPressed(){
-//        Intent intent=new Intent(EmailLogin.this,Login.class);
-//        startActivity(intent);
-//        finish();
-//    }
 }

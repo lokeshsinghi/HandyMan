@@ -50,17 +50,16 @@ public class asklocation extends FragmentActivity implements OnMapReadyCallback,
     private Marker markerCenter;
     Button savebutton;
     LatLng position;
-    private DatabaseReference databaseReference;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_asklocation);
-        addresscategory = (RadioGroup) findViewById(R.id.nickname);
-        home = (RadioButton) findViewById(R.id.checkhome);
-        work = (RadioButton) findViewById(R.id.checkwork);
-        others = (RadioButton) findViewById(R.id.checkother);
-        nickaddress = (EditText) findViewById(R.id.nickname_other);
+        addresscategory = findViewById(R.id.nickname);
+        home = findViewById(R.id.checkhome);
+        work = findViewById(R.id.checkwork);
+        others = findViewById(R.id.checkother);
+        nickaddress = findViewById(R.id.nickname_other);
         savebutton = findViewById(R.id.save_button);
         fusedLocationProviderClient = LocationServices.getFusedLocationProviderClient(this);
         fetchLastLocation();
@@ -139,10 +138,6 @@ public class asklocation extends FragmentActivity implements OnMapReadyCallback,
                         startActivity(intent);
                     }
                 });
-
-
-//                Intent intent = new Intent(asklocation.this, Main2Activity.class);
-//                startActivity(intent);
             }
         });
 
