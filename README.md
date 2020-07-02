@@ -21,8 +21,7 @@ Two different modes for users to create their account:
 
 ## Screenshots
 <img src="Screenshots/Screenshot_20200703-011431.jpg" width="200" >   <img src="Screenshots/Screenshot_20200703-011439.jpg" width="200" >   <img src="Screenshots/Screenshot_20200703-011448.jpg" width="200" >   <img src="Screenshots/Screenshot_20200703-012213.jpg" width="200" >   
-<img src="Screenshots/Screenshot_20200703-012226.jpg" width="200" >   <img src="Screenshots/Screenshot_20200703-012302.jpg" width="200" >   <img src="Screenshots/Screenshot_20200703-012307.jpg" width="200" >   <img src="Screenshots/Screenshot_20200703-012324.jpg" width="200" >
-<img src="Screenshots/Screenshot_20200703-012330.jpg" width="200" >   <img src="Screenshots/Screenshot_20200703-012356.jpg" width="200" >   <img src="Screenshots/Screenshot_20200703-012454.jpg" width="200" >   <img src="Screenshots/Screenshot_20200703-012551.jpg" width="200" >
+<img src="Screenshots/Screenshot_20200703-012226.jpg" width="200" >   <img src="Screenshots/Screenshot_20200703-012302.jpg" width="200" >   <img src="Screenshots/Screenshot_20200703-012307.jpg" width="200" >   <img src="Screenshots/Screenshot_20200703-012324.jpg" width="200" >   <img src="Screenshots/Screenshot_20200703-012356.jpg" width="200" >   <img src="Screenshots/Screenshot_20200703-012454.jpg" width="200" >   <img src="Screenshots/Screenshot_20200703-012551.jpg" width="200" >
 <img src="Screenshots/Screenshot_20200703-012609.jpg" width="200" >   <img src="Screenshots/Screenshot_20200703-012624.jpg" width="200" >
 ## Contributing
 Pull requests are welcome. For major changes, please open an issue first to discuss what you would like to change.
